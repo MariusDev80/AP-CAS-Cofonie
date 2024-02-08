@@ -1,5 +1,6 @@
 <?php
 session_start();
+//Inclusion du controleur
 include('controleur.php');
 
 	if (!isset($leControleur))
