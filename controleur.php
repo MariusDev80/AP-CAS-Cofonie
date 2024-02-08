@@ -1,7 +1,9 @@
 <?php 
 
-// include des vues a ajouter
+// include des vues 
 include_once('vueAmendement.php');
+
+// include des conteneurs 
 include_once('conteneurAmendement.php');
 include_once('conteneurArticle.php');
 include_once('conteneurOrgane.php');
