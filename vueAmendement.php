@@ -15,7 +15,7 @@
 		public function ajouterAmendement()
 		{
 
-			echo "<BR>je suis dans l'ajout d'un amendement";
+			echo "<p>je suis dans l'ajout d'un amendement</p>";
 	
 		}
 	

@@ -14,8 +14,8 @@
                     Amendements
                   </a>
                 <ul class="sub-menu">
-                  <li><a href="index.php?vue=amendement&action=visualiser">Ajouter</a></li>
-                  <li><a href="#">Visualiser</a></li>
+                  <li><a href="index.php?vue=amendement&action=ajouter">Ajouter</a></li>
+                  <li><a href="index.php?vue=amendement&action=visualiser">Visualiser</a></li>
                 </ul>
               </li>
               <li>
