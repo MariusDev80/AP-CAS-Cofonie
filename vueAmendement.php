@@ -9,7 +9,7 @@
 		
 		public function visualiserAmendement()
 		{
-			echo "<BR>je suis dans la visualisation des amendements";		
+			echo "<p>je suis dans la visualisation des amendements</p>";		
 			
 		}
 		public function ajouterAmendement()
