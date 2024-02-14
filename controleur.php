@@ -1,7 +1,7 @@
 <?php 
 
 // include des vues 
-include_once('vueAmendement.php');
+include_once('vueCentraleAmendement.php');
 
 // include des conteneurs 
 include_once('conteneurAmendement.php');
