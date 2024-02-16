@@ -10,12 +10,12 @@ class conteneurArticle
         $this->lesArticles = new ArrayObject();
     }
 
-    public function ajouterUnArticle(int $unId,string $unTexte){
+    public function ajouterUnArticle(int $unId,string $unTexte, conteneurAmendement $lesAmendements, conteneurArticle $lesArticlesDeReference, conteneurVote $lesVotes){
 
-        $unArticle = new metierArticle($unId,$unTexte, new conteneurAmendement);
+        $unArticle = new metierArticle($unId,$unTexte, $lesAmendements, $lesArticlesDeReference, $lesVotes);
         $this->lesArticles->append($unArticle);
     }
-    
+
     public function nbArticle(){
         return $this->lesArticles->count();
     }

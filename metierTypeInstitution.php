@@ -18,7 +18,7 @@ class metierTypeInstitution
     {
         switch($attribut) {
             case 'idTypeInstitution': $this->idTypeInstitution = $valeur; break;
-            case 'libelleTypeInstitution': $this->libelleTypeInstitution = $attribut; break;
+            case 'libelleTypeInstitution': $this->libelleTypeInstitution = $valeur; break;
         }
     }   
 }

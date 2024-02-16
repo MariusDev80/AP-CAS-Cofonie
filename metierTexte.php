@@ -3,7 +3,7 @@ class metierTexte
 {   
     # ajouter un conteneur Institution/l'id de l'institution qui propose le texte de loi
     # texteLoi peut etre modifié, sois en descriptionTexteLoi ou libelleTexteLoi car le texte en lui meme est dans les articles
-    public function __construct(private int $idTexte, private string $titreTexteLoi, private conteneurArticle $lesArticles)
+    public function __construct(private int $idTexte, private string $titreTexteLoi, private conteneurArticle $lesArticles, private metierInstitution $lInstitution)
     {
     }
     public function __get($attribut){

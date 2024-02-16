@@ -17,7 +17,7 @@ class metierOrgane
     {
         switch($attribut){
             case 'idOrgane': $this->idOrgane = $valeur; break;
-            case 'libelleOrgane': $this->libelleOrgane = $attribut; break;
+            case 'libelleOrgane': $this->libelleOrgane = $valeur; break;
         }
     }
 }

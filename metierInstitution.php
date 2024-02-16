@@ -3,7 +3,7 @@
 class metierInstitution 
 {   
     # changer le type/role en fonction de si il peut y en avoir plusieurs ou non
-    public function __construct(private int $idInstitution, private string $libelleInstitution, private conteneurTypeInstitution $typeInstitution, private conteneurRole $roleInstitution)
+    public function __construct(private int $idInstitution, private string $libelleInstitution, private metierTypeInstitution $typeInstitution, private conteneurRole $roleInstitution)
     {
     }
 
@@ -21,8 +21,8 @@ class metierInstitution
     {
         switch($attribut) {
             case 'idInstitution': $this->idInstitution = $valeur; break;
-            case 'libelleInstitution': $this->libelleInstitution = $attribut; break;
+            case 'libelleInstitution': $this->libelleInstitution = $valeur; break;
         }
-    }   
+    }
 }
 ?>
