@@ -12,7 +12,7 @@ class conteneurArticle
 
     public function ajouterUnArticle(int $unId,string $unTexte){
 
-        $unArticle = new metierArticle($unId,$unTexte);
+        $unArticle = new metierArticle($unId,$unTexte, new conteneurAmendement);
         $this->lesArticles->append($unArticle);
     }
     

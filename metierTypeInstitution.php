@@ -2,6 +2,7 @@
 
 class metierTypeInstitution 
 {
+    # voir si il faut mettre un conteneur des institutions dans le constructeur pour avoir la liste des institutions relatives a un type
     public function __construct(private int $idTypeInstitution, private string $libelleTypeInstitution)
     {
     }

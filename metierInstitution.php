@@ -1,11 +1,13 @@
 <?php
 
 class metierInstitution 
-{
-    public function __construct(private int $idInstitution, private string $libelleInstitution)
+{   
+    # changer le type/role en fonction de si il peut y en avoir plusieurs ou non
+    public function __construct(private int $idInstitution, private string $libelleInstitution, private conteneurTypeInstitution $typeInstitution, private conteneurRole $roleInstitution)
     {
     }
 
+    # ajouter les getters pour le role et type institution
     public function __get($attribut) 
     {
         switch($attribut){
@@ -13,6 +15,8 @@ class metierInstitution
             case 'libelleInstitution': return $this->libelleInstitution; break;
         }
     }
+
+    # ajouter les setters pour le role et type institution
     public function __set($attribut, $valeur) 
     {
         switch($attribut) {

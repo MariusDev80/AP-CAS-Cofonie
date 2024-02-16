@@ -11,7 +11,7 @@ class conteneurInstitution
     }
 
     public function ajouterUneInstitution(int $unId,string $unLibelle){
-        $uneInstitution = new metierArticle($unId,$unLibelle);
+        $uneInstitution = new metierInstitution($unId,$unLibelle, new conteneurTypeInstitution, new conteneurRole);
         $this->lesInstitutions->append($uneInstitution); 
     }
 

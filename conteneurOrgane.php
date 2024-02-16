@@ -12,7 +12,7 @@ class conteneurOrgane
 
     public function ajouterUnOrgane(int $unId,string $unLibelle){
 
-        $unOrgane = new metierArticle($unId,$unLibelle);
+        $unOrgane = new metierOrgane($unId,$unLibelle, new conteneurInstitution);
         $this->lesOrganes->append($unOrgane);
     }
 

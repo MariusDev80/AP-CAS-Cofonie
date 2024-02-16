@@ -10,9 +10,9 @@ class conteneurTexte
         $this->lesTextes = new ArrayObject();
     }
 
-    public function ajouterUnTexte(int $unId,string $unTexteLoi){
+    public function ajouterUnTexte(int $unId,string $unTitreTexteLoi){
 
-        $unTexte = new metierArticle($unId,$unTexteLoi);
+        $unTexte = new metierTexte($unId,$unTitreTexteLoi, new conteneurArticle);
         $this->lesTextes->append($unTexte);
     }
 

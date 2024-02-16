@@ -12,7 +12,7 @@ class conteneurRole
 
     public function ajouterUnRole(int $unId,string $unLibelle){
 
-        $unRole = new metierArticle($unId,$unLibelle);
+        $unRole = new metierRole($unId,$unLibelle);
         $this->lesRoles->append($unRole);
     }
 

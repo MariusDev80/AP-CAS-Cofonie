@@ -1,6 +1,7 @@
 <?php
 class metierAmendement {
 
+    # ajouter un moyen de connaitre l'article concerner par l'amendement
     public function __construct(private int $idAmendement, private DateTime $dateAmendement, private string $texteAmendement)
     {
     }

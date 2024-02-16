@@ -2,7 +2,7 @@
 
 class metierOrgane 
 {
-    public function __construct(private int $idOrgane, private string $libelleOrgane)
+    public function __construct(private int $idOrgane, private string $libelleOrgane, private conteneurInstitution $lesInstitutions)
     {
     }
 

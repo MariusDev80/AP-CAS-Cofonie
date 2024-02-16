@@ -1,6 +1,7 @@
 <?php
 class metierRole
 {
+    # voir si on ajoute un conteneur institution pour avoir la liste des institutions relatives a un role
     public function __construct(private int $idRole, private string $libelleRole)
     {
     }

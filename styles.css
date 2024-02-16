@@ -62,7 +62,8 @@
 }
 
 .sidebar .nav-links > li{
-  padding: 10%;
+  padding-left: 10%;
+  padding-block: 5%;
   text-align: center;
 }
 
