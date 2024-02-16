@@ -1,7 +1,7 @@
 <?php 
 
 // include des vues 
-include_once('vueAmendement.php');
+include_once('vueCentraleAmendement.php');
 
 // include des conteneurs 
 include_once('conteneurAmendement.php');
@@ -110,7 +110,7 @@ Class controleur
             // l'ajout passe par deux etapes,
             // la creation de vueAmendement et l'appel de la fonction d'ajout puis la saisie et l'ajout 
             case "ajouter" :
-                $vue = new vueAmendement();
+                $vue = new vueCentraleAmendement();
                 $vue->ajouterAmendement();
                 break;
             case "saisirAmendement" :
@@ -127,7 +127,7 @@ Class controleur
                 // ?? voir fichier prof : $liste = $liste.$this->tousLesVehicules->listeDesVehicules();
 
                 // creation de l'objet vueAmendement
-                $vue = new vueAmendement();
+                $vue = new vueCentraleAmendement();
                 //$vue->visualiserAmendement($liste);
                 $vue->visualiserAmendement();
 

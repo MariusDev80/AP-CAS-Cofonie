@@ -1,6 +1,6 @@
 <?php
 	
-	class vueTexte
+	class vueCentraleTexte
 	{
 		public function __construct()
 		{

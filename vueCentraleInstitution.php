@@ -1,6 +1,6 @@
 <?php
 	
-	class vueInstitution
+	class vueCentraleInstitution
 	{
 		public function __construct()
 		{

@@ -18,6 +18,7 @@ class accesBD
 		$this->connexion();
 		
 		}
+
 	private function connexion()
 	{
 		try

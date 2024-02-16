@@ -1,6 +1,6 @@
 <?php
 	
-	class vueOrgane
+	class vueCentraleOrgane
 	{
 		public function __construct()
 		{

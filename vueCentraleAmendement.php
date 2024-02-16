@@ -1,6 +1,6 @@
 <?php
 	
-	class vueAmendement
+	class vueCentraleAmendement
 	{
 		public function __construct()
 		{

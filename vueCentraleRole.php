@@ -1,6 +1,6 @@
 <?php
 	
-	class vueRole
+	class vueCentraleRole
 	{
 		public function __construct()
 		{
