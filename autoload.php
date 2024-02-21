@@ -3,11 +3,11 @@ session_start();
     function my_autoloader($class) 
     {
         $result = substr($class,0,5);
-        if (strcmp($result,"") == 0)
+        if (strcmp($result,"contr") == 0)
             include_once 'controler/'.$class. '.php';
         else 
             if (strcmp($result, "acces") == 0)
-                include_once 'tool/'.$class. '.php';
+                include_once ''.$class. '.php';
             else 
                 if (strcmp($result,'conte') == 0)
                     include_once 'proccessing/classeConteneur/'.$class. '.php';

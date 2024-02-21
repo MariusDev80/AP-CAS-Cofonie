@@ -13,10 +13,9 @@ class accesBD
 		{
 		$this->hote="localhost";
 		$this->login="root";
-		$this->passwd="";
-		$this->base="voiture";
+		$this->passwd="root";
+		$this->base="cofonie";
 		$this->connexion();
-		
 		}
 
 	private function connexion()
@@ -76,7 +75,7 @@ class accesBD
 			$uneTable = strtoupper($uneTable);
 			switch ($uneTable) {
 			case 'VOITURE':
-				$stringQuery.='voiture';
+				$stringQuery.='voiture'; // concatenation de stringQuery et 'voiture'
 				break;
 			default:
 				die('Pas une table valide');

@@ -1,6 +1,6 @@
 <?php 
 
-include_once('metierTexte.php');
+include_once('autoload.php');
 
 class conteneurTexte
 {
@@ -10,9 +10,9 @@ class conteneurTexte
         $this->lesTextes = new ArrayObject();
     }
 
-    public function ajouterUnTexte(int $unId,string $unTitreTexteLoi){
+    public function ajouterUnTexte(int $unId,string $unTitreTexteLoi, conteneurArticle $lesArticles, metierInstitution $lInstitution){
 
-        $unTexte = new metierTexte($unId,$unTitreTexteLoi, new conteneurArticle);
+        $unTexte = new metierTexte($unId,$unTitreTexteLoi,$lesArticles,$lInstitution);
         $this->lesTextes->append($unTexte);
     }
 

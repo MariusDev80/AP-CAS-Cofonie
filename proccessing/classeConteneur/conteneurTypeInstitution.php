@@ -1,6 +1,6 @@
 <?php 
 
-include_once('metierTypeInstitution.php');
+include_once('autoload.php');
 
 class conteneurTypeInstitution
 {

@@ -1,15 +1,7 @@
 <?php 
 
-// include des vues 
-include_once('vueCentraleAmendement.php');
-
-// include des conteneurs 
-include_once('conteneurAmendement.php');
-include_once('conteneurArticle.php');
-include_once('conteneurOrgane.php');
-include_once('conteneurRole.php');
-include_once('conteneurTexte.php');
-include_once('conteneurTypeInstitution.php');
+// include de l'autoload
+include_once('autoload.php');
 
 Class controleur 
 {

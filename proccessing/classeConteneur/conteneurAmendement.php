@@ -1,6 +1,6 @@
 <?php 
 // ajoute le fichier contenant la class concernée, ne le fait qu'une fois et ne se repète pas a chaque appel du ficher
-include_once('metierAmendement.php');
+include_once('autoload.php');
 
 class conteneurAmendement
 {   

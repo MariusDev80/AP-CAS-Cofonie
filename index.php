@@ -1,7 +1,6 @@
 <?php
-session_start();
 //Inclusion du controleur
-include('controleur.php');
+include_once('autoload.php');
 
 	if (!isset($leControleur))
 	{
@@ -21,6 +20,6 @@ include('controleur.php');
 	
 	//if (!isset($monControleur))
 	//{
-		$leControleur->affichePiedPage();
+	$leControleur->affichePiedPage();
 	//}
 ?>

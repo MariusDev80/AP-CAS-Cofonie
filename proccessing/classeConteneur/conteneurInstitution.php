@@ -1,6 +1,6 @@
 <?php 
 
-include_once('metierInstitution.php');
+include_once('autoload.php');
 
 class conteneurInstitution
 {
@@ -10,8 +10,8 @@ class conteneurInstitution
         $this->lesInstitutions = new ArrayObject();
     }
 
-    public function ajouterUneInstitution(int $unId,string $unLibelle){
-        $uneInstitution = new metierInstitution($unId,$unLibelle, new conteneurTypeInstitution, new conteneurRole);
+    public function ajouterUneInstitution(int $unId,string $unLibelle, metierTypeInstitution $leTypeInstitution, conteneurRole $leRole){
+        $uneInstitution = new metierInstitution($unId,$unLibelle,$leTypeInstitution,$leRole);
         $this->lesInstitutions->append($uneInstitution); 
     }
 
