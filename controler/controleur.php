@@ -1,13 +1,7 @@
 <?php 
 
 // include des vues a ajouter
-include_once('vueAmendement.php');
-include_once('conteneurAmendement.php');
-include_once('conteneurArticle.php');
-include_once('conteneurOrgane.php');
-include_once('conteneurRole.php');
-include_once('conteneurTexte.php');
-include_once('conteneurTypeInstitution.php');
+include_once('autoload.php');
 
 Class controleur 
 {
@@ -108,7 +102,7 @@ Class controleur
             // l'ajout passe par deux etapes,
             // la creation de vueAmendement et l'appel de la fonction d'ajout puis la saisie et l'ajout 
             case "ajouter" :
-                $vue = new vueAmendement();
+                $vue = new vueCentraleAmendement();
                 $vue->ajouterAmendement();
                 break;
             case "saisirAmendement" :
@@ -125,7 +119,7 @@ Class controleur
                 // ?? voir fichier prof : $liste = $liste.$this->tousLesVehicules->listeDesVehicules();
 
                 // creation de l'objet vueAmendement
-                $vue = new vueAmendement();
+                $vue = new vueCentraleAmendement();
                 //$vue->visualiserAmendement($liste);
                 $vue->visualiserAmendement();
 
@@ -138,7 +132,7 @@ Class controleur
             // l'ajout passe par deux etapes,
             // la creation de vueRole et l'appel de la fonction d'ajout puis la saisie et l'ajout 
             case "ajouter" :
-                $vue = new vueRole();
+                $vue = new vueCentraleRole();
                 $vue->ajouterRole();
                 break;
             case "saisirRole" :
@@ -154,9 +148,9 @@ Class controleur
                 // ?? voir fichier prof : $liste = $liste.$this->tousLesVehicules->listeDesVehicules();
 
                 // creation de l'objet vueAmendement
-                $vue = new vueAmendement();
+                $vue = new vueCentraleRole();
                 //$vue->visualiserAmendement($liste);
-                $vue->visualiserAmendement();
+                $vue->visualiserRole();
 
                 // ?? voir fichier prof : echo $this->tousLesVehicules->listeDesVehicules();
         }       

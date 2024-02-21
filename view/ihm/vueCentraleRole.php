@@ -9,6 +9,7 @@
 		
 		public function visualiserRole()
 		{
+			/*
 			$listeRole=explode("|",$message);
 
 			echo '<table class="table table-striped table-bordered table-sm ">
@@ -36,9 +37,13 @@
 			}
 			echo '</tbody>';
 			echo '</table>';
+			*/
+
+			echo '<br>visualisation d\'un role';
 		}
 		public function ajouterRole()
 		{
+			/*
 
 			echo '<form action=index.php?vue=vehicule&action=saisirVehicule method=POST align=center>
 							<fieldset>
@@ -48,7 +53,9 @@
 							<input type="submit" class="btn btn-primary" value=Valider></input>
 							</fieldset>	
 				 </form>';
-	
+			*/
+
+			echo 'je suis dans l\'ajout d\'un role';
 		}
 	
 }
