@@ -1,7 +1,13 @@
 <?php 
 
-// include de l'autoload
-include_once('autoload.php');
+// include des vues a ajouter
+include_once('vueAmendement.php');
+include_once('conteneurAmendement.php');
+include_once('conteneurArticle.php');
+include_once('conteneurOrgane.php');
+include_once('conteneurRole.php');
+include_once('conteneurTexte.php');
+include_once('conteneurTypeInstitution.php');
 
 Class controleur 
 {
@@ -84,7 +90,7 @@ Class controleur
                         // $this->actionOrgane($action);
                         break;
                     case "role" :
-                        // $this->actionRole($action);
+                        $this->actionRole($action);
                         break;
                     case "texte" : 
                         // $this->actionTexte($action);
@@ -102,7 +108,7 @@ Class controleur
             // l'ajout passe par deux etapes,
             // la creation de vueAmendement et l'appel de la fonction d'ajout puis la saisie et l'ajout 
             case "ajouter" :
-                $vue = new vueCentraleAmendement();
+                $vue = new vueAmendement();
                 $vue->ajouterAmendement();
                 break;
             case "saisirAmendement" :
@@ -119,7 +125,36 @@ Class controleur
                 // ?? voir fichier prof : $liste = $liste.$this->tousLesVehicules->listeDesVehicules();
 
                 // creation de l'objet vueAmendement
-                $vue = new vueCentraleAmendement();
+                $vue = new vueAmendement();
+                //$vue->visualiserAmendement($liste);
+                $vue->visualiserAmendement();
+
+                // ?? voir fichier prof : echo $this->tousLesVehicules->listeDesVehicules();
+        }       
+    }
+    public function actionRole($action){
+        switch ($action) {
+
+            // l'ajout passe par deux etapes,
+            // la creation de vueRole et l'appel de la fonction d'ajout puis la saisie et l'ajout 
+            case "ajouter" :
+                $vue = new vueRole();
+                $vue->ajouterRole();
+                break;
+            case "saisirRole" :
+                $idRole = $_POST['idRole'];
+                $libelleRole = $_POST['libelleRole'];
+                $this->toutLesRoles->ajouterUnRole($idRole, $libelleRole);
+                break;
+
+            // visualisation des amendements
+            case "visualiser" :
+                // mettre les amendement sous la forme souhaité et en string
+                // $liste = $this->toutLesAmendements->listeDesAmendements();
+                // ?? voir fichier prof : $liste = $liste.$this->tousLesVehicules->listeDesVehicules();
+
+                // creation de l'objet vueAmendement
+                $vue = new vueAmendement();
                 //$vue->visualiserAmendement($liste);
                 $vue->visualiserAmendement();
 

@@ -1,6 +1,6 @@
 <?php 
 
-include_once('autoload.php');
+include_once('metierRole.php');
 
 class conteneurRole
 {
@@ -12,7 +12,7 @@ class conteneurRole
 
     public function ajouterUnRole(int $unId,string $unLibelle){
 
-        $unRole = new metierRole($unId,$unLibelle);
+        $unRole = new metierArticle($unId,$unLibelle);
         $this->lesRoles->append($unRole);
     }
 
