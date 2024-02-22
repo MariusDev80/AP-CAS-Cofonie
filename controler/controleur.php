@@ -47,6 +47,9 @@ Class controleur
         } else {
             $this->toutLesTypeInstitutions = new conteneurTypeInstitution();
         }
+        if (isset($_SESSION['users'])) {
+            $this->connexion = $_SESSION['user'];
+        }
     }
 /*******************************************************************************
                     Affichage ENTETE et PIED de PAGE 
