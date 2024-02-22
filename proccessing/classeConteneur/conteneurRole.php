@@ -10,9 +10,9 @@ class conteneurRole
         $this->lesRoles = new ArrayObject();
     }
 
-    public function ajouterUnRole(int $unId,string $unLibelle){
+    public function ajouterUnRole(int $unId, int $idInstit, string $unLibelle){
 
-        $unRole = new metierArticle($unId,$unLibelle);
+        $unRole = new metierRole($unId,$idInstit,$unLibelle);
         $this->lesRoles->append($unRole);
     }
 

@@ -75,7 +75,7 @@ class accesBD
 			$uneTable = strtoupper($uneTable);
 			switch ($uneTable) {
 			case 'ROLEINSTITUTION':
-				$stringQuery.='roleInstution';
+				$stringQuery.='roleinstitution';
 				break;
 			default:
 				die('Pas une table valide');

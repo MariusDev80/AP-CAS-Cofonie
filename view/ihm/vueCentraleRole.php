@@ -7,20 +7,20 @@
 			
 		}
 		
-		public function visualiserRole()
+		public function visualiserRole($message)
 		{
 			
 			$listeRole=explode("|",$message);
-
+			
 			echo '<table class="table table-striped table-bordered table-sm ">
 					<thead>
 						<tr>
 							<th scope="col">Id Role</th>
-							<th scope="col">Id institution/th>
+							<th scope="col">Id institution</th>
 							<th scope="col">Intitulé du role</th>
 						</tr>
 					</thead>
-					<tbody>';
+					<tbody>';	
 			$nbE=0;
 			while ($nbE<sizeof($listeRole))
 			{	
@@ -37,9 +37,6 @@
 			}
 			echo '</tbody>';
 			echo '</table>';
-			
-
-			echo '<br>visualisation d\'un role';
 		}
 		public function ajouterRole()
 		{

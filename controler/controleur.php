@@ -132,7 +132,7 @@ Class controleur
     }
     public function actionRole($action){
         switch ($action) {
-
+            /*
             // l'ajout passe par deux etapes,
             // la creation de vueRole et l'appel de la fonction d'ajout puis la saisie et l'ajout 
             case "ajouter" :
@@ -144,7 +144,7 @@ Class controleur
                 $libelleRole = $_POST['libelleRole'];
                 $this->toutLesRoles->ajouterUnRole($idRole, $libelleRole);
                 break;
-
+            */
             // visualisation des amendements
             case "visualiser" :
                 // mettre les amendement sous la forme souhaité et en string
@@ -164,7 +164,7 @@ Class controleur
 			$nbE=0;
 			while ($nbE<sizeof($resultatRoles))
 			{
-				$this->$toutLesRoles->ajouterUnRole($resultatRoles[$nbE][0],$resultatRoles[$nbE][1],$resultatRoles[$nbE][2]);
+				$this->toutLesRoles->ajouterUnRole($resultatRoles[$nbE][0],$resultatRoles[$nbE][1],$resultatRoles[$nbE][2]);
                 
 				$nbE++;
 			}
