@@ -17,5 +17,9 @@ class metierRole
             case 'role': $this->libelleRole = $valeur; break;
         }
     }
+    public function afficheRole(){
+        $liste=$this->idRole.' | '.$this->idInstitution.' | '.$this->libelleRole.' | ';
+		return $liste;
+    }
 }
 ?>

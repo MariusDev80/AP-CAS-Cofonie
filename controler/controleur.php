@@ -11,12 +11,14 @@ Class controleur
     public $toutLesRoles;
     public $toutLesTextes;
     public $toutLesTypeInstitutions;
+    private $maBD;
 
 /*******************************************************************************
                                 CONSTRUCTEUR 
 ********************************************************************************/
     public function __construct()
     {
+        $this->maBD = new accesBD();
         if (isset($_SESSION['amendements'])) {
             $this->toutLesAmendements = unserialize($_SESSION['amendements']);
         } else {
@@ -34,8 +36,10 @@ Class controleur
         }
         if (isset($_SESSION['roles'])) {
             $this->toutLesRoles = unserialize($_SESSION['roles']);
+            $this->chargeLesRoles();
         } else {
             $this->toutLesRoles = new conteneurRole();
+            $this->chargeLesRoles();
         }
         if (isset($_SESSION['textes'])) {
             $this->toutLesTextes = unserialize($_SESSION['textes']);
@@ -144,17 +148,28 @@ Class controleur
             // visualisation des amendements
             case "visualiser" :
                 // mettre les amendement sous la forme souhaité et en string
-                // $liste = $this->toutLesAmendements->listeDesAmendements();
+                $listeRole = $this->toutLesRoles->listeDesRoles();
                 // ?? voir fichier prof : $liste = $liste.$this->tousLesVehicules->listeDesVehicules();
 
                 // creation de l'objet vueAmendement
                 $vue = new vueCentraleRole();
                 //$vue->visualiserAmendement($liste);
-                $vue->visualiserRole();
+                $vue->visualiserRole($listeRole);
 
                 // ?? voir fichier prof : echo $this->tousLesVehicules->listeDesVehicules();
         }       
     }
+    public function chargeLesRoles()
+		{   $resultatRoles=$this->maBD->chargement('roleinstitution');
+			$nbE=0;
+			while ($nbE<sizeof($resultatRoles))
+			{
+				$this->$toutLesRoles->ajouterUnRole($resultatRoles[$nbE][0],$resultatRoles[$nbE][1],$resultatRoles[$nbE][2]);
+                
+				$nbE++;
+			}
+			
+		}
 
 
 }

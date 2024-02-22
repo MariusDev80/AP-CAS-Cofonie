@@ -24,7 +24,7 @@ class conteneurRole
 
         $liste = '';
         foreach($this->lesRoles as $unRole){
-            $liste = $liste.$unRole->libelleRole;
+            $liste = $liste.$unRole->afficheRole();
         }
         return $liste;
     }

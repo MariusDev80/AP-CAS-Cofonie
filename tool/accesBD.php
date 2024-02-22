@@ -30,7 +30,7 @@ class accesBD
             die("Connection à la base de données échouée".$e->getMessage());
         }
 	}
-	
+	/*
 	public function insererUnVehicule($unCodeVoiture,$uneCouleurVoiture,$unNombrePlaceVoiture)
 	{
 		$sonCodeVoiture = $this->donneProchainIdentifiant("VOITURE","code");
@@ -43,7 +43,7 @@ class accesBD
 			die("Erreur dans insert Voiture : ".$requete->errorCode());
 		}
 		return $sonCodeVoiture;
-	}
+	}/*
 	
 	/***********************************************************************************************
 	C'est la fonction qui permet de charger les tables et de les mettre dans un tableau 2 dimensions. La petite fontions specialCase permet juste de psser des minuscules aux majuscules pour les noms des tables de la base de données
@@ -74,12 +74,12 @@ class accesBD
 	{
 			$uneTable = strtoupper($uneTable);
 			switch ($uneTable) {
-			case 'VOITURE':
-				$stringQuery.='voiture'; // concatenation de stringQuery et 'voiture'
+			case 'ROLEINSTITUTION':
+				$stringQuery.='roleInstution';
 				break;
 			default:
 				die('Pas une table valide');
-				break;
+				break;	
 			}
 
 			return $stringQuery.";";

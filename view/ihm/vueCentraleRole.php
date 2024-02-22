@@ -9,7 +9,7 @@
 		
 		public function visualiserRole()
 		{
-			/*
+			
 			$listeRole=explode("|",$message);
 
 			echo '<table class="table table-striped table-bordered table-sm ">
@@ -37,7 +37,7 @@
 			}
 			echo '</tbody>';
 			echo '</table>';
-			*/
+			
 
 			echo '<br>visualisation d\'un role';
 		}
