@@ -40,19 +40,15 @@
 		}
 		public function ajouterRole()
 		{
-			/*
-
-			echo '<form action=index.php?vue=vehicule&action=saisirVehicule method=POST align=center>
+			echo '<form action=index.php?vue=role&action=saisirRole method=POST align=center>
 							<fieldset>
-								<input type=number name="idRole" >
+								<input type=number name="idRole">
+								<input type=number name="idInstitution">
 								<input type=text name="libelleRole">
 														
 							<input type="submit" class="btn btn-primary" value=Valider></input>
 							</fieldset>	
 				 </form>';
-			*/
-
-			echo 'je suis dans l\'ajout d\'un role';
 		}
 	
 }

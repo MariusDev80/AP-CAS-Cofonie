@@ -132,31 +132,23 @@ Class controleur
     }
     public function actionRole($action){
         switch ($action) {
-            /*
-            // l'ajout passe par deux etapes,
-            // la creation de vueRole et l'appel de la fonction d'ajout puis la saisie et l'ajout 
+            
             case "ajouter" :
                 $vue = new vueCentraleRole();
                 $vue->ajouterRole();
                 break;
             case "saisirRole" :
                 $idRole = $_POST['idRole'];
+                $idInstution = $_POST['idInstitution'];
                 $libelleRole = $_POST['libelleRole'];
-                $this->toutLesRoles->ajouterUnRole($idRole, $libelleRole);
+                $this->toutLesRoles->ajouterUnRole($idRole, $idInstution, $libelleRole);
+                $this->maBD->insererUnRole($idRole, $idInstution,$libelleRole);
+                echo 'Role rajouté correctement';
                 break;
-            */
-            // visualisation des amendements
             case "visualiser" :
-                // mettre les amendement sous la forme souhaité et en string
                 $listeRole = $this->toutLesRoles->listeDesRoles();
-                // ?? voir fichier prof : $liste = $liste.$this->tousLesVehicules->listeDesVehicules();
-
-                // creation de l'objet vueAmendement
                 $vue = new vueCentraleRole();
-                //$vue->visualiserAmendement($liste);
                 $vue->visualiserRole($listeRole);
-
-                // ?? voir fichier prof : echo $this->tousLesVehicules->listeDesVehicules();
         }       
     }
     public function chargeLesRoles()
