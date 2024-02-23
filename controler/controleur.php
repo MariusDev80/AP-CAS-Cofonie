@@ -5,48 +5,22 @@ include_once('autoload.php');
 
 Class controleur 
 {
-    public $toutLesAmendements;
-    public $toutLesArticles;
-    public $toutLesOrganes;
-    public $toutLesRoles;
-    public $toutLesTextes;
-    public $toutLesTypeInstitutions;
+    private $toutLesAmendements;
+    private $toutLesArticles;
+    private $toutLesOrganes;
+    private $toutLesRoles;
+    private $toutLesTextes;
+    private $toutLesTypesInstitutions;
+    private $maBD;
 
 /*******************************************************************************
                                 CONSTRUCTEUR 
 ********************************************************************************/
-    public function __construct()
+    public function __construct() 
     {
-        if (isset($_SESSION['amendements'])) {
-            $this->toutLesAmendements = unserialize($_SESSION['amendements']);
-        } else {
-            $this->toutLesAmendements = new conteneurAmendement();
-        }
-        if (isset($_SESSION['articles'])) {
-            $this->toutLesArticles = unserialize($_SESSION['articles']);
-        } else {
-            $this->toutLesArticles = new conteneurArticle();
-        }
-        if (isset($_SESSION['organes'])) {
-            $this->toutLesOrganes = unserialize($_SESSION['organes']);
-        } else {
-            $this->toutLesOrganes = new conteneurOrgane();
-        }
-        if (isset($_SESSION['roles'])) {
-            $this->toutLesRoles = unserialize($_SESSION['roles']);
-        } else {
-            $this->toutLesRoles = new conteneurRole();
-        }
-        if (isset($_SESSION['textes'])) {
-            $this->toutLesTextes = unserialize($_SESSION['textes']);
-        } else {
-            $this->toutLesTextes = new conteneurTexte();
-        }
-        if (isset($_SESSION['typeInstitutions'])) {
-            $this->toutLesTypeInstitutions = unserialize($_SESSION['typeInstitutions']);
-        } else {
-            $this->toutLesTypeInstitutions = new conteneurTypeInstitution();
-        }
+       $this->maBD = new accesBD();
+        $this->toutLesTypesInstitutions = new conteneurTypeInstitution();
+        $this->chargeLesTypesInstitutions(); 
     }
 /*******************************************************************************
                     Affichage ENTETE et PIED de PAGE 
@@ -90,10 +64,29 @@ Class controleur
                         // $this->actionTexte($action);
                         break;
                     case "typeInstitution" :
-                        // $this->actionTypeInstitution($action);
+                        $this->actionTypeInstitution($action);
                         break;
                 }
             }
+    }
+
+
+    public function actionTypeInstitution($action) {
+        switch ($action) {
+            case "ajouter":
+                $vue = new vueTypeInstitution();
+                $vue->ajouterTypeInstitution();
+                break;
+
+            case "saisirTypeInstitution" :
+                // break;
+
+            case "visualiser":
+                $liste=$this->toutLesTypesInstitutions->listeDesTypesInstitutions();
+				$vue=new vueCentraleTypeInstitution();
+				$vue->visualiserTypeInstitution($liste);
+				break;
+        }
     }
 
     public function actionAmendement($action){
@@ -125,6 +118,18 @@ Class controleur
 
                 // ?? voir fichier prof : echo $this->tousLesVehicules->listeDesVehicules();
         }       
+    }
+
+    public function chargeLesTypesInstitutions() {
+        // définir une variable résultat
+        $resultatTypeInstitutions = $this->maBD->chargement("typeInstitution");
+        $nbE=0;
+
+        // parcourir la liste resultat pour prendre chaque elem et en faire un obj
+        while ($nbE < sizeof($resultatTypeInstitutions)) {
+            $this->toutLesTypesInstitutions->ajouterUnTypeInstitution($resultatTypeInstitutions[$nbE][0], $resultatTypeInstitutions[$nbE][1]);
+            $nbE++;
+        }
     }
 
 
