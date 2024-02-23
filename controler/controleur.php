@@ -16,42 +16,12 @@ Class controleur
 /*******************************************************************************
                                 CONSTRUCTEUR 
 ********************************************************************************/
-    public function __construct()
-    {
-        $this->maBD = new accesBD();
-        if (isset($_SESSION['amendements'])) {
-            $this->toutLesAmendements = unserialize($_SESSION['amendements']);
-        } else {
-            $this->toutLesAmendements = new conteneurAmendement();
-        }
-        if (isset($_SESSION['articles'])) {
-            $this->toutLesArticles = unserialize($_SESSION['articles']);
-        } else {
-            $this->toutLesArticles = new conteneurArticle();
-        }
-        if (isset($_SESSION['organes'])) {
-            $this->toutLesOrganes = unserialize($_SESSION['organes']);
-        } else {
-            $this->toutLesOrganes = new conteneurOrgane();
-        }
-        if (isset($_SESSION['roles'])) {
-            $this->toutLesRoles = unserialize($_SESSION['roles']);
-            $this->chargeLesRoles();
-        } else {
-            $this->toutLesRoles = new conteneurRole();
-            $this->chargeLesRoles();
-        }
-        if (isset($_SESSION['textes'])) {
-            $this->toutLesTextes = unserialize($_SESSION['textes']);
-        } else {
-            $this->toutLesTextes = new conteneurTexte();
-        }
-        if (isset($_SESSION['typeInstitutions'])) {
-            $this->toutLesTypeInstitutions = unserialize($_SESSION['typeInstitutions']);
-        } else {
-            $this->toutLesTypeInstitutions = new conteneurTypeInstitution();
-        }
-    }
+public function __construct()
+{
+    $this->maBD = new accesBD();
+    $this->toutLesRoles = new conteneurRole();
+    $this->chargeLesRoles();
+}
 /*******************************************************************************
                     Affichage ENTETE et PIED de PAGE 
 ********************************************************************************/
@@ -143,7 +113,7 @@ Class controleur
                 $libelleRole = $_POST['libelleRole'];
                 $this->toutLesRoles->ajouterUnRole($idRole, $idInstution, $libelleRole);
                 $this->maBD->insererUnRole($idRole, $idInstution,$libelleRole);
-                echo 'Role rajouté correctement';
+                echo 'Rôle rajouté correctement';
                 break;
             case "visualiser" :
                 $listeRole = $this->toutLesRoles->listeDesRoles();
