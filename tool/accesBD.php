@@ -45,7 +45,7 @@ class accesBD
 	public function insererUneInstitution($idInstitution, $libelleInstitution)
 	{
 		$sonInstitution = $this->donneProchainIdentifiant("INSTITUTION", "code");
-		$requete = $this->conn->prepare("INSERT INTO institution (idInstitution, libelleInstitution) VALUES (?,?,?)");
+		$requete = $this->conn->prepare("INSERT INTO institution (idInstitution,libelleInstitution) VALUES (?,?,?)");
 		$requete->bindValue(1,$idInstitution);
 		$requete->bindValue(2,$libelleInstitution);
 		if(!$requete->execute())

@@ -55,6 +55,9 @@ public function __construct()
                     case "article" :
                         // $this->actionArticle($action);
                         break;
+                    case "institution" :
+                        $this->actionInstitution($action);
+                        break;
                     case "organe" :
                         // $this->actionOrgane($action);
                         break;
@@ -97,10 +100,31 @@ public function __construct()
                 $vue = new vueCentraleAmendement();
                 //$vue->visualiserAmendement($liste);
                 $vue->visualiserAmendement();
-
-                // ?? voir fichier prof : echo $this->tousLesVehicules->listeDesVehicules();
+                break;
         }       
     }
+
+    public function actionInstitution($action){
+        switch ($action) {
+            case "ajouter" :
+                $vue = new vueCentraleInstitution();
+                $vue->ajouterInstitution($this->toutLesInstitutions->nbInstitution());
+                break;
+            case "saisirInstitution" :
+                $idInstitution = $_POST['idInstitution'];
+                $libelleInstitution = $_POST['libelleInstitution'];
+                $this->toutLesInstitutions->ajouterUneInstitution($idInstitution, $libelleInstitution);
+                $this->maBD->insererUneInstitution($idInstitution, $libelleInstitution);
+                echo 'Rôle rajouté correctement';
+                break;
+            case "visualiser" :
+                $listeInstitution = $this->toutLesInstitutions->listeDesInstitutions();
+                $vue = new vueCentraleInstitution();
+                $vue->visualiserInstitution($listeInstitution);
+                break;
+        }
+    }
+
     public function actionRole($action){
         switch ($action) {
             
@@ -119,7 +143,6 @@ public function __construct()
                 break;
             case "visualiser" :
                 $listeRole = $this->toutLesRoles->listeDesRoles();
-                $listeInstitutions = $this->toutLesInstitutions->listeDesInstitutions();
                 $vue = new vueCentraleRole();
                 $vue->visualiserRole($listeRole);
                 break;
@@ -130,7 +153,7 @@ public function __construct()
         $nbE=0;
         while ($nbE<sizeof($resultatInstitutions))
 			{
-				$this->toutLesInstitutions->ajouteruneInstitution($resultatInstitutions[$nbE][0],$resultatInstitutions[$nbE][1]);
+				$this->toutLesInstitutions->ajouterUneInstitution($resultatInstitutions[$nbE][0],$resultatInstitutions[$nbE][1]);
                 
 				$nbE++;
 			}

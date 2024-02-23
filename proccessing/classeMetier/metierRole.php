@@ -20,6 +20,6 @@ class metierRole
     public function afficheRole(){
         $liste=$this->idRole.' | '.$this->idInstitution.' | '.$this->libelleRole.' | ';
 		return $liste;
-    }
+    }   
 }
 ?>

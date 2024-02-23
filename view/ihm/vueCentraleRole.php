@@ -37,10 +37,11 @@ include_once('autoload.php');
 			echo '</tbody>';
 			echo '</table>';
 		}
-		public function ajouterRole($nbRoles, $tousLesInstitutions)
+		public function ajouterRole($nbRoles,$tousLesInstitutions)
 		{
+			
 			echo '<table class="table table-striped table-bordered table-sm ">
-					<thead>
+						<thead>
 						<tr>
 							<th scope="col">Id Role</th>
 							<th scope="col">Id institution</th>
@@ -48,13 +49,13 @@ include_once('autoload.php');
 						</tr>
 					</thead>
 					<tbody>
-						<form action=index.php?vue=role&action=saisirRole method=POST align=center>
+						<form action=index.php?vue=role&action=saisirRole method=POST align=center autocomplete="off">
 							<fieldset>
 								<tr>
 									<th scope="col"><input type=number name="idRole" value='.($nbRoles+1).' readonly  ></th>
 									<th scope="col"><input list="Institution" name="idInstitution"></th>
 									<th scope="col"><input type=text name="libelleRole"></th>
-								</tr>							
+								</tr>
 							</fieldset>
 							<input type="submit" class="btn btn-primary" value=Valider></input>
 				 </form>
@@ -62,10 +63,10 @@ include_once('autoload.php');
 				</table>
 				
 				<datalist id="Institution">';
-			foreach($tousLesInstitutions as $uneInstitution)
-  				echo '<option value='.$uneIntitution->get("id").' - '.$uneInstitution->get("libelle").'>';
-			echo '</datalist>';
-			echo '<br>';
+				foreach($tousLesInstitutions as $choixInstitution){
+					echo '<option value="'.$choixInstitution->get("id").' - '.$choixInstitution->get("libelle").'">';
+				}
+				echo '</datalist>';
 		}
 	}
 ?>

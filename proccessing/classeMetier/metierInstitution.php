@@ -2,8 +2,6 @@
 
 class metierInstitution 
 {   
-    private $typeInstitution;
-    private $lesRoles;
     # changer le type/role en fonction de si il peut y en avoir plusieurs ou non
     public function __construct(private int $idInstitution, private string $libelleInstitution)
     {
