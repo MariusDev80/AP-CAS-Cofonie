@@ -1,8 +1,6 @@
 <?php 
 
 // include des vues a ajouter
-include_once('autoload.php');
-
 Class controleur 
 {
     public $toutLesAmendements;
@@ -10,6 +8,7 @@ Class controleur
     public $toutLesOrganes;
     public $toutLesRoles;
     public $toutLesTextes;
+    public $toutLesInstitutions;
     public $toutLesTypeInstitutions;
     private $maBD;
 
@@ -21,6 +20,8 @@ public function __construct()
     $this->maBD = new accesBD();
     $this->toutLesRoles = new conteneurRole();
     $this->chargeLesRoles();
+    $this->toutLesInstitutions = new conteneurInstitution();
+    $this->chargeLesInstitutions();
 }
 /*******************************************************************************
                     Affichage ENTETE et PIED de PAGE 
@@ -105,21 +106,34 @@ public function __construct()
             
             case "ajouter" :
                 $vue = new vueCentraleRole();
-                $vue->ajouterRole();
+                $vue->ajouterRole($this->toutLesRoles->nbRole(),$this->toutLesInstitutions->listeDesInstitutions());
                 break;
             case "saisirRole" :
                 $idRole = $_POST['idRole'];
                 $idInstution = $_POST['idInstitution'];
+                $choix = explode('-',$idInstution);
                 $libelleRole = $_POST['libelleRole'];
-                $this->toutLesRoles->ajouterUnRole($idRole, $idInstution, $libelleRole);
+                $this->toutLesRoles->ajouterUnRole($idRole, $choix[0], $libelleRole);
                 $this->maBD->insererUnRole($idRole, $idInstution,$libelleRole);
                 echo 'Rôle rajouté correctement';
                 break;
             case "visualiser" :
                 $listeRole = $this->toutLesRoles->listeDesRoles();
+                $listeInstitutions = $this->toutLesInstitutions->listeDesInstitutions();
                 $vue = new vueCentraleRole();
                 $vue->visualiserRole($listeRole);
+                break;
         }       
+    }
+    public function chargeLesInstitutions(){
+        $resultatInstitutions=$this->maBD->chargement('institution');
+        $nbE=0;
+        while ($nbE<sizeof($resultatInstitutions))
+			{
+				$this->toutLesInstitutions->ajouteruneInstitution($resultatInstitutions[$nbE][0],$resultatInstitutions[$nbE][1]);
+                
+				$nbE++;
+			}
     }
     public function chargeLesRoles()
 		{   $resultatRoles=$this->maBD->chargement('roleinstitution');

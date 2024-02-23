@@ -1,5 +1,4 @@
 <?php
-
 class accesBD
 {
 	private $hote;
@@ -43,6 +42,18 @@ class accesBD
 		}
 		return $sonRole;
 	}
+	public function insererUneInstitution($idInstitution, $libelleInstitution)
+	{
+		$sonInstitution = $this->donneProchainIdentifiant("INSTITUTION", "code");
+		$requete = $this->conn->prepare("INSERT INTO institution (idInstitution, libelleInstitution) VALUES (?,?,?)");
+		$requete->bindValue(1,$idInstitution);
+		$requete->bindValue(2,$libelleInstitution);
+		if(!$requete->execute())
+		{
+			die("Erreur dans insert Cofonie : ".$requete->errorCode());
+		}
+		return $sonInstitution;
+	}
 	
 	/***********************************************************************************************
 	C'est la fonction qui permet de charger les tables et de les mettre dans un tableau 2 dimensions. La petite fontions specialCase permet juste de psser des minuscules aux majuscules pour les noms des tables de la base de données
@@ -75,6 +86,9 @@ class accesBD
 			switch ($uneTable) {
 			case 'ROLEINSTITUTION':
 				$stringQuery.='roleinstitution';
+				break;
+			case 'INSTITUTION':
+				$stringQuery.='institution';
 				break;
 			default:
 				die('Pas une table valide');

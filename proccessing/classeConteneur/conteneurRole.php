@@ -1,7 +1,4 @@
 <?php 
-
-include_once('autoload.php');
-
 class conteneurRole
 {
     private $lesRoles;

@@ -2,8 +2,10 @@
 
 class metierInstitution 
 {   
+    private $typeInstitution;
+    private $lesRoles;
     # changer le type/role en fonction de si il peut y en avoir plusieurs ou non
-    public function __construct(private int $idInstitution, private string $libelleInstitution, private metierTypeInstitution $typeInstitution, private conteneurRole $roleInstitution)
+    public function __construct(private int $idInstitution, private string $libelleInstitution)
     {
     }
 
@@ -23,6 +25,10 @@ class metierInstitution
             case 'idInstitution': $this->idInstitution = $valeur; break;
             case 'libelleInstitution': $this->libelleInstitution = $valeur; break;
         }
+    }
+    public function afficheInstitution(){
+        $liste=$this->idInstitution.' | '.$this->libelleInstitution.' | ';
+		return $liste;
     }
 }
 ?>

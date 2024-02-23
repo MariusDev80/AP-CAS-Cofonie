@@ -21,5 +21,10 @@ class metierTypeInstitution
             case 'libelleTypeInstitution': $this->libelleTypeInstitution = $valeur; break;
         }
     }   
+
+    public function afficheTypeInstitution() {
+        $liste=$this->idTypeInstitution." | ".$this->libelleTypeInstitution." | ";
+        return $liste;
+    }
 }
 ?>
