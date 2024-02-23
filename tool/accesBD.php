@@ -1,34 +1,62 @@
 <?php
-$username = isset($_POST['username']) ? $_POST['username'] : 0;
+$username = $_POST['username'];
+$password = $_POST['password'];
 
-echo "$username";
+// Création de l'objet de connexion à la base de données
+$accesBD = new accesBD();
+
+// Requête SQL pour vérifier l'utilisateur et le mot de passe
+$req = $accesBD->getConn()->prepare('SELECT COUNT(*) FROM users WHERE username = :username AND password = :password');
+$req->execute(array(
+    'username' => $username,
+    'password' => $password
+));
+
+// Récupération du résultat
+$resultat = $req->fetchColumn();
+
+// Vérification du résultat
+if ($resultat > 0) {
+    include('../menu-user.php');
+} else {
+    echo 'Identifiants incorrects';
+}
+
+// Fermeture de la requête
+$req->closeCursor();
+
 class accesBD
 {
-	private $hote;
-	private $login;
-	private $passwd;
-	private $base;
-	private $conn;
+    private $hote;
+    private $login;
+    private $passwd;
+    private $base;
+    private $conn;
 
-	// Nous construisons notre connexion
-	public function __construct()
-	{
-		$this->hote = "localhost";
-		$this->login = "root";
-		$this->passwd = "root";
-		$this->base = "cofonie";
-		$this->connexion();
-	}
+    // Nous construisons notre connexion
+    public function __construct()
+    {
+        $this->hote = "localhost";
+        $this->login = "root";
+        $this->passwd = "root";
+        $this->base = "cofonie";
+        $this->connexion();
+    }
 
-	private function connexion()
-	{
-		try {
-			$this->conn = new PDO("mysql:host=" . $this->hote . ";dbname=" . $this->base . ";charset=utf8", $this->login, $this->passwd);
-			//$this->boolConnexion = true;
-		} catch (PDOException $e) {
-			die("Connection à la base de données échouée" . $e->getMessage());
-		}
-	}
+    private function connexion()
+    {
+        try {
+            $this->conn = new PDO("mysql:host=" . $this->hote . ";dbname=" . $this->base . ";charset=utf8", $this->login, $this->passwd);
+            //$this->boolConnexion = true;
+        } catch (PDOException $e) {
+            die("Connection à la base de données échouée" . $e->getMessage());
+        }
+    }
+
+    public function getConn()
+    {
+        return $this->conn;
+    }
 
 	public function insererUnVehicule($unCodeVoiture, $uneCouleurVoiture, $unNombrePlaceVoiture)
 	{

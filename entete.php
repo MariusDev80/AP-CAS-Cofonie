@@ -67,7 +67,7 @@
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 		<h1>
-			<font face="helvetica">Cas Cofonie</font>
+			<font face="helvetica">Cas Cofonies</font>
 		</h1>
 	</div>
 	<div class="sidebar">
