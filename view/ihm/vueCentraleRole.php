@@ -64,10 +64,9 @@ include_once('autoload.php');
 				
 				<datalist id="Institution">';
 				for ($i = 0; $i < $nbInstits*2; $i=$i+2){
-					echo "<option value='" . $listeInstitution[$i] . "'>" . $listeInstitution[$i+1] . "</option>";
+					echo "<option value='" . $listeInstitution[$i] . "-" . $listeInstitution[$i+1] . "'></option>";
 				}
 				echo '</datalist>';
-				echo $nbInstits;
 		}
 	}
 ?>
