@@ -12,7 +12,7 @@ class conteneurInstitution
 
     public function ajouterUneInstitution(int $unId,string $unLibelle){
         $uneInstitution = new metierInstitution($unId,$unLibelle);
-        $this->lesInstitutions->append($uneInstitution); 
+        $this->lesInstitutions->append($uneInstitution);
     }
 
     public function nbInstitution(){
