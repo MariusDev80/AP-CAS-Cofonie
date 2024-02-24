@@ -130,7 +130,7 @@ public function __construct()
             
             case "ajouter" :
                 $vue = new vueCentraleRole();
-                $vue->ajouterRole($this->toutLesRoles->nbRole(),$this->toutLesInstitutions->listeDesInstitutions());
+                $vue->ajouterRole($this->toutLesRoles->nbRole(),$this->toutLesInstitutions->listeDesInstitutions(),$this->toutLesInstitutions->nbInstitution());
                 break;
             case "saisirRole" :
                 $idRole = $_POST['idRole'];

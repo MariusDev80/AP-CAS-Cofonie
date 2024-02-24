@@ -37,9 +37,9 @@ include_once('autoload.php');
 			echo '</tbody>';
 			echo '</table>';
 		}
-		public function ajouterRole($nbRoles,$tousLesInstitutions)
+		public function ajouterRole($nbRoles,$tousLesInstitutions, $nbInstits)
 		{
-			
+			$listeInstitution = explode("|", $tousLesInstitutions);
 			echo '<table class="table table-striped table-bordered table-sm ">
 						<thead>
 						<tr>
@@ -63,10 +63,11 @@ include_once('autoload.php');
 				</table>
 				
 				<datalist id="Institution">';
-				foreach($tousLesInstitutions as $choixInstitution){
-					echo '<option value="'.$choixInstitution->get("id").' - '.$choixInstitution->get("libelle").'">';
+				for ($i = 0; $i < $nbInstits*2; $i=$i+2){
+					echo "<option value='" . $listeInstitution[$i] . "'>" . $listeInstitution[$i+1] . "</option>";
 				}
 				echo '</datalist>';
+				echo $nbInstits;
 		}
 	}
 ?>
