@@ -23,8 +23,8 @@
                     Institutions
                   </a>
                 <ul class="sub-menu">
-                  <li><a href="#">Ajouter</a></li>
-                  <li><a href="#">Visualiser</a></li>
+                  <li><a href="index.php?vue=institution&action=ajouter">Ajouter</a></li>
+                  <li><a href="index.php?vue=institution&action=visualiser">Visualiser</a></li>
                 </ul>
               </li>
               <li>
@@ -50,8 +50,8 @@
                   Rôles
                 </a>
                 <ul class="sub-menu">
-                  <li><a href="#">Ajouter</a></li>
-                  <li><a href="#">Visualiser</a></li>
+                  <li><a href="index.php?vue=role&action=ajouter">Ajouter</a></li>
+                  <li><a href="index.php?vue=role&action=visualiser">Visualiser</a></li>
                 </ul>
               </li>
           </ul>

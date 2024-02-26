@@ -4,6 +4,7 @@ class metierArticle {
     # ajouter un moyen de connaitre le Texte de loi qui contient cet article
     public function __construct(private int $idArticle,private string $texteArticle, private conteneurAmendement $lesAmendement, private conteneurArticle $lesArticlesDeReference, private conteneurVote $lesVotes)
     {
+        
     }
 
     public function __get($attribut){

@@ -1,7 +1,4 @@
 <?php 
-
-include_once('autoload.php');
-
 class conteneurRole
 {
     private $lesRoles;
@@ -10,9 +7,9 @@ class conteneurRole
         $this->lesRoles = new ArrayObject();
     }
 
-    public function ajouterUnRole(int $unId,string $unLibelle){
+    public function ajouterUnRole(int $unId, int $idInstit, string $unLibelle){
 
-        $unRole = new metierRole($unId,$unLibelle);
+        $unRole = new metierRole($unId,$idInstit,$unLibelle);
         $this->lesRoles->append($unRole);
     }
 
@@ -24,7 +21,7 @@ class conteneurRole
 
         $liste = '';
         foreach($this->lesRoles as $unRole){
-            $liste = $liste.$unRole->libelleRole;
+            $liste = $liste.$unRole->afficheRole();
         }
         return $liste;
     }

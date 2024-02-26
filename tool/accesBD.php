@@ -1,5 +1,4 @@
 <?php
-
 class accesBD
 {
 	private $hote;
@@ -13,7 +12,7 @@ class accesBD
 		{
 		$this->hote="localhost";
 		$this->login="root";
-		$this->passwd="root";
+		$this->passwd="";
 		$this->base="cofonie";
 		$this->connexion();
 		}
@@ -30,19 +29,30 @@ class accesBD
             die("Connection à la base de données échouée".$e->getMessage());
         }
 	}
-	
-	public function insererUnVehicule($unCodeVoiture,$uneCouleurVoiture,$unNombrePlaceVoiture)
+	public function insererUnRole($idRole,$idInstitution,$libelleRole)
 	{
-		$sonCodeVoiture = $this->donneProchainIdentifiant("VOITURE","code");
-		$requete = $this->conn->prepare("INSERT INTO voiture (code,couleur,nbrPlace) VALUES (?,?,?)");
-		$requete->bindValue(1,$unCodeVoiture);
-		$requete->bindValue(2,$uneCouleurVoiture);
-		$requete->bindValue(3,$unNombrePlaceVoiture);
+		$sonRole = $this->donneProchainIdentifiant("ROLEINSTITUTION","code");
+		$requete = $this->conn->prepare("INSERT INTO roleInstitution (idRole,idInstitution,libelleRole) VALUES (?,?,?)");
+		$requete->bindValue(1,$idRole);
+		$requete->bindValue(2,$idInstitution);
+		$requete->bindValue(3,$libelleRole);
 		if(!$requete->execute())
 		{
-			die("Erreur dans insert Voiture : ".$requete->errorCode());
+			die("Erreur dans insert Cofonie : ".$requete->errorCode());
 		}
-		return $sonCodeVoiture;
+		return $sonRole;
+	}
+	public function insererUneInstitution($idInstitution, $libelleInstitution)
+	{
+		$sonInstitution = $this->donneProchainIdentifiant("INSTITUTION", "code");
+		$requete = $this->conn->prepare("INSERT INTO institution (idInstitution,libelleInstitution) VALUES (?,?)");
+		$requete->bindValue(1,$idInstitution);
+		$requete->bindValue(2,$libelleInstitution);
+		if(!$requete->execute())
+		{
+			die("Erreur dans insert Cofonie : ".$requete->errorCode());
+		}
+		return $sonInstitution;
 	}
 	
 	/***********************************************************************************************
@@ -74,12 +84,19 @@ class accesBD
 	{
 			$uneTable = strtoupper($uneTable);
 			switch ($uneTable) {
+
+			case 'ROLEINSTITUTION':
+				$stringQuery.='roleinstitution';
+				break;
+			case 'INSTITUTION':
+				$stringQuery.='institution';
+        break;
 			case 'TYPEINSTITUTION':
 				$stringQuery.='typeinstitution'; // concatenation de stringQuery et 'voiture'
 				break;
 			default:
 				die('Pas une table valide');
-				break;
+				break;	
 			}
 
 			return $stringQuery.";";
