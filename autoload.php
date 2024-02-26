@@ -7,7 +7,7 @@ session_start();
             include_once 'controler/'.$class. '.php';
         else 
             if (strcmp($result, "acces") == 0)
-                include_once ''.$class. '.php';
+                include_once 'tool/'.$class. '.php';
             else 
                 if (strcmp($result,'conte') == 0)
                     include_once 'proccessing/classeConteneur/'.$class. '.php';
