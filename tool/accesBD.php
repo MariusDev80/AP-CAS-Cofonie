@@ -84,11 +84,15 @@ class accesBD
 	{
 			$uneTable = strtoupper($uneTable);
 			switch ($uneTable) {
+
 			case 'ROLEINSTITUTION':
 				$stringQuery.='roleinstitution';
 				break;
 			case 'INSTITUTION':
 				$stringQuery.='institution';
+        break;
+			case 'TYPEINSTITUTION':
+				$stringQuery.='typeinstitution'; // concatenation de stringQuery et 'voiture'
 				break;
 			default:
 				die('Pas une table valide');

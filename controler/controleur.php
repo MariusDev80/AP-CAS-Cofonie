@@ -3,18 +3,19 @@
 // include des vues a ajouter
 Class controleur 
 {
-    public $toutLesAmendements;
-    public $toutLesArticles;
-    public $toutLesOrganes;
-    public $toutLesRoles;
-    public $toutLesTextes;
-    public $toutLesInstitutions;
-    public $toutLesTypeInstitutions;
+    private $toutLesAmendements;
+    private $toutLesArticles;
+    private $toutLesOrganes;
+    private $toutLesRoles;
+    private $toutLesTextes;
+    private $toutLesInstitutions;
+    private $toutLesTypeInstitutions;
     private $maBD;
 
 /*******************************************************************************
                                 CONSTRUCTEUR 
 ********************************************************************************/
+
 public function __construct()
 {
     $this->maBD = new accesBD();
@@ -22,7 +23,10 @@ public function __construct()
     $this->chargeLesRoles();
     $this->toutLesInstitutions = new conteneurInstitution();
     $this->chargeLesInstitutions();
+    $this->toutLesTypesInstitutions = new conteneurTypeInstitution();
+    $this->chargeLesTypesInstitutions(); 
 }
+
 /*******************************************************************************
                     Affichage ENTETE et PIED de PAGE 
 ********************************************************************************/
@@ -68,10 +72,29 @@ public function __construct()
                         // $this->actionTexte($action);
                         break;
                     case "typeInstitution" :
-                        // $this->actionTypeInstitution($action);
+                        $this->actionTypeInstitution($action);
                         break;
                 }
             }
+    }
+
+
+    public function actionTypeInstitution($action) {
+        switch ($action) {
+            case "ajouter":
+                $vue = new vueTypeInstitution();
+                $vue->ajouterTypeInstitution();
+                break;
+
+            case "saisirTypeInstitution" :
+                // break;
+
+            case "visualiser":
+                $liste=$this->toutLesTypesInstitutions->listeDesTypesInstitutions();
+				$vue=new vueCentraleTypeInstitution();
+				$vue->visualiserTypeInstitution($liste);
+				break;
+        }
     }
 
     public function actionAmendement($action){
@@ -169,6 +192,18 @@ public function __construct()
 			}
 			
 		}
+
+    public function chargeLesTypesInstitutions() {
+        // définir une variable résultat
+        $resultatTypeInstitutions = $this->maBD->chargement("typeInstitution");
+        $nbE=0;
+
+        // parcourir la liste resultat pour prendre chaque elem et en faire un obj
+        while ($nbE < sizeof($resultatTypeInstitutions)) {
+            $this->toutLesTypesInstitutions->ajouterUnTypeInstitution($resultatTypeInstitutions[$nbE][0], $resultatTypeInstitutions[$nbE][1]);
+            $nbE++;
+        }
+    }
 
 
 }

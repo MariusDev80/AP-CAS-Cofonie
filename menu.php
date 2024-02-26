@@ -32,8 +32,8 @@
                   Types Institutions
                 </a>
                 <ul class="sub-menu">
-                  <li><a href="#">Ajouter</a></li>
-                  <li><a href="#">Visualiser</a></li>
+                  <li><a href="index.php?vue=typeInstitution&action=ajouter">Ajouter</a></li>
+                  <li><a href="index.php?vue=typeInstitution&action=visualiser">Visualiser</a></li>
                 </ul>
               </li>
               <li>
@@ -54,7 +54,7 @@
                   <li><a href="index.php?vue=role&action=visualiser">Visualiser</a></li>
                 </ul>
               </li>
-        </ul>
+          </ul>
       </div>
     </div>
     <div class="page">
