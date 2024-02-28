@@ -44,21 +44,20 @@ include_once('autoload.php');
 						<thead>
 						<tr>
 							<th scope="col">Id Role</th>
-							<th scope="col">Id institution</th>
+							<th scope="col">Id Institution</th>
 							<th scope="col">Intitulé du role</th>
+							<th scope="col">Valider<th>
 						</tr>
 					</thead>
 					<tbody>
 						<form action=index.php?vue=role&action=saisirRole method=POST align=center autocomplete="off">
-							<fieldset>
-								<tr>
-									<th scope="col"><input type=number name="idRole" value='.($nbRoles+1).' readonly  ></th>
-									<th scope="col"><input list="Institution" name="idInstitution"></th>
-									<th scope="col"><input type=text name="libelleRole"></th>
-								</tr>
-							</fieldset>
-							<input type="submit" class="btn btn-primary" value=Valider></input>
-				 </form>
+							<tr>
+								<th scope="col"><input type=number name="idRole" value='.($nbRoles+1).' readonly  ></th>
+								<th scope="col"><input list="Institution" name="idInstitution"></th>
+								<th scope="col"><input type=text name="libelleRole"></th>
+								<th scope="col"><input type="submit" class="btn btn-primary" value=Valider></input></th>
+							</tr>
+				 		</form>
 					</tbody>
 				</table>
 				

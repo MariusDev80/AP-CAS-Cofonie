@@ -45,6 +45,7 @@
 						<tr>
 							<th scope="col">Id Institution</th>
 							<th scope="col">Libelle Institution</th>
+							<th scope="col">Valider<th>
 						</tr>
 					</thead>
 					<tbody>
@@ -53,9 +54,9 @@
 								<tr>
 									<th scope="col"><input type=number name="idInstitution" value='.($nbInstitutions+1).' readonly></th>
 									<th scope="col"><input type=text name="libelleInstitution"></th>
+									<th scope="col"><input type="submit" class="btn btn-primary" value=Valider></input></th>
 								</tr>
 							</fieldset>
-							<input type="submit" class="btn btn-primary" value=Valider></input>
 				 </form>
 					</tbody>
 				</table>';

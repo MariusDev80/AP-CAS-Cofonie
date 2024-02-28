@@ -10,6 +10,12 @@ class conteneurInstitution
         $this->lesInstitutions = new ArrayObject();
     }
 
+    public function __get($attribut){
+        switch($attribut){
+            case'lesInstitutions': return $this->lesInstitutions;break;
+        }
+    }
+
     public function ajouterUneInstitution(int $unId,string $unLibelle){
         $uneInstitution = new metierInstitution($unId,$unLibelle);
         $this->lesInstitutions->append($uneInstitution);

@@ -9,7 +9,8 @@ Class controleur
     private $toutLesRoles;
     private $toutLesTextes;
     private $toutLesInstitutions;
-    private $toutLesTypeInstitutions;
+    private $toutLesTypesInstitutions;
+    private $refArticles;
     private $maBD;
 
 /*******************************************************************************
@@ -21,10 +22,19 @@ public function __construct()
     $this->maBD = new accesBD();
     $this->toutLesRoles = new conteneurRole();
     $this->chargeLesRoles();
-    $this->toutLesInstitutions = new conteneurInstitution();
-    $this->chargeLesInstitutions();
     $this->toutLesTypesInstitutions = new conteneurTypeInstitution();
     $this->chargeLesTypesInstitutions(); 
+    $this->toutLesInstitutions = new conteneurInstitution();
+    $this->chargeLesInstitutions();
+    $this->toutLesAmendements = new conteneurAmendement();
+    $this->chargeLesAmendements();
+    $this->toutLesArticles = new conteneurArticle();
+    $this->chargeLesArticles();
+    $this->refArticles = new ArrayObject();
+    $this->chargeArtRef();
+    $this->toutLesTextes = new conteneurTexte();
+    $this->chargeLesTextes();
+
 }
 
 /*******************************************************************************
@@ -53,11 +63,8 @@ public function __construct()
                 $vue = $_GET['vue'];
 
                 switch ($vue){
-                    case "amendement" : 
-                        $this->actionAmendement($action);
-                        break;
-                    case "article" :
-                        // $this->actionArticle($action);
+                    case "texte" : 
+                        $this->actionTexte($action);
                         break;
                     case "institution" :
                         $this->actionInstitution($action);
@@ -67,9 +74,6 @@ public function __construct()
                         break;
                     case "role" :
                         $this->actionRole($action);
-                        break;
-                    case "texte" : 
-                        // $this->actionTexte($action);
                         break;
                     case "typeInstitution" :
                         $this->actionTypeInstitution($action);
@@ -82,7 +86,7 @@ public function __construct()
     public function actionTypeInstitution($action) {
         switch ($action) {
             case "ajouter":
-                $vue = new vueTypeInstitution();
+                $vue = new vueCentraleTypeInstitution();
                 $vue->ajouterTypeInstitution();
                 break;
 
@@ -97,34 +101,22 @@ public function __construct()
         }
     }
 
-    public function actionAmendement($action){
+    public function actionTexte($action){
         switch ($action) {
 
-            // l'ajout passe par deux etapes,
-            // la creation de vueAmendement et l'appel de la fonction d'ajout puis la saisie et l'ajout 
             case "ajouter" :
-                $vue = new vueCentraleAmendement();
-                $vue->ajouterAmendement();
+                $vue = new vueCentraleTexte();
+                $vue->ajouterTextes();
                 break;
             case "saisirAmendement" :
-                // $idAmendement = $_POST['idAmendement'];
-                // $dateAmendement = $_POST['dateAmendement'];
-                // $texteAmendement = $_POST['texteAmendement'];
-                // $this->toutLesAmendements->ajouterUnAmendement($idAmendement,$dateAmendement,$texteAmendement);
                 break;
 
-            // visualisation des amendements
             case "visualiser" :
-                // mettre les amendement sous la forme souhaité et en string
-                // $liste = $this->toutLesAmendements->listeDesAmendements();
-                // ?? voir fichier prof : $liste = $liste.$this->tousLesVehicules->listeDesVehicules();
-
-                // creation de l'objet vueAmendement
-                $vue = new vueCentraleAmendement();
-                //$vue->visualiserAmendement($liste);
-                $vue->visualiserAmendement();
+                $textes = $this->toutLesTextes->__get('lesTextes');
+                $vue = new vueCentraleTexte();
+                $vue->visualiserTextes($textes,$this->toutLesArticles);
                 break;
-        }       
+        }
     }
 
     public function actionInstitution($action){
@@ -153,15 +145,16 @@ public function __construct()
             
             case "ajouter" :
                 $vue = new vueCentraleRole();
+                // vue de l'ajout d'un role, a besoin du nombre de role et d'institutions ainsi que de la liste des institutions
                 $vue->ajouterRole($this->toutLesRoles->nbRole(),$this->toutLesInstitutions->listeDesInstitutions(),$this->toutLesInstitutions->nbInstitution());
                 break;
             case "saisirRole" :
                 $idRole = $_POST['idRole'];
-                $idInstution = $_POST['idInstitution'];
-                $choix = explode('-',$idInstution);
+                $idInstitution = $_POST['idInstitution'];
+                $choix = explode('-',$idInstitution);
                 $libelleRole = $_POST['libelleRole'];
                 $this->toutLesRoles->ajouterUnRole($idRole, $choix[0], $libelleRole);
-                $this->maBD->insererUnRole($idRole, $idInstution,$libelleRole);
+                $this->maBD->insererUnRole($idRole, $idInstitution,$libelleRole);
                 echo 'Rôle rajouté correctement';
                 break;
             case "visualiser" :
@@ -171,6 +164,10 @@ public function __construct()
                 break;
         }       
     }
+
+/***********************************************************************************************************************
+                                    CHARGEMENT DES TABLES DANS LES CONTENEURS
+***********************************************************************************************************************/
     public function chargeLesInstitutions(){
         $resultatInstitutions=$this->maBD->chargement('institution');
         $nbE=0;
@@ -205,7 +202,104 @@ public function __construct()
         }
     }
 
+    public function chargeLesAmendements(){
+        $resultatAmendements = $this->maBD->chargement('amendement');
+        $nbE = 0;
+        while ($nbE < sizeof($resultatAmendements)) {
+            $this->toutLesAmendements->ajouterUnAmendement($resultatAmendements[$nbE][0],$resultatAmendements[$nbE][1],$resultatAmendements[$nbE][2],$resultatAmendements[$nbE][3],$resultatAmendements[$nbE][4],$resultatAmendements[$nbE][5]);
+            $nbE++;
+        }
+    }
 
+    public function chargeLesArticles(){
+        $resultatArticles = $this->maBD->chargement('article');
+        $nbE = 0;
+        while ($nbE < sizeof($resultatArticles)) {
+            $this->toutLesArticles->ajouterUnArticle($resultatArticles[$nbE][0],$resultatArticles[$nbE][1],$resultatArticles[$nbE][2],$resultatArticles[$nbE][3]);
+            $nbE++;
+        }
+
+        // parcours tout les articles et pour chaque articles tout les amendements
+        // ajoute les amendements qui correspondent a un article dans sa liste des amendements
+        $art = $this->toutLesArticles->__get('lesArticles');
+        foreach ($art as $unArticle){
+            $idTexteArt = $unArticle->__get('idTexte');
+            $codeSeqArt = $unArticle->__get('codeSeqArticle'); 
+            $amend = $this->toutLesAmendements->__get('lesAmendements');
+
+            foreach ($amend as $unAmendement) {
+                $idTexteArtAm = $unAmendement->__get('idTexte');
+                $codeSeqArtAm = $unAmendement->__get('codeSeqArticle');
+
+                if ($idTexteArt == $idTexteArtAm){
+                    if ($codeSeqArt == $codeSeqArtAm){
+                        $unArticle->ajouterAmendement($unAmendement);
+                    }
+                }
+            }
+        }
+    }
+
+    public function chargeArtRef() {
+        $resultatArtRef = $this->maBD->chargement('fairereference');
+        $nbE = 0;
+        while ($nbE < sizeof($resultatArtRef)) {
+            $tempArr = array($resultatArtRef[$nbE][0],$resultatArtRef[$nbE][1],$resultatArtRef[$nbE][2],$resultatArtRef[$nbE][3]);
+            $this->refArticles->append($tempArr);
+            $nbE++;
+        }
+
+        foreach($this->refArticles as $uneRef) {
+            foreach($this->toutLesArticles->__get('lesArticles') as $unArticle){
+                $idTexteArt1 = $unArticle->__get('idTexte');
+                $codeSeqArt1 = $unArticle->__get('codeSeqArticle');
+
+                if ($idTexteArt1 == $uneRef[0] and $codeSeqArt1 == $uneRef[1]){
+                    foreach($this->toutLesArticles->__get('lesArticles') as $unAutreArticle){
+                        $idTexteArt2 = $unArticle->__get('idTexte');
+                        $codeSeqArt2 = $unArticle->__get('codeSeqArticle');
+
+                        if ($idTexteArt2 == $uneRef[2] and $codeSeqArt2 == $uneRef[3]){
+                            $unArticle->ajouterReference($unAutreArticle);
+                            // est ce qu'il faut ajouter la reference dans l'autre sens aussi ? si oui :
+                            // $unAutreArticle->ajouterReference($unArticle);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function chargeLesTextes(){
+        $resultatTextes = $this->maBD->chargement('texte');
+        $nbE = 0;
+        while ($nbE < sizeof($resultatTextes)){
+            $this->toutLesTextes->ajouterUnTexte($resultatTextes[$nbE][0],$resultatTextes[$nbE][1],$resultatTextes[$nbE][2]);
+            $nbE++;
+        }
+
+        foreach($this->toutLesTextes->__get('lesTextes') as $unTexte){
+            $id = $unTexte->__get('idTexte');
+
+            foreach($this->toutLesArticles->__get('lesArticles') as $unArticle){
+                $idTexteArt = $unArticle->__get('idTexte');
+
+                if ($id == $idTexteArt){
+                    $unTexte->ajouterArticle($unArticle);
+                }
+            }
+            foreach($this->toutLesInstitutions->__get('lesInstitutions') as $uneInstitution){
+                $idInst = $uneInstitution->__get('idInstitution');
+                $idTextInst = $unTexte->__get('idInstitution');
+                if ($idTextInst == $idInst){
+                    $unTexte->__set('lInstitution',$uneInstitution);
+                }
+            }
+        }
+        /*
+        
+        */
+    }
 }
 
 ?>
