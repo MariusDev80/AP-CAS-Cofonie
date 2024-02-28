@@ -12,7 +12,7 @@ class accesBD
 		{
 		$this->hote="localhost";
 		$this->login="root";
-		$this->passwd="";
+		$this->passwd="root";
 		$this->base="cofonie";
 		$this->connexion();
 		}
@@ -90,9 +90,21 @@ class accesBD
 				break;
 			case 'INSTITUTION':
 				$stringQuery.='institution';
-        break;
+        		break;
 			case 'TYPEINSTITUTION':
 				$stringQuery.='typeinstitution'; // concatenation de stringQuery et 'voiture'
+				break;
+			case 'AMENDEMENT':
+				$stringQuery.='amendement';
+				break;
+			case 'ARTICLE':
+				$stringQuery.='article';
+				break;
+			case 'TEXTE':
+				$stringQuery.='texte';
+				break;
+			case 'FAIREREFERENCE':
+				$stringQuery.='fairereference';
 				break;
 			default:
 				die('Pas une table valide');

@@ -12,13 +12,21 @@ class conteneurAmendement
         $this->lesAmendements = new ArrayObject();
     }
 
+    public function __get($attribut){
+        switch ($attribut){
+            case 'lesAmendements': return $this->lesAmendements;break;
+        }
+    }
     // fonction qui créée les objets Amendements et les ajoute dans la liste
-    public function ajouterUnAmendement(int $unId,DateTime $uneDate,string $unTexte){
-
-        $unAmendement = new metierAmendement($unId,$uneDate,$unTexte);
+    public function ajouterUnAmendement(int $unIdtexte,int $unCodeSeqArticle,int $unCodeSeqAmendement,string $unLib,string $unTexte,string $uneDate){
+        $laDate = DateTime::createFromFormat('Y-m-d',$uneDate);
+        $unAmendement = new metierAmendement($unIdtexte,$unCodeSeqArticle,$unCodeSeqAmendement,$unLib,$unTexte,$laDate);
         $this->lesAmendements->append($unAmendement);
     }
-    
+
+    public function ajouterObjAmendement(metierAmendement $amendement){
+        $this->lesAmendements->append($amendement);
+    }
     // retourne le nombre d'objets dans le liste 
     public function nbAmendement(){
         return $this->lesAmendements->count();

@@ -10,23 +10,20 @@ class conteneurTexte
         $this->lesTextes = new ArrayObject();
     }
 
-    public function ajouterUnTexte(int $unId,string $unTitreTexteLoi, conteneurArticle $lesArticles, metierInstitution $lInstitution){
+    public function __get($attribut){
+        switch($attribut){
+            case 'lesTextes' : return $this->lesTextes;break;
+        }
+    }
 
-        $unTexte = new metierTexte($unId,$unTitreTexteLoi,$lesArticles,$lInstitution);
+    public function ajouterUnTexte(int $unIdTexte,int $unIdInstitution,string $unTitreTexte){
+
+        $unTexte = new metierTexte($unIdTexte,$unIdInstitution,$unTitreTexte);
         $this->lesTextes->append($unTexte);
     }
 
     public function nbTexte(){
         return $this->lesTextes->count();
-    }
-
-    public function listeDesTextes(){
-
-        $liste = '';
-        foreach($this->lesTextes as $unTexte){
-            $liste = $liste.$unTexte->texteLoi;
-        }
-        return $liste;
     }
 }
 ?>

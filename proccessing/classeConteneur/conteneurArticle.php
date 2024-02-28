@@ -10,10 +10,20 @@ class conteneurArticle
         $this->lesArticles = new ArrayObject();
     }
 
-    public function ajouterUnArticle(int $unId,string $unTexte, conteneurAmendement $lesAmendements, conteneurArticle $lesArticlesDeReference, conteneurVote $lesVotes){
+    public function __get($attribut){
+        switch ($attribut){
+            case 'lesArticles': return $this->lesArticles;break;
+        }
+    }
 
-        $unArticle = new metierArticle($unId,$unTexte, $lesAmendements, $lesArticlesDeReference, $lesVotes);
+    public function ajouterUnArticle(int $unIdTexte,int $unCodeSeqArticle,string $unTitreArticle,string $unTexte){
+
+        $unArticle = new metierArticle($unIdTexte,$unCodeSeqArticle,$unTitreArticle,$unTexte);
         $this->lesArticles->append($unArticle);
+    }
+
+    public function ajouterObjArticle(metierArticle $article){
+        $this->lesArticles->append($article);
     }
 
     public function nbArticle(){

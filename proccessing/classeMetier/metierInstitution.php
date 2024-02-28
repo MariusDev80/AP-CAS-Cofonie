@@ -2,9 +2,13 @@
 
 class metierInstitution 
 {   
+    private $leType; // est un objet typeInstitution qui qualifie l'institution
+    private $lesRoles; // est un conteneur de l'ensemble des roles de l'institution
+    
     # changer le type/role en fonction de si il peut y en avoir plusieurs ou non
     public function __construct(private int $idInstitution, private string $libelleInstitution)
     {
+        $this->lesRoles = new conteneurRole();
     }
 
     # ajouter les getters pour le role et type institution
