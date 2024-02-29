@@ -70,7 +70,7 @@ public function __construct()
                         $this->actionInstitution($action);
                         break;
                     case "organe" :
-                        // $this->actionOrgane($action);
+                        $this->actionOrgane($action);
                         break;
                     case "role" :
                         $this->actionRole($action);
@@ -82,6 +82,21 @@ public function __construct()
             }
     }
 
+    public function actionOrgane($action){
+        switch($action) {
+            case 'ajouter' :
+                $vue = new vueCentraleOrgane();
+                $vue->ajouterOrgane();
+                break;
+            case 'saisirOrgane' :
+                break;
+
+            case 'visualiser' :
+                $vue = new vueCentraleOrgane();
+                $vue-> visualiserOrgane();
+                break;
+        }
+    }
 
     public function actionTypeInstitution($action) {
         switch ($action) {

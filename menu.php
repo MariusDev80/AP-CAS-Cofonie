@@ -2,7 +2,7 @@
             <ul class="nav-links">
               <li>
                   <a href="#">
-                    Texte
+                    Textes
                   </a>
                 <ul class="sub-menu">
                   <li><a href="index.php?vue=texte&action=ajouter">Ajouter</a></li>
@@ -32,8 +32,8 @@
                   Organes
                 </a>
                 <ul class="sub-menu">
-                  <li><a href="#">Ajouter</a></li>
-                  <li><a href="#">Visualiser</a></li>
+                  <li><a href="index.php?vue=organe&action=ajouter">Ajouter</a></li>
+                  <li><a href="index.php?vue=organe&action=visualiser">Visualiser</a></li>
                 </ul>
               </li>
               <li>
