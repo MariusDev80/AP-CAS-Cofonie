@@ -1,4 +1,7 @@
-<h3>Menu Global</h3>
+<h3>Vous n'êtes pas connecté.</h3>
+
+<!-- MENU
+  <h3>Menu Global</h3>
 <ul class="nav-links">
   <li>
     <a href="#">
@@ -58,3 +61,4 @@
 </div>
 </div>
 <div class="page">
+-->

@@ -14,7 +14,6 @@
 .entete h1 {
     color: white;
 }
-
 .page {
     position: fixed;
     left: 20%;
@@ -126,3 +125,4 @@
   margin-right:80%;
   position: absolute;
 }
+

@@ -1,62 +1,78 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <?php
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = htmlspecialchars($_POST['username']); //htmlspecialchars permet d'éviter de mettre des caractères spéciaux et permet d'éviter les attques sql
+$password = htmlspecialchars($_POST['password']);
+
+// Hachage du mot de passe avec MD5
+$hashed_password = md5($password);
 
 // Création de l'objet de connexion à la base de données
 $accesBD = new accesBD();
 
-// Requête SQL pour vérifier l'utilisateur et le mot de passe
-$req = $accesBD->getConn()->prepare('SELECT COUNT(*) FROM users WHERE username = :username AND password = :password');
-$req->execute(array(
-    'username' => $username,
-    'password' => $password
-));
+// Requête SQL pour récupérer l'utilisateur et le rôle
+$req = $accesBD->getConn()->prepare('SELECT username, role FROM users WHERE username = :username AND password = :password');
+$req->execute(
+	array(
+		'username' => $username,
+		'password' => $hashed_password
+	)
+);
 
 // Récupération du résultat
-$resultat = $req->fetchColumn();
+$userInfo = $req->fetch(PDO::FETCH_ASSOC);
 
 // Vérification du résultat
-if ($resultat > 0) {
-    include('../menu-user.php');
-} else {
-    echo 'Identifiants incorrects';
-}
+if ($userInfo) {
+	$role = $userInfo['role'];
 
+	// Stocker le rôle dans une variable de session
+	session_start();
+	$_SESSION['role'] = $role;
+
+	// Redirection vers menu-user.php
+	header("Location: ../menu-user.php");
+	exit();
+} else {
+	echo '<center style="color:#FF0000">Identifiant ou mot de passe incorrect <br></center>';
+	echo '<center><a href="../index.php"><button type="button" class="btn btn-primary">Retour a la page de connexion</button></a><center>';
+}
 // Fermeture de la requête
 $req->closeCursor();
 
+
 class accesBD
 {
-    private $hote;
-    private $login;
-    private $passwd;
-    private $base;
-    private $conn;
+	private $hote;
+	private $login;
+	private $passwd;
+	private $base;
+	private $conn;
 
-    // Nous construisons notre connexion
-    public function __construct()
-    {
-        $this->hote = "localhost";
-        $this->login = "root";
-        $this->passwd = "root";
-        $this->base = "cofonie";
-        $this->connexion();
-    }
+	// Nous construisons notre connexion
+	public function __construct()
+	{
+		$this->hote = "localhost";
+		$this->login = "root";
+		$this->passwd = "root";
+		$this->base = "cofonie";
+		$this->connexion();
+	}
 
-    private function connexion()
-    {
-        try {
-            $this->conn = new PDO("mysql:host=" . $this->hote . ";dbname=" . $this->base . ";charset=utf8", $this->login, $this->passwd);
-            //$this->boolConnexion = true;
-        } catch (PDOException $e) {
-            die("Connection à la base de données échouée" . $e->getMessage());
-        }
-    }
+	private function connexion()
+	{
+		try {
+			$this->conn = new PDO("mysql:host=" . $this->hote . ";dbname=" . $this->base . ";charset=utf8", $this->login, $this->passwd);
+			//$this->boolConnexion = true;
+		} catch (PDOException $e) {
+			die("Connection à la base de données échouée" . $e->getMessage());
+		}
+	}
 
-    public function getConn()
-    {
-        return $this->conn;
-    }
+	public function getConn()
+	{
+		return $this->conn;
+	}
 
 	public function insererUnVehicule($unCodeVoiture, $uneCouleurVoiture, $unNombrePlaceVoiture)
 	{
@@ -73,8 +89,8 @@ class accesBD
 
 
 	/***********************************************************************************************
-						 C'est la fonction qui permet de charger les tables et de les mettre dans un tableau 2 dimensions. La petite fontions specialCase permet juste de psser des minuscules aux majuscules pour les noms des tables de la base de données
-						 ************************************************************************************************/
+							   C'est la fonction qui permet de charger les tables et de les mettre dans un tableau 2 dimensions. La petite fontions specialCase permet juste de psser des minuscules aux majuscules pour les noms des tables de la base de données
+							   ************************************************************************************************/
 	public function chargement($uneTable)
 	{
 		$lesInfos = null;
@@ -109,8 +125,8 @@ class accesBD
 	}
 
 	/**************************************************************************
-						 fonction qui permet d'avoir le prochain identifiant de la table. Elle est là uniquement parce que nous n'avons pas d'autoincremente dans notre base de données
-						 ***************************************************************************/
+							   fonction qui permet d'avoir le prochain identifiant de la table. Elle est là uniquement parce que nous n'avons pas d'autoincremente dans notre base de données
+							   ***************************************************************************/
 	public function donneProchainIdentifiant($uneTable)
 	{
 		$stringQuery = $this->specialCase("SELECT * FROM ", $uneTable);
