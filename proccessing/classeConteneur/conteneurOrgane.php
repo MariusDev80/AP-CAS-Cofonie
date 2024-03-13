@@ -10,9 +10,15 @@ class conteneurOrgane
         $this->lesOrganes = new ArrayObject();
     }
 
-    public function ajouterUnOrgane(int $unId,string $unOrgane,int $nbPersonnes){
+    public function __get($attribut){
+        switch($attribut){
+            case'lesOrganes': return $this->lesOrganes;break;
+        }
+    }
 
-        $unOrgane = new metierOrgane($unId,$unOrgane,$nbPersonnes, new conteneurOrgane);
+    public function ajouterUnOrgane(int $unId,string $unOrgane,int $nbrPersonnes){
+
+        $unOrgane = new metierOrgane($unId,$unOrgane,$nbrPersonnes);
         $this->lesOrganes->append($unOrgane);
     }
 

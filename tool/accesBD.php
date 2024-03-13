@@ -29,6 +29,19 @@ class accesBD
             die("Connection à la base de données échouée".$e->getMessage());
         }
 	}
+	public function insererUnOrgane($idOrgane,$nomOrgane,$nbPersonne)
+	{
+		$sonOrgane = $this->donneProchainIdentifiant("ORGANE","code");
+		$requete = $this->conn->prepare("INSERT INTO organe (idOrgane,libOrgane,nbrPersonnesOrgane) VALUES (?,?,?)");
+		$requete->bindValue(1,$idOrgane);
+		$requete->bindValue(2,$nomOrgane);
+		$requete->bindValue(3,$nbPersonne);
+		if(!$requete->execute())
+		{
+			die("Erreur dans insert Cofonie : ".$requete->errorCode());
+		}
+		return $sonOrgane;
+	}
 	public function insererUnRole($idRole,$idInstitution,$libelleRole)
 	{
 		$sonRole = $this->donneProchainIdentifiant("ROLEINSTITUTION","code");
