@@ -30,6 +30,8 @@ public function __construct()
     $this->chargeLesAmendements();
     $this->toutLesArticles = new conteneurArticle();
     $this->chargeLesArticles();
+    $this->toutLesOrganes = new conteneurOrgane();
+    $this->chargeLesOrganes();
     $this->refArticles = new ArrayObject();
     $this->chargeArtRef();
     $this->toutLesTextes = new conteneurTexte();
@@ -92,8 +94,9 @@ public function __construct()
                 break;
 
             case 'visualiser' :
+                $listeOrgane = $this->toutLesOrganes->listeDesOrganes();
                 $vue = new vueCentraleOrgane();
-                $vue-> visualiserOrgane();
+                $vue->visualiserOrgane($listeOrgane);
                 break;
         }
     }
@@ -183,6 +186,17 @@ public function __construct()
 /***********************************************************************************************************************
                                     CHARGEMENT DES TABLES DANS LES CONTENEURS
 ***********************************************************************************************************************/
+    public function chargeLesOrganes(){
+        $resultatOrganes=$this->maBD->chargement('organe');
+        $nbE=0;
+        while ($nbE<sizeof($resultatOrganes))
+			{
+				$this->toutLesOrganes->ajouterUnOrgane($resultatOrganes[$nbE][0],$resultatOrganes[$nbE][1],$resultatOrganes[$nbE][2]);
+                
+				$nbE++;
+			}
+    }
+
     public function chargeLesInstitutions(){
         $resultatInstitutions=$this->maBD->chargement('institution');
         $nbE=0;

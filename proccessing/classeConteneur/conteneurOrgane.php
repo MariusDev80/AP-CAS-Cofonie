@@ -10,9 +10,9 @@ class conteneurOrgane
         $this->lesOrganes = new ArrayObject();
     }
 
-    public function ajouterUnOrgane(int $unId,string $unLibelle){
+    public function ajouterUnOrgane(int $unId,string $unOrgane,int $nbPersonnes){
 
-        $unOrgane = new metierOrgane($unId,$unLibelle, new conteneurInstitution);
+        $unOrgane = new metierOrgane($unId,$unOrgane,$nbPersonnes, new conteneurOrgane);
         $this->lesOrganes->append($unOrgane);
     }
 
@@ -24,7 +24,7 @@ class conteneurOrgane
 
         $liste = '';
         foreach($this->lesOrganes as $unOrgane){
-            $liste = $liste.$unOrgane->libelleOrgane;
+            $liste = $liste.$unOrgane->afficheOrgane();
         }
         return $liste;
     }
