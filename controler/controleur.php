@@ -263,12 +263,6 @@ public function __construct()
         $nbE = 0;
         while ($nbE < sizeof($resultatArtRef)) {
             $tempArr = array($resultatArtRef[$nbE][0],$resultatArtRef[$nbE][1],$resultatArtRef[$nbE][2],$resultatArtRef[$nbE][3]); 
-            /*
-            $tempArr[]=$resultatArtRef[$nbE][0];
-            $tempArr[]=&$resultatArtRef[$nbE][1];
-            $tempArr[]=&$resultatArtRef[$nbE][2];
-            $tempArr[]=&$resultatArtRef[$nbE][3];
-            */
             $this->refArticles->append($tempArr);
             $nbE++;
         }
@@ -278,14 +272,6 @@ public function __construct()
             foreach($this->toutLesArticles->__get('lesArticles') as $unArticle){
                 $idTexteArt1 = $unArticle->__get('idTexte');
                 $codeSeqArt1 = $unArticle->__get('codeSeqArticle');
-                /*
-                print_r(gettype($idTexteArt1));
-                print_r(gettype($codeSeqArt1));
-                print_r($idTexteArt1);
-                print_r("-");
-                print_r($codeSeqArt1);
-                print_r("|");
-                */
                 // si un art correspond au premier art d'une ref
                 if ($idTexteArt1 == $uneRef[0] && $codeSeqArt1 == $uneRef[1]){
                     // pour chaque article
@@ -330,9 +316,6 @@ public function __construct()
                 }
             }
         }
-        /*
-        
-        */
     }
 }
 

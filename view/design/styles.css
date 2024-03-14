@@ -43,8 +43,7 @@
 }
 
 .textes li{
-  border-top: 2px groove black;
-  /*border-radius: 20px;*/
+  border-top: 3px groove black;
   margin: 2%;
   padding: 2%;
 }
