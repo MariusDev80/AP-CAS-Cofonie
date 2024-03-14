@@ -1,6 +1,9 @@
 <?php 
 
 // include des vues a ajouter
+
+use function PHPSTORM_META\type;
+
 Class controleur 
 {
     private $toutLesAmendements;
@@ -30,7 +33,7 @@ public function __construct()
     $this->chargeLesAmendements();
     $this->toutLesArticles = new conteneurArticle();
     $this->chargeLesArticles();
-    $this->refArticles = new ArrayObject();
+    $this->refArticles = new ArrayIterator();
     $this->chargeArtRef();
     $this->toutLesTextes = new conteneurTexte();
     $this->chargeLesTextes();
@@ -256,25 +259,41 @@ public function __construct()
     }
 
     public function chargeArtRef() {
-        $resultatArtRef = $this->maBD->chargement('fairereference');
+        $resultatArtRef = $this->maBD->chargement('faireReference');
         $nbE = 0;
         while ($nbE < sizeof($resultatArtRef)) {
-            $tempArr = array($resultatArtRef[$nbE][0],$resultatArtRef[$nbE][1],$resultatArtRef[$nbE][2],$resultatArtRef[$nbE][3]);
+            $tempArr = array($resultatArtRef[$nbE][0],$resultatArtRef[$nbE][1],$resultatArtRef[$nbE][2],$resultatArtRef[$nbE][3]); 
+            /*
+            $tempArr[]=$resultatArtRef[$nbE][0];
+            $tempArr[]=&$resultatArtRef[$nbE][1];
+            $tempArr[]=&$resultatArtRef[$nbE][2];
+            $tempArr[]=&$resultatArtRef[$nbE][3];
+            */
             $this->refArticles->append($tempArr);
             $nbE++;
         }
-
+        // pour chaque reference = (text1, artText1, text2, artText2)
         foreach($this->refArticles as $uneRef) {
+            // pour chaque art
             foreach($this->toutLesArticles->__get('lesArticles') as $unArticle){
                 $idTexteArt1 = $unArticle->__get('idTexte');
                 $codeSeqArt1 = $unArticle->__get('codeSeqArticle');
-
-                if ($idTexteArt1 == $uneRef[0] and $codeSeqArt1 == $uneRef[1]){
+                /*
+                print_r(gettype($idTexteArt1));
+                print_r(gettype($codeSeqArt1));
+                print_r($idTexteArt1);
+                print_r("-");
+                print_r($codeSeqArt1);
+                print_r("|");
+                */
+                // si un art correspond au premier art d'une ref
+                if ($idTexteArt1 == $uneRef[0] && $codeSeqArt1 == $uneRef[1]){
+                    // pour chaque article
                     foreach($this->toutLesArticles->__get('lesArticles') as $unAutreArticle){
-                        $idTexteArt2 = $unArticle->__get('idTexte');
-                        $codeSeqArt2 = $unArticle->__get('codeSeqArticle');
-
-                        if ($idTexteArt2 == $uneRef[2] and $codeSeqArt2 == $uneRef[3]){
+                        $idTexteArt2 = $unAutreArticle->__get('idTexte');
+                        $codeSeqArt2 = $unAutreArticle->__get('codeSeqArticle');
+                        // si l'art correspond au deuxieme art de la ref
+                        if ($idTexteArt2 == $uneRef[2] && $codeSeqArt2 == $uneRef[3]){
                             $unArticle->ajouterReference($unAutreArticle);
                             // est ce qu'il faut ajouter la reference dans l'autre sens aussi ? si oui :
                             // $unAutreArticle->ajouterReference($unArticle);

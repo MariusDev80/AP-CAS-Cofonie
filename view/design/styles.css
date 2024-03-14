@@ -22,6 +22,7 @@
 }
 
 .page {
+  background-color: rgb(214, 214, 214);
   position: fixed;
   left: 20%;
   top: 15%;
@@ -31,25 +32,45 @@
   display: flex;
   justify-content: left;
   overflow: scroll;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 2%;
 }
 
-.page ul{
+
+.textes {
+  list-style-type: none;
+  padding: 0%;
+  margin: 0%;
+  width: 100%;
+}
+
+.textes li{
+  border-top: 2px groove black;
+  /*border-radius: 20px;*/
+  margin: 2%;
+  padding: 2%;
+}
+
+.articles{
+  margin: 0%;
+  padding: 0%;
   list-style-type: none;
   width: 100%;
 }
 
-.textes {
-  padding: 0;
-  margin: 0;
+.amendements{
+  border: 2px groove black;
+  border-radius: 10px;
+  margin: 0%;
+  padding: 0%;
+  list-style-type: none;
+  width: 100%;
 }
 
-.articles, .amendements{
-  margin-left: 5%;
-  margin-top: 5%;
+.articles li, .amendements li {
+  border: none;
+  margin: 2%;
+  padding: 2%;
 }
+
 /*
 .footer {
   position: absolute;
