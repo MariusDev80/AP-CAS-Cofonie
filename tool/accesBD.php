@@ -29,6 +29,19 @@ class accesBD
             die("Connection à la base de données échouée".$e->getMessage());
         }
 	}
+	public function insererUnTypeInstitution($idTypeInstitution, $libelleTypeInstitution)
+	{
+		$sonTypeInstitution = $this->donneProchainIdentifiant("TYPEINSTITUTION","code");
+		$requete = $this->conn->prepare("INSERT INTO typeInstitution (idTypeInstitution,libelleTypeInstitution) VALUES (?,?)");
+		$requete->bindValue(1,$idTypeInstitution);
+		$requete->bindValue(2,$libelleInstitution);
+		if(!$requete->execute())
+		{
+			die("Erreur dans insert Cofonie : ".$requete->errorCode());
+		}
+		return $sonTypeInstitution;
+	}
+
 	public function insererUnRole($idRole,$idInstitution,$libelleRole)
 	{
 		$sonRole = $this->donneProchainIdentifiant("ROLEINSTITUTION","code");

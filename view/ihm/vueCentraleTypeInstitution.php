@@ -38,12 +38,28 @@
 			echo '</table>';
 			
 		}
-		public function ajouterTypeInstitution()
+		public function ajouterTypeInstitution($nbTypeInstitutions)
 		{
-
-			echo "<BR>je suis dans l'ajout d'un type d'institution";
-	
+			echo '<table class="table table-striped table-bordered table-sm ">
+					<thead>
+						<tr>
+							<th scope="col">ID TYPE INSTITUTION</th>
+							<th scope="col">LIBELLE TYPE INSTITUTION</th>
+						</tr>
+					</thead>
+					<tbody>
+						<form action=index.php?vue=typeinstitution&action=saisirTypeInstitution method=POST align=center autocomplete="off">
+							<fieldset>
+								<tr>
+									<th scope="col"><input type=number name="idTypeInstitution" value='.($nbTypeInstitutions+1).' readonly></th>
+									<th scope="col"><input type=text name="libelleTypeInstitution"></th>
+									<th scope="col"><input type="submit" class="btn btn-primary" value=Valider></input></th>
+								</tr>
+							</fieldset>
+				 </form>
+					</tbody>
+				</table>';
 		}
-	
-}
+	}
+
 ?>

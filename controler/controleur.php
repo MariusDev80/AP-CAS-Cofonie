@@ -105,11 +105,16 @@ public function __construct()
         switch ($action) {
             case "ajouter":
                 $vue = new vueCentraleTypeInstitution();
-                $vue->ajouterTypeInstitution();
+                $vue->ajouterTypeInstitution($this->toutLesTypesInstitutions->nbTypeInstitution());
                 break;
 
             case "saisirTypeInstitution" :
-                // break;
+                $idTypeInstitution = $_POST['idTypeInstitution'];
+                $libelleTypeInstitution = $_POST['libelleTypeInstitution'];
+                $this->toutLesTypesInstitutions->ajouterUnTypeInstitution($idTypeInstitution, $libelleTypeInstitution);
+                $this->maBD->insererUnTypeInstitution($idTypeInstitution, $libelleTypeInstitution);
+                echo 'Type Institution rajouté correctement';
+                break;
 
             case "visualiser":
                 $liste=$this->toutLesTypesInstitutions->listeDesTypesInstitutions();
