@@ -45,6 +45,15 @@
                   <li><a href="index.php?vue=role&action=visualiser">Visualiser</a></li>
                 </ul>
               </li>
+              <li>
+                <a href="#">
+                  Votes
+                </a>
+                <ul class="sub-menu">
+                  <li><a href="index.php?vue=vote&action=voter">Voter</a></li>
+                  <li><a href="index.php?vue=vote&action=visualiser">Visualiser</a></li>
+                </ul>
+              </li>
           </ul>
       </div>
     </div>

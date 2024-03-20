@@ -29,8 +29,6 @@
   width: 80%;
   height: 80%;
   z-index: -1;
-  display: flex;
-  justify-content: left;
   overflow: scroll;
 }
 

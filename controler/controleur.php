@@ -81,8 +81,33 @@ public function __construct()
                     case "typeInstitution" :
                         $this->actionTypeInstitution($action);
                         break;
+                    case "vote":
+                        $this->actionVote($action);
+                        break;
                 }
             }
+    }
+
+    public function actionVote($action){
+        switch($action){
+            case "voter":
+                break;
+            case "visualiser":
+                $vue = new vueCentraleVote();
+                $vue->choisirVote($this->toutLesTextes);
+                break;
+            
+            case "visualiserVote":
+                $texte = $_POST['texte'];
+                $vue = new vueCentraleVote();
+                foreach ($this->toutLesTextes->__get('lesTextes') as $unTexte){
+                    if ($unTexte->__get('idTexte') == $texte){
+                        $texteChoisi = $unTexte;
+                    }
+                }
+                $vue->visualiserVote($texteChoisi); // ajouter le conteneurVote pour
+                break;                                   // avoir le nombre de vote sur les articles
+        }
     }
 
     public function actionOrgane($action){
@@ -96,7 +121,7 @@ public function __construct()
 
             case 'visualiser' :
                 $vue = new vueCentraleOrgane();
-                $vue-> visualiserOrgane();
+                $vue->visualiserOrgane();
                 break;
         }
     }
