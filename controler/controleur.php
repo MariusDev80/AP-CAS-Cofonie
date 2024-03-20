@@ -33,6 +33,8 @@ public function __construct()
     $this->chargeLesAmendements();
     $this->toutLesArticles = new conteneurArticle();
     $this->chargeLesArticles();
+    $this->toutLesOrganes = new conteneurOrgane();
+    $this->chargeLesOrganes();
     $this->refArticles = new ArrayIterator();
     $this->chargeArtRef();
     $this->toutLesTextes = new conteneurTexte();
@@ -114,14 +116,42 @@ public function __construct()
         switch($action) {
             case 'ajouter' :
                 $vue = new vueCentraleOrgane();
-                $vue->ajouterOrgane();
+                $vue->ajouterOrgane($this->toutLesOrganes->nbOrgane());
                 break;
             case 'saisirOrgane' :
+                $idOrgane = $_POST['idOrgane'];
+                $nomOrgane = $_POST['nomOrgane'];
+                $nbPersonne = $_POST['nbPersonne'];
+                $this->toutLesOrganes->ajouterUnOrgane($idOrgane, $nomOrgane, $nbPersonne);
+                $this->maBD->insererUnOrgane($idOrgane, $nomOrgane, $nbPersonne);
+                echo 'Rôle rajouté correctement';
                 break;
 
             case 'visualiser' :
+                $listeOrgane = $this->toutLesOrganes->listeDesOrganes();
                 $vue = new vueCentraleOrgane();
-                $vue->visualiserOrgane();
+                $vue->visualiserOrgane($listeOrgane);
+                break;
+        }
+    }
+
+    public function actionInstitution($action){
+        switch ($action) {
+            case "ajouter" :
+                $vue = new vueCentraleInstitution();
+                $vue->ajouterInstitution($this->toutLesInstitutions->nbInstitution());
+                break;
+            case "saisirInstitution" :
+                $idInstitution = $_POST['idInstitution'];
+                $libelleInstitution = $_POST['libelleInstitution'];
+                $this->toutLesInstitutions->ajouterUneInstitution($idInstitution, $libelleInstitution);
+                $this->maBD->insererUneInstitution($idInstitution, $libelleInstitution);
+                echo 'Rôle rajouté correctement';
+                break;
+            case "visualiser" :
+                $listeInstitution = $this->toutLesInstitutions->listeDesInstitutions();
+                $vue = new vueCentraleInstitution();
+                $vue->visualiserInstitution($listeInstitution);
                 break;
         }
     }
@@ -162,26 +192,6 @@ public function __construct()
         }
     }
 
-    public function actionInstitution($action){
-        switch ($action) {
-            case "ajouter" :
-                $vue = new vueCentraleInstitution();
-                $vue->ajouterInstitution($this->toutLesInstitutions->nbInstitution());
-                break;
-            case "saisirInstitution" :
-                $idInstitution = $_POST['idInstitution'];
-                $libelleInstitution = $_POST['libelleInstitution'];
-                $this->toutLesInstitutions->ajouterUneInstitution($idInstitution, $libelleInstitution);
-                $this->maBD->insererUneInstitution($idInstitution, $libelleInstitution);
-                echo 'Rôle rajouté correctement';
-                break;
-            case "visualiser" :
-                $listeInstitution = $this->toutLesInstitutions->listeDesInstitutions();
-                $vue = new vueCentraleInstitution();
-                $vue->visualiserInstitution($listeInstitution);
-                break;
-        }
-    }
 
     public function actionRole($action){
         switch ($action) {
@@ -211,6 +221,17 @@ public function __construct()
 /***********************************************************************************************************************
                                     CHARGEMENT DES TABLES DANS LES CONTENEURS
 ***********************************************************************************************************************/
+    public function chargeLesOrganes(){
+        $resultatOrganes=$this->maBD->chargement('organe');
+        $nbE=0;
+        while ($nbE<sizeof($resultatOrganes))
+			{
+				$this->toutLesOrganes->ajouterUnOrgane($resultatOrganes[$nbE][0],$resultatOrganes[$nbE][1],$resultatOrganes[$nbE][2]);
+                
+				$nbE++;
+			}
+    }
+
     public function chargeLesInstitutions(){
         $resultatInstitutions=$this->maBD->chargement('institution');
         $nbE=0;
