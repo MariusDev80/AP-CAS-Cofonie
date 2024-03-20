@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 // include des vues a ajouter
 
 use function PHPSTORM_META\type;
 
-Class controleur 
+class controleur
 {
     private $toutLesAmendements;
     private $toutLesArticles;
@@ -15,10 +15,6 @@ Class controleur
     private $toutLesTypesInstitutions;
     private $refArticles;
     private $maBD;
-
-/*******************************************************************************
-                                CONSTRUCTEUR 
-********************************************************************************/
 
 public function __construct()
 {
@@ -41,23 +37,23 @@ public function __construct()
 }
 
 /*******************************************************************************
+
                     Affichage ENTETE et PIED de PAGE 
-********************************************************************************/
-    public function afficheEntete() {
+     ********************************************************************************/
+    public function afficheEntete()
+    {
         require 'entete.php';
     }
 
-    public function affichePiedPage() {
+    public function affichePiedPage()
+    {
         require 'piedPage.php';
     }
 
-/********************************************************************************
+    /********************************************************************************
                 Execution des differentes actions selon les vues
-*********************************************************************************/ 
 
-// liste = ('bonjour', 'bonsoir')
-// isset(liste['bonjour']) -> true
-// isset(liste['coucou']) -> false
+     *********************************************************************************/
 
     public function affichePage($action,$vue){
 
@@ -84,8 +80,62 @@ public function __construct()
                     case "vote":
                         $this->actionVote($action);
                         break;
+                    case "deconnexion":
+                      $this->deconnexion();
+                      break;
+                    case "connexion":
+                      $this->connexion();
+                      break;
                 }
             }
+        }
+    }
+
+    public function deconnexion(){
+        // Détruire la session
+        session_destroy();
+        header('Location: ../AP-CAS-COFONIE/index.php');
+        // array_pop($_GET['action']);
+        // array_pop($_GET['vue']);
+        
+    }
+
+    public function connexion()
+    {
+        $username = htmlspecialchars($_POST['username']); //htmlspecialchars permet d'éviter de mettre des caractères spéciaux et permet d'éviter les attques sql
+        $password = htmlspecialchars($_POST['password']);
+
+        // Hachage du mot de passe avec MD5
+        $hashed_password = md5($password);
+
+        // Création de l'objet de connexion à la base de données
+        $accesBD = $this->maBD;
+
+        // Requête SQL pour récupérer l'utilisateur et le rôle
+        $req = $accesBD->getConn()->prepare('SELECT username, role FROM users WHERE username = :username AND password = :password');
+        $req->execute(
+            array(
+                'username' => $username,
+                'password' => $hashed_password
+            )
+        );
+
+        // Récupération du résultat
+        $userInfo = $req->fetch(PDO::FETCH_ASSOC);
+
+        // Vérification du résultat
+        if ($userInfo) {
+            $role = $userInfo['role'];
+
+            // Stocker le rôle dans une variable de session
+            $_SESSION['role'] = $role;
+        } else {
+            echo '<center style="color:#FF0000">Identifiant ou mot de passe incorrect <br></center>';
+            echo '<center><a href="../index.php"><button type="button" class="btn btn-primary">Retour a la page de connexion</button></a><center>';
+
+        }
+        // Fermeture de la requête
+        $req->closeCursor();
     }
 
     public function actionVote($action){
@@ -182,7 +232,6 @@ public function __construct()
                 break;
         }
     }
-
     public function actionRole($action){
         switch ($action) {
             
@@ -343,5 +392,3 @@ public function __construct()
         }
     }
 }
-
-?>

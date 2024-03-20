@@ -132,9 +132,7 @@
   text-decoration: none;
   color:white;
 }
-.sub-menu {
-  z-index: auto;
-}
+
 .sidebar .nav-links li .sub-menu{
   padding: 6px 6px 14px 80px;
   margin-top: -10px;
@@ -168,3 +166,23 @@
   pointer-events: auto;
   transition: all 0.4s ease;
 }
+
+.connexion{
+  margin-right:80%;
+  position: absolute;
+}
+
+.deconnexion {
+  margin-right:80%;
+  position: absolute;
+}
+
+.deconnexion .bouton{
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  font: 16px;
+  padding: 6px;
+  color: white;
+}
+
