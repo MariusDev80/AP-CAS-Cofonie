@@ -10,7 +10,6 @@ class metierArticle {
     public function __construct(private int $idTexte,private int $codeSeqArticle,private string $titreArticle, private string $texteArticle)
     {
         $this->lesAmendements = new conteneurAmendement();
-        $this->lesArticlesDeReference = new conteneurArticle();
     }
 
     public function __get($attribut){
@@ -37,18 +36,21 @@ class metierArticle {
         $texte = $this->texteArticle;
 
         echo "<h3>$id | $titre</h3>";
-        /*
-        if ($this->lesArticlesDeReference != null){
-            $listeId = '|';
+
+        if (isset($this->lesArticlesDeReference)){
+            $listeId = '';
             $refs = $this->lesArticlesDeReference->__get('lesArticles');
             foreach($refs as $unArtRef){
                 $listeId .= $unArtRef->__get('idTexte');
                 $listeId .= '.';
                 $listeId .= $unArtRef->__get('codeSeqArticle');
-                $listeId .= '|';
+                if ($this->lesArticlesDeReference->nbArticle() > 1 and $unArtRef != $refs[$this->lesArticlesDeReference->nbArticle()-1]){
+                    $listeId .= ' | ';
+                }
             }
+            echo "Article(s) de réference : $listeId<br>";
         }
-        */
+
         echo "<br><p>$texte</p>";
     }
 
@@ -57,7 +59,14 @@ class metierArticle {
     }
 
     public function ajouterReference(metierArticle $article){
-        $this->lesArticlesDeReference->ajouterObjArticle($article);
+        if (isset($lesArticlesDeReference)){
+            $this->lesArticlesDeReference->ajouterObjArticle($article);
+        }
+        else {
+            $this->lesArticlesDeReference = new conteneurArticle();
+            $this->lesArticlesDeReference->ajouterObjArticle($article);
+        }
+        
     }
 
 }

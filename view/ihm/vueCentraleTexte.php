@@ -20,7 +20,7 @@ include_once('autoload.php');
 				foreach($lesArticles as $unArticle){
 					echo'<li>';
 					$unArticle->afficheArticle();
-					if ($unArticle->__get('lesAmendements') != NULL){
+					if ($unArticle->__get('lesAmendements')->nbAmendement() != 0){
 						$lesAmendements = $unArticle->__get('lesAmendements')->__get('lesAmendements');
 						echo'<ul class="amendements">';
 						foreach($lesAmendements as $unAmendement){

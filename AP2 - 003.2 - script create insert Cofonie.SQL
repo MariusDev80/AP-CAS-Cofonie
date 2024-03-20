@@ -130,17 +130,16 @@ CREATE TABLE IF NOT EXISTS TEXTE
    idTexte int NOT NULL AUTO_INCREMENT ,
    idInstitution int NOT NULL  ,
    titreTexte CHAR(32) NULL  ,
-   voteFinalTexte int NULL  ,
-   promulgationTexte boolean NULL  ,
+   promulgationTexte boolean NULL  , -- 1 etant true et 0 false
    constraint pk_texte PRIMARY KEY (idTexte) ,
    constraint fk_texte_institution FOREIGN KEY (idInstitution) REFERENCES INSTITUTION (idInstitution) 
  ) ENGINE = INNODB;
 
-insert into TEXTE values (1, 2, 'Texte Loi 1',0,0);
-insert into TEXTE values (2, 2, 'Texte Loi 2',0,0);
+insert into TEXTE values (1, 2, 'Texte Loi 1', 1);
+insert into TEXTE values (2, 2, 'Texte Loi 2', 1);
 
-insert into TEXTE values (3, 3, 'Texte Loi 3',0,0);
-insert into TEXTE values (4, 3, 'Texte Loi 4',0,0);
+insert into TEXTE values (3, 3, 'Texte Loi 3', 0);
+insert into TEXTE values (4, 3, 'Texte Loi 4', 1);
 
 
 # -----------------------------------------------------------------------------
@@ -250,12 +249,13 @@ insert into FAIREREFERENCE values (4,1,2,4);
 
 CREATE TABLE IF NOT EXISTS VOTER
  (
-   idTexte int NOT NULL  ,
-   codeSeqArticle int NOT NULL  ,
-   jourVote date NOT NULL  ,
-   idOrgane int NOT NULL  ,
-   nbrVoixPour int NULL  ,
+   idTexte int NOT NULL ,
+   codeSeqArticle int NOT NULL ,
+   jourVote date NOT NULL ,
+   idOrgane int NOT NULL ,
+   nbrVoixPour int NULL ,
    nbrVoixContre int NULL , 
+   propositionAmendement boolean NOT NULL,
    constraint pk_voter PRIMARY KEY (idTexte,codeSeqArticle,jourVote,idOrgane) ,
    constraint fk_voter_article FOREIGN KEY (idTexte,codeSeqArticle) REFERENCES ARTICLE (idTexte,codeSeqArticle),
    constraint fk_voter_organe FOREIGN KEY (idOrgane) REFERENCES ORGANE (idOrgane)
