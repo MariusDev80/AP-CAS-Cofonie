@@ -12,68 +12,55 @@
 
 <body>
 	<div class="entete">
-		<div class="connexion">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#connexion">
-				Se connecter
-			</button>
-			<div class="modal" id="connexion">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title">Connexion</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-						</div>
-						<div class="modal-body">
-							<form action="tool/accesBD.php" method="post">
-								<div class="mb-3">
-									<label for="username" class="form-label">Nom d'utilisateur</label>
-									<input type="text" class="form-control" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" required>
-								</div>
-								<div class="mb-3">
-									<label for="password" class="form-label">Mot de passe</label>
-									<input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" required>
-								</div>
-								<div class="modal-footer">
-									<h6><strong>Votre role : </strong></h6>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="1" id="1" value="secretaire">
-										<label class="form-check-label" for="exampleRadios1">
-											Secrétaire
-										</label>
+	<?php
+		if (isset($_SESSION['role'])){
+			echo '
+			<div class="deconnexion">
+				<form action="index.php?vue=deconnexion&action=deconnexion" method="post">
+					<button type="submit" class="bouton">
+						Se déconnecter
+					</button>
+				</form>
+        	</div>
+			';
+		}
+		else {
+			echo '
+			<div class="connexion">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#connexion">
+					Se connecter
+				</button>
+				<div class="modal" id="connexion">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Connexion</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<div class="modal-body">
+								<form action="index.php?vue=connexion&action=connexion" method="post">
+									<div class="mb-3">
+										<label for="username" class="form-label">Nom d\'utilisateur</label>
+										<input type="text" class="form-control" id="username" name="username" placeholder="Entrez votre nom d\'utilisateur" required>
 									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="2" id="2" value="greffier">
-										<label class="form-check-label" for="exampleRadios2">
-											Greffier
-										</label>
+									<div class="mb-3">
+										<label for="password" class="form-label">Mot de passe</label>
+										<input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" required>
 									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="3" id="3" value="citoyen">
-										<label class="form-check-label" for="exampleRadios3">
-											Citoyen
-										</label>
+									<div class="modal-footer">
+										<button type="button" href="https://www.youtube.com" class="btn btn-secondary">Créer un compte</button>
+										<button type="submit" class="btn btn-primary">Connexion</button>
 									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="4" id="4" value="monarque">
-										<label class="form-check-label" for="exampleRadios3">
-											Monarque
-										</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="5" id="5" value="parlementaire">
-										<label class="form-check-label" for="exampleRadios3">
-											Parlementaire
-										</label>
-									</div>
-									<button type="submit" class="btn btn-primary">Connexion</button>
-								</div>
-							</form>
-						</div>
+								</form>
+							</div>
 
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			';
+		}
+		?>	
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 		<h1>

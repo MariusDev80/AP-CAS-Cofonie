@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 // include de l'autoload
 include_once('autoload.php');
 
-Class controleur 
+class controleur
 {
     public $toutLesAmendements;
     public $toutLesArticles;
@@ -12,9 +12,9 @@ Class controleur
     public $toutLesTextes;
     public $toutLesTypeInstitutions;
 
-/*******************************************************************************
+    /*******************************************************************************
                                 CONSTRUCTEUR 
-********************************************************************************/
+     ********************************************************************************/
     public function __construct()
     {
         if (isset($_SESSION['amendements'])) {
@@ -47,74 +47,132 @@ Class controleur
         } else {
             $this->toutLesTypeInstitutions = new conteneurTypeInstitution();
         }
-        
+
+
     }
-/*******************************************************************************
+    /*******************************************************************************
                     Affichage ENTETE et PIED de PAGE 
-********************************************************************************/
-    public function afficheEntete() {
+     ********************************************************************************/
+    public function afficheEntete()
+    {
         require 'entete.php';
     }
 
-    public function affichePiedPage() {
+    public function affichePiedPage()
+    {
         require 'piedPage.php';
     }
 
-/********************************************************************************
+    /********************************************************************************
                 Execution des differentes actions selon les vues
-*********************************************************************************/ 
+     *********************************************************************************/
 
-// liste = ('bonjour', 'bonsoir')
-// isset(liste['bonjour']) -> true
-// isset(liste['coucou']) -> false
+    // liste = ('bonjour', 'bonsoir')
+    // isset(liste['bonjour']) -> true
+    // isset(liste['coucou']) -> false
 
-    public function affichePage($action,$vue){
+    public function affichePage($action, $vue)
+    {
 
-        if (isset($_GET['action']) && isset($_GET['vue'])){
-                $action = $_GET['action'];
-                $vue = $_GET['vue'];
+        if (isset($_GET['action']) && isset($_GET['vue'])) {
+            $action = $_GET['action'];
+            $vue = $_GET['vue'];
 
-                switch ($vue){
-                    case "amendement" : 
-                        $this->actionAmendement($action);
-                        break;
-                    case "article" :
-                        // $this->actionArticle($action);
-                        break;
-                    case "organe" :
-                        // $this->actionOrgane($action);
-                        break;
-                    case "role" :
-                        // $this->actionRole($action);
-                        break;
-                    case "texte" : 
-                        // $this->actionTexte($action);
-                        break;
-                    case "typeInstitution" :
-                        // $this->actionTypeInstitution($action);
-                        break;
-                }
+            switch ($vue) {
+                case "amendement":
+                    $this->actionAmendement($action);
+                    break;
+                case "article":
+                    // $this->actionArticle($action);
+                    break;
+                case "organe":
+                    // $this->actionOrgane($action);
+                    break;
+                case "role":
+                    // $this->actionRole($action);
+                    break;
+                case "texte":
+                    // $this->actionTexte($action);
+                    break;
+                case "typeInstitution":
+                    // $this->actionTypeInstitution($action);
+                    break;
+                case "deconnexion":
+                    $this->deconnexion();
+                    break;
+                case "connexion":
+                    $this->connexion();
+                    break;
             }
+        }
     }
 
-    public function actionAmendement($action){
+    public function deconnexion(){
+        // Détruire la session
+        session_destroy();
+        header('Location: ../AP-CAS-COFONIE-2/index.php');
+        // array_pop($_GET['action']);
+        // array_pop($_GET['vue']);
+        
+    }
+
+    public function connexion()
+    {
+        $username = htmlspecialchars($_POST['username']); //htmlspecialchars permet d'éviter de mettre des caractères spéciaux et permet d'éviter les attques sql
+        $password = htmlspecialchars($_POST['password']);
+
+        // Hachage du mot de passe avec MD5
+        $hashed_password = md5($password);
+
+        // Création de l'objet de connexion à la base de données
+        $accesBD = new accesBD();
+
+        // Requête SQL pour récupérer l'utilisateur et le rôle
+        $req = $accesBD->getConn()->prepare('SELECT username, role FROM users WHERE username = :username AND password = :password');
+        $req->execute(
+            array(
+                'username' => $username,
+                'password' => $hashed_password
+            )
+        );
+
+        // Récupération du résultat
+        $userInfo = $req->fetch(PDO::FETCH_ASSOC);
+
+        // Vérification du résultat
+        if ($userInfo) {
+            $role = $userInfo['role'];
+
+            // Stocker le rôle dans une variable de session
+            $_SESSION['role'] = $role;
+        } else {
+            echo '<center style="color:#FF0000">Identifiant ou mot de passe incorrect <br></center>';
+            echo '<center><a href="../index.php"><button type="button" class="btn btn-primary">Retour a la page de connexion</button></a><center>';
+
+        }
+        // Fermeture de la requête
+        $req->closeCursor();
+    }
+
+    public function actionAmendement($action)
+    {
         switch ($action) {
 
-            // l'ajout passe par deux etapes,
-            // la creation de vueAmendement et l'appel de la fonction d'ajout puis la saisie et l'ajout 
-            case "ajouter" :
+                // l'ajout passe par deux etapes,
+                // la creation de vueAmendement et l'appel de la fonction d'ajout puis la saisie et l'ajout 
+            case "ajouter":
                 $vue = new vueCentraleAmendement();
                 $vue->ajouterAmendement();
                 break;
-            case "saisirAmendement" :
+            case "saisirAmendement":
                 // $idAmendement = $_POST['idAmendement'];
                 // $dateAmendement = $_POST['dateAmendement'];
                 // $texteAmendement = $_POST['texteAmendement'];
                 // $this->toutLesAmendements->ajouterUnAmendement($idAmendement,$dateAmendement,$texteAmendement);
                 break;
 
-            // visualisation des amendements
-            case "visualiser" :
+                // visualisation des amendements
+            case "visualiser":
                 // mettre les amendement sous la forme souhaité et en string
                 // $liste = $this->toutLesAmendements->listeDesAmendements();
                 // ?? voir fichier prof : $liste = $liste.$this->tousLesVehicules->listeDesVehicules();
@@ -125,10 +183,6 @@ Class controleur
                 $vue->visualiserAmendement();
 
                 // ?? voir fichier prof : echo $this->tousLesVehicules->listeDesVehicules();
-        }       
+        }
     }
-
-
 }
-
-?>

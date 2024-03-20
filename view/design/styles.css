@@ -126,3 +126,17 @@
   position: absolute;
 }
 
+.deconnexion {
+  margin-right:80%;
+  position: absolute;
+}
+
+.deconnexion .bouton{
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  font: 16px;
+  padding: 6px;
+  color: white;
+}
+
