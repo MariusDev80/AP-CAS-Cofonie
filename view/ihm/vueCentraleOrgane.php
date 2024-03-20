@@ -9,7 +9,7 @@
 		
 		public function visualiserOrgane()
 		{
-			echo "<BR>je suis dans la visualisation de l'organe";		
+			echo "<BR>je suis dans la visualisation des organes";		
 			
 		}
 		public function ajouterOrgane()

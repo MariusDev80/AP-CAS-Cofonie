@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS TYPEINSTITUTION
    constraint pk_typeInstitution PRIMARY KEY (idTypeInstitution) 
     ) ENGINE = INNODB;
 
-    insert into typeInstitution values (1, 'executif');
+    insert into typeInstitution values (1,'executif');
     insert into typeInstitution values (2,'legislatif');
     insert into typeInstitution values (3,'judiciaire');
     insert into typeInstitution values (4,'pas de pouvoir');
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS ROLEINSTITUTION
  
 
 
- insert into ROLEINSTITUTION values (1, 1,'Dissoudre l assemblée');
+ insert into ROLEINSTITUTION values (1, 1,"Dissoudre l'assemblée");
  insert into ROLEINSTITUTION values (2,1,'Recourir au référendum');
  insert into ROLEINSTITUTION values (3,1, 'Promulguer des lois');
  insert into ROLEINSTITUTION values (4,1,'Exercer les plien pouvoirs en cas de crise');
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS ROLEINSTITUTION
  insert into ROLEINSTITUTION values (6, 2, 'Défini la politique de la nation');
  insert into ROLEINSTITUTION values (7, 2, 'Conduit la politique de la nation');
 
- insert into ROLEINSTITUTION values (8, 3, 'Vote les lois dans le domaine énuméré par l article 34 de la constitution');
+ insert into ROLEINSTITUTION values (8, 3, "Vote les lois dans le domaine énuméré par l'article 34 de la constitution");
 
  insert into ROLEINSTITUTION values (9, 4 ,'Chargé de vérifier que les lois adoptées par le parlement respectent la constitution');
 
@@ -130,17 +130,16 @@ CREATE TABLE IF NOT EXISTS TEXTE
    idTexte int NOT NULL AUTO_INCREMENT ,
    idInstitution int NOT NULL  ,
    titreTexte CHAR(32) NULL  ,
-   voteFinalTexte int NULL  ,
-   promulgationTexte boolean NULL  ,
+   promulgationTexte boolean NULL  , -- 1 etant true et 0 false
    constraint pk_texte PRIMARY KEY (idTexte) ,
    constraint fk_texte_institution FOREIGN KEY (idInstitution) REFERENCES INSTITUTION (idInstitution) 
  ) ENGINE = INNODB;
 
-insert into TEXTE values (1, 2, 'Texte Loi 1',0,0);
-insert into TEXTE values (2, 2, 'Texte Loi 2',0,0);
+insert into TEXTE values (1, 2, 'Texte Loi 1', 1);
+insert into TEXTE values (2, 2, 'Texte Loi 2', 1);
 
-insert into TEXTE values (3, 3, 'Texte Loi 3',0,0);
-insert into TEXTE values (4, 3, 'Texte Loi 4',0,0);
+insert into TEXTE values (3, 3, 'Texte Loi 3', 0);
+insert into TEXTE values (4, 3, 'Texte Loi 4', 1);
 
 
 # -----------------------------------------------------------------------------
@@ -158,21 +157,21 @@ CREATE TABLE IF NOT EXISTS ARTICLE
  ) ENGINE = INNODB;
 
 
-insert into ARTICLE values (1, 1, 'Article 1.1', 'Détail de l arrticle 1.1');
-insert into ARTICLE values (1, 2, 'Article 1.2', 'Détail de l arrticle 1.2');
-insert into ARTICLE values (1, 3, 'Article 1.3', 'Détail de l arrticle 1.3');
+insert into ARTICLE values (1, 1, 'Article 1.1', "Détail de l'article 1.1");
+insert into ARTICLE values (1, 2, 'Article 1.2', "Détail de l'article 1.2");
+insert into ARTICLE values (1, 3, 'Article 1.3', "Détail de l'article 1.3");
 
-insert into ARTICLE values (2, 1, 'Article 2.1', 'Détail de l arrticle 2.1');
-insert into ARTICLE values (2, 2, 'Article 2.2', 'Détail de l arrticle 2.2');
-insert into ARTICLE values (2, 3, 'Article 2.3', 'Détail de l arrticle 2.3');
-insert into ARTICLE values (2, 4, 'Article 2.4', 'Détail de l arrticle 2.4');
+insert into ARTICLE values (2, 1, 'Article 2.1', "Détail de l'article 2.1");
+insert into ARTICLE values (2, 2, 'Article 2.2', "Détail de l'article 2.2");
+insert into ARTICLE values (2, 3, 'Article 2.3', "Détail de l'article 2.3");
+insert into ARTICLE values (2, 4, 'Article 2.4', "Détail de l'article 2.4");
 
-insert into ARTICLE values (3, 1, 'Article 3.1', 'Détail de l arrticle 3.1');
-insert into ARTICLE values (3, 2, 'Article 3.2', 'Détail de l arrticle 3.2');
+insert into ARTICLE values (3, 1, 'Article 3.1', "Détail de l'article 3.1");
+insert into ARTICLE values (3, 2, 'Article 3.2', "Détail de l'article 3.2");
 
-insert into ARTICLE values (4, 1, 'Article 4.1', 'Détail de l arrticle 4.1');
-insert into ARTICLE values (4, 2, 'Article 4.2', 'Détail de l arrticle 4.2');
-insert into ARTICLE values (4, 3, 'Article 4.3', 'Détail de l arrticle 4.3');
+insert into ARTICLE values (4, 1, 'Article 4.1', "Détail de l'article 4.1");
+insert into ARTICLE values (4, 2, 'Article 4.2', "Détail de l'article 4.2");
+insert into ARTICLE values (4, 3, 'Article 4.3', "Détail de l'article 4.3");
 
 
 
@@ -195,32 +194,32 @@ CREATE TABLE IF NOT EXISTS AMENDEMENT
 
 
 
-insert into AMENDEMENT values (1, 1, 1, 'Amendement 1 de l article 1.1', 'Détail de l amendement 1 de l arrticle 1.1', '2019-01-01');
-insert into AMENDEMENT values (1, 1, 2, 'Amendement 2 de l article 1.1', 'Détail de l amendement 2 de l arrticle 1.1', '2022-01-01');
-insert into AMENDEMENT values (1, 2, 1, 'Amendement 1 de l article 1.2', 'Détail de l amendement 1 de l arrticle 1.2', '2020-06-01');
-insert into AMENDEMENT values (1, 2, 2, 'Amendement 2 de l article 1.2', 'Détail de l amendement 2 de l arrticle 1.2', '2020-07-01');
-insert into AMENDEMENT values (1, 2, 3, 'Amendement 3 de l article 1.2', 'Détail de l amendement 1 de l arrticle 1.2', '2020-08-01');
-insert into AMENDEMENT values (1, 3, 1, 'Amendement 1 de l article 1.3', 'Détail de l amendement 1 de l arrticle 1.3', '2023-09-01');
+insert into AMENDEMENT values (1, 1, 1, "Amendement 1 de l'article 1.1", "Détail de l'amendement 1 de l'article 1.1", '2019-01-01');
+insert into AMENDEMENT values (1, 1, 2, "Amendement 2 de l'article 1.1", "Détail de l'amendement 2 de l'article 1.1", '2022-01-01');
+insert into AMENDEMENT values (1, 2, 1, "Amendement 1 de l'article 1.2", "Détail de l'amendement 1 de l'article 1.2", '2020-06-01');
+insert into AMENDEMENT values (1, 2, 2, "Amendement 2 de l'article 1.2", "Détail de l'amendement 2 de l'article 1.2", '2020-07-01');
+insert into AMENDEMENT values (1, 2, 3, "Amendement 3 de l'article 1.2", "Détail de l'amendement 1 de l'article 1.2", '2020-08-01');
+insert into AMENDEMENT values (1, 3, 1, "Amendement 1 de l'article 1.3", "Détail de l'amendement 1 de l'article 1.3", '2023-09-01');
 
-insert into AMENDEMENT values (2, 1, 1, 'Amendement 1 de l article 2.1', 'Détail de l amendement 1 de l arrticle 2.1', '2020-01-01');
-insert into AMENDEMENT values (2, 1, 2, 'Amendement 2 de l article 2.1', 'Détail de l amendement 2 de l arrticle 2.1', '2020-02-01');
-insert into AMENDEMENT values (2, 2, 1, 'Amendement 1 de l article 2.2', 'Détail de l amendement 1 de l arrticle 2.2', '2020-03-01');
-insert into AMENDEMENT values (2, 3, 1, 'Amendement 1 de l article 2.3', 'Détail de l amendement 1 de l arrticle 2.3', '2020-04-01');
-insert into AMENDEMENT values (2, 3, 2, 'Amendement 2 de l article 2.3', 'Détail de l amendement 2 de l arrticle 2.3', '2020-08-01');
-insert into AMENDEMENT values (2, 3, 3, 'Amendement 3 de l article 2.3', 'Détail de l amendement 3 de l arrticle 2.3', '2023-09-01');
-insert into AMENDEMENT values (2, 4, 1, 'Amendement 1 de l article 2.4', 'Détail de l amendement 1 de l arrticle 2.4', '2023-10-01');
-insert into AMENDEMENT values (2, 4, 2, 'Amendement 2 de l article 2.4', 'Détail de l amendement 1 de l arrticle 2.4', '2023-11-01');
+insert into AMENDEMENT values (2, 1, 1, "Amendement 1 de l'article 2.1", "Détail de l'amendement 1 de l'article 2.1", '2020-01-01');
+insert into AMENDEMENT values (2, 1, 2, "Amendement 2 de l'article 2.1", "Détail de l'amendement 2 de l'article 2.1", '2020-02-01');
+insert into AMENDEMENT values (2, 2, 1, "Amendement 1 de l'article 2.2", "Détail de l'amendement 1 de l'article 2.2", '2020-03-01');
+insert into AMENDEMENT values (2, 3, 1, "Amendement 1 de l'article 2.3", "Détail de l'amendement 1 de l'article 2.3", '2020-04-01');
+insert into AMENDEMENT values (2, 3, 2, "Amendement 2 de l'article 2.3", "Détail de l'amendement 2 de l'article 2.3", '2020-08-01');
+insert into AMENDEMENT values (2, 3, 3, "Amendement 3 de l'article 2.3", "Détail de l'amendement 3 de l'article 2.3", '2023-09-01');
+insert into AMENDEMENT values (2, 4, 1, "Amendement 1 de l'article 2.4", "Détail de l'amendement 1 de l'article 2.4", '2023-10-01');
 
-insert into AMENDEMENT values (3, 1, 1, 'Amendement 1 de l article 3.1', 'Détail de l amendement 1 de l arrticle 3.1', '2020-01-01');
-insert into AMENDEMENT values (3, 1, 2, 'Amendement 2 de l article 3.1', 'Détail de l amendement 2 de l arrticle 3.1', '2020-02-01');
+insert into AMENDEMENT values (2, 4, 2, "Amendement 2 de l'article 2.4", "Détail de l'amendement 1 de l'article 2.4", '2023-11-01');
+insert into AMENDEMENT values (3, 1, 1, "Amendement 1 de l'article 3.1", "Détail de l'amendement 1 de l'article 3.1", '2020-01-01');
+insert into AMENDEMENT values (3, 1, 2, "Amendement 2 de l'article 3.1", "Détail de l'amendement 2 de l'article 3.1", '2020-02-01');
 
-insert into AMENDEMENT values (4, 1, 1, 'Amendement 1 de l article 4.1', 'Détail de l amendement 1 de l arrticle 4.1', '2023-02-01');
-insert into AMENDEMENT values (4, 1, 2, 'Amendement 2 de l article 4.1', 'Détail de l amendement 2 de l arrticle 4.1', '2023-03-01');
-insert into AMENDEMENT values (4, 2, 1, 'Amendement 1 de l article 4.2', 'Détail de l amendement 1 de l arrticle 4.2', '2023-04-01');
-insert into AMENDEMENT values (4, 2, 2, 'Amendement 2 de l article 4.2', 'Détail de l amendement 2 de l arrticle 4.2', '2023-08-01');
-insert into AMENDEMENT values (4, 2, 3, 'Amendement 3 de l article 4.2', 'Détail de l amendement 3 de l arrticle 4.2', '2023-09-01');
-insert into AMENDEMENT values (4, 3, 1, 'Amendement 1 de l article 4.3', 'Détail de l amendement 1 de l arrticle 4.3', '2023-10-01');
-insert into AMENDEMENT values (4, 3, 2, 'Amendement 2 de l article 4.3', 'Détail de l amendement 1 de l arrticle 4.3', '2023-11-01');
+insert into AMENDEMENT values (4, 1, 1, "Amendement 1 de l'article 4.1", "Détail de l'amendement 1 de l'article 4.1", '2023-02-01');
+insert into AMENDEMENT values (4, 1, 2, "Amendement 2 de l'article 4.1", "Détail de l'amendement 2 de l'article 4.1", '2023-03-01');
+insert into AMENDEMENT values (4, 2, 1, "Amendement 1 de l'article 4.2", "Détail de l'amendement 1 de l'article 4.2", '2023-04-01');
+insert into AMENDEMENT values (4, 2, 2, "Amendement 2 de l'article 4.2", "Détail de l'amendement 2 de l'article 4.2", '2023-08-01');
+insert into AMENDEMENT values (4, 2, 3, "Amendement 3 de l'article 4.2", "Détail de l'amendement 3 de l'article 4.2", '2023-09-01');
+insert into AMENDEMENT values (4, 3, 1, "Amendement 1 de l'article 4.3", "Détail de l'amendement 1 de l'article 4.3", '2023-10-01');
+insert into AMENDEMENT values (4, 3, 2, "Amendement 2 de l'article 4.3", "Détail de l'amendement 1 de l'article 4.3", '2023-11-01');
 
 
 # -----------------------------------------------------------------------------
@@ -250,12 +249,13 @@ insert into FAIREREFERENCE values (4,1,2,4);
 
 CREATE TABLE IF NOT EXISTS VOTER
  (
-   idTexte int NOT NULL  ,
-   codeSeqArticle int NOT NULL  ,
-   jourVote date NOT NULL  ,
-   idOrgane int NOT NULL  ,
-   nbrVoixPour int NULL  ,
+   idTexte int NOT NULL ,
+   codeSeqArticle int NOT NULL ,
+   jourVote date NOT NULL ,
+   idOrgane int NOT NULL ,
+   nbrVoixPour int NULL ,
    nbrVoixContre int NULL , 
+   propositionAmendement boolean NOT NULL,
    constraint pk_voter PRIMARY KEY (idTexte,codeSeqArticle,jourVote,idOrgane) ,
    constraint fk_voter_article FOREIGN KEY (idTexte,codeSeqArticle) REFERENCES ARTICLE (idTexte,codeSeqArticle),
    constraint fk_voter_organe FOREIGN KEY (idOrgane) REFERENCES ORGANE (idOrgane)

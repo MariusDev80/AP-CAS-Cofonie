@@ -20,11 +20,12 @@ class conteneurTypeInstitution
         return $this->lesTypesInstitutions->count();
     }
 
-    public function listeDesTypesInstitutions(){
+    public function listeDesTypesInstitutions() {
 
         $liste = '';
         foreach($this->lesTypesInstitutions as $unTypeInstitution){
-            $liste = $liste.$unTypeInstitution->libelleTypeInstitution;
+            $liste = $liste.$unTypeInstitution->afficheTypeInstitution();
+            
         }
         return $liste;
     }

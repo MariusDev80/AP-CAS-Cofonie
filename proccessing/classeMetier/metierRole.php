@@ -2,7 +2,7 @@
 class metierRole
 {
     # voir si on ajoute un conteneur institution pour avoir la liste des institutions relatives a un role
-    public function __construct(private int $idRole, private string $libelleRole)
+    public function __construct(private int $idRole, private int $idInstitution, private string $libelleRole)
     {
     }
     public function __get($attribut){
@@ -17,5 +17,9 @@ class metierRole
             case 'role': $this->libelleRole = $valeur; break;
         }
     }
+    public function afficheRole(){
+        $liste=$this->idRole.' | '.$this->idInstitution.' | '.$this->libelleRole.' | ';
+		return $liste;
+    }   
 }
 ?>

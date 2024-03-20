@@ -27,9 +27,35 @@ class accesBD
 		}
 	}
 
+
 	public function getConn()
 	{
 		return $this->conn;
+
+	public function insererUnRole($idRole,$idInstitution,$libelleRole)
+	{
+		$sonRole = $this->donneProchainIdentifiant("ROLEINSTITUTION","code");
+		$requete = $this->conn->prepare("INSERT INTO roleInstitution (idRole,idInstitution,libelleRole) VALUES (?,?,?)");
+		$requete->bindValue(1,$idRole);
+		$requete->bindValue(2,$idInstitution);
+		$requete->bindValue(3,$libelleRole);
+		if(!$requete->execute())
+		{
+			die("Erreur dans insert Cofonie : ".$requete->errorCode());
+		}
+		return $sonRole;
+	}
+	public function insererUneInstitution($idInstitution, $libelleInstitution)
+	{
+		$sonInstitution = $this->donneProchainIdentifiant("INSTITUTION", "code");
+		$requete = $this->conn->prepare("INSERT INTO institution (idInstitution,libelleInstitution) VALUES (?,?)");
+		$requete->bindValue(1,$idInstitution);
+		$requete->bindValue(2,$libelleInstitution);
+		if(!$requete->execute())
+		{
+			die("Erreur dans insert Cofonie : ".$requete->errorCode());
+		}
+		return $sonInstitution;
 	}
 
 
@@ -56,15 +82,34 @@ class accesBD
 
 	private function specialCase($stringQuery, $uneTable)
 	{
-		$uneTable = strtoupper($uneTable);
-		switch ($uneTable) {
-			case 'VOITURE':
-				$stringQuery .= 'voiture'; // concatenation de stringQuery et 'voiture'
+			$uneTable = strtoupper($uneTable);
+			switch ($uneTable) {
+
+			case 'ROLEINSTITUTION':
+				$stringQuery.='roleinstitution';
+				break;
+			case 'INSTITUTION':
+				$stringQuery.='institution';
+        		break;
+			case 'TYPEINSTITUTION':
+				$stringQuery.='typeinstitution'; // concatenation de stringQuery et 'voiture'
+				break;
+			case 'AMENDEMENT':
+				$stringQuery.='amendement';
+				break;
+			case 'ARTICLE':
+				$stringQuery.='article';
+				break;
+			case 'TEXTE':
+				$stringQuery.='texte';
+				break;
+			case 'FAIREREFERENCE':
+				$stringQuery.='fairereference';
 				break;
 			default:
 				die('Pas une table valide');
-				break;
-		}
+				break;	
+			}
 
 		return $stringQuery . ";";
 	}

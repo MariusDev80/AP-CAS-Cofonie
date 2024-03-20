@@ -10,20 +10,26 @@ class conteneurInstitution
         $this->lesInstitutions = new ArrayObject();
     }
 
-    public function ajouterUneInstitution(int $unId,string $unLibelle, metierTypeInstitution $leTypeInstitution, conteneurRole $leRole){
-        $uneInstitution = new metierInstitution($unId,$unLibelle,$leTypeInstitution,$leRole);
-        $this->lesInstitutions->append($uneInstitution); 
+    public function __get($attribut){
+        switch($attribut){
+            case'lesInstitutions': return $this->lesInstitutions;break;
+        }
+    }
+
+    public function ajouterUneInstitution(int $unId,string $unLibelle){
+        $uneInstitution = new metierInstitution($unId,$unLibelle);
+        $this->lesInstitutions->append($uneInstitution);
     }
 
     public function nbInstitution(){
         return $this->lesInstitutions->count();
     }
 
-    public function listeDesInsitutions(){
+    public function listeDesInstitutions(){
 
         $liste = '';
         foreach($this->lesInstitutions as $uneInstitution){
-            $liste = $liste.$uneInstitution->libelleInstitution;
+            $liste = $liste.$uneInstitution->afficheInstitution();
         }
         return $liste;
     }
