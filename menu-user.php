@@ -10,16 +10,6 @@ if ($role == 1) { // role 1 = secrétaire
     echo "
 <li>
     <a href='#'>
-        Articles
-    </a>
-    <ul class='sub-menu'>
-        <li><a href='#'>Ajouter</a></li>
-        <li><a href='#'>Modifier</a></li>
-        <li><a href='#'>Visualiser</a></li>
-    </ul>
-</li>
-<li>
-    <a href='#'>
         Texte
     </a>
     <ul class='sub-menu'>

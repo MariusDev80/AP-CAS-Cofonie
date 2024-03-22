@@ -97,7 +97,6 @@ public function __construct()
         header('Location: ../AP-CAS-COFONIE/index.php');
         // array_pop($_GET['action']);
         // array_pop($_GET['vue']);
-        
     }
 
     public function connexion()
