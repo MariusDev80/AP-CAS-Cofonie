@@ -86,6 +86,9 @@ public function __construct()
                     case "connexion":
                       $this->connexion();
                       break;
+                    case "signup":
+                      $this->signup();
+                      break;
                 }
             }
         }
@@ -97,6 +100,13 @@ public function __construct()
         header('Location: ../AP-CAS-COFONIE/index.php');
         // array_pop($_GET['action']);
         // array_pop($_GET['vue']);
+    }
+
+    public function signup(){
+        $signupUsername = $_POST['signupUsername'];
+        $signupPassword = $_POST['signupPassword'];
+        $confirmPassword = $_POST['confirmPassword'];
+
     }
 
     public function connexion()
