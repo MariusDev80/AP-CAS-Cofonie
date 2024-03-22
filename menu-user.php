@@ -20,12 +20,12 @@ if ($role == 1) { // role 1 = secrétaire
 </li>
 <li>
     <a href='#'>
-        Amendements
+        Texte
     </a>
     <ul class='sub-menu'>
-        <li><a href='index.php?vue=amendement&action=ajouter'>Ajouter</a></li>
+        <li><a href='index.php?vue=texte&action=ajouter'>Ajouter</a></li>
         <li><a href='#'>Modifier</a></li>
-        <li><a href='index.php?vue=amendement&action=visualiser'>Visualiser</a></li>
+        <li><a href='index.php?vue=texte&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>";
 } elseif ($role == 2) { // role 2 = greffier
@@ -133,3 +133,4 @@ echo '</ul>';
 
 ?>
 </div>
+<div class="page">

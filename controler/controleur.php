@@ -89,7 +89,7 @@ public function __construct()
                 }
             }
         }
-    }
+    
 
     public function deconnexion(){
         // Détruire la session

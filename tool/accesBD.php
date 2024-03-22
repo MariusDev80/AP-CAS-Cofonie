@@ -31,7 +31,7 @@ class accesBD
 	public function getConn()
 	{
 		return $this->conn;
-
+	}
 	public function insererUnRole($idRole,$idInstitution,$libelleRole)
 	{
 		$sonRole = $this->donneProchainIdentifiant("ROLEINSTITUTION","code");
