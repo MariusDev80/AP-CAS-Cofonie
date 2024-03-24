@@ -1,19 +1,20 @@
-CREATE TABLE users (
-  id int(11) NOT NULL,
-  username varchar(55) DEFAULT NULL,
-  password varchar(50) DEFAULT NULL,
-  role int(11) DEFAULT NULL
+CREATE TABLE USERS (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(55) DEFAULT NULL,
+  password VARCHAR(50) DEFAULT NULL,
+  role INT DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table users
 --
 
-INSERT INTO users (id, username, password, role) VALUES
-(1, 'marius', '98fbcccdc2e8ddcda2c45c422111531d', 1),
-(2, 'nolan', '14d54cbd95b45292736ee3e4cb2ed925', 2),
-(3, 'teddy', 'e148cf6f0815f1daecaea692f9cf5fc3', 3),
-(4, 'leopold', '20c1592bea0b2000bf4ef1fe1463117a', 4);
+INSERT INTO USERS (username, password, role) VALUES
+('marius', '98fbcccdc2e8ddcda2c45c422111531d', 1),
+('nolan', '14d54cbd95b45292736ee3e4cb2ed925', 2),
+('teddy', 'e148cf6f0815f1daecaea692f9cf5fc3', 3),
+('leopold', '20c1592bea0b2000bf4ef1fe1463117a', 4),
+('admin', '21232f297a57a5a743894a0e4a801fc3', 10);
 
 --
 -- Index pour les tables déchargées
@@ -22,6 +23,6 @@ INSERT INTO users (id, username, password, role) VALUES
 --
 -- Index pour la table users
 --
-ALTER TABLE users
+ALTER TABLE USERS
   ADD PRIMARY KEY (id);
 COMMIT;

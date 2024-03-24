@@ -21,6 +21,46 @@ session_start();
 			$leControleur->affichePage($_GET['action'],$_GET['vue']);
 		}
 	}
+
+	if ((isset($_GET['vue'])) && (isset($_GET['action'])))
+	{
+		if ($_GET['vue'] == 'signup' && $_GET['action'] == 'signup' && (!isset($_GET['role'])))
+		{
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+		if ($_GET['vue'] == 'signup' && $_GET['action'] == 'signup' && (isset($_GET['role'])))
+		{	
+			require "menu-user.php";
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+	}
+
+	if ((isset($_GET['vue'])) && (isset($_GET['action'])))
+	{
+		if ($_GET['vue'] == 'afficherUtilisateurs' && $_GET['action'] == 'afficherUtilisateurs' && (!isset($_GET['role'])))
+		{
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+		if ($_GET['vue'] == 'afficherUtilisateurs' && $_GET['action'] == 'afficherUtilisateurs' && (isset($_GET['role'])))
+		{	
+			require "menu-user.php";
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+	}
+
+	if ((isset($_GET['vue'])) && (isset($_GET['action'])))
+	{
+		if ($_GET['vue'] == 'modifRole' && $_GET['action'] == 'modifRole' && (!isset($_GET['role'])))
+		{
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+		if ($_GET['vue'] == 'modifRole' && $_GET['action'] == 'modifRole' && (isset($_GET['role'])))
+		{	
+			require "menu-user.php";
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+	}
+
 	if ((isset($_GET['vue'])) && (isset($_GET['action'])) && (isset($_SESSION['role'])))
 	{
 		require "menu-user.php";

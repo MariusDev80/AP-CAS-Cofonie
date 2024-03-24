@@ -13,7 +13,7 @@
 <body>
 	<div class="entete">
 	<?php
-		if (isset($_SESSION['role'])){
+		if (isset($_SESSION['role']) && $_SESSION['role'] !== 0) {
 			echo '
 			<div class="deconnexion">
 				<form action="index.php?vue=deconnexion&action=deconnexion" method="post">
@@ -21,7 +21,7 @@
 						Se déconnecter
 					</button>
 				</form>
-        	</div>
+			</div>
 			';
 		}
 		else {
@@ -86,7 +86,7 @@
 										<input type="password" class="form-control" id="password" name="confirmPassword" placeholder="Confirmer votre mot de passe" required>
 									</div>
 									<div class="modal-footer">
-										<button type="submit" class="btn btn-primary">Connexion</button>
+										<button type="submit" class="btn btn-primary">Créer un compte</button>
 									</div>
 								</form>
 							</div>

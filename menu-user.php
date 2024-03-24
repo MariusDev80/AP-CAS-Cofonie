@@ -117,7 +117,69 @@ if ($role == 1) { // role 1 = secrétaire
         <li><a href='#'>Visualiser</a></li>
     </ul>
 </li>";
-echo '</ul>';
+    echo '</ul>';
+}
+if ($role == 10) { // role 10 = admin
+    echo "
+    <li>
+    <a href='#'>
+        Articles
+    </a>
+    <ul class='sub-menu'>
+        <li><a href='#'>Ajouter</a></li>
+        <li><a href='#'>Modifier</a></li>
+        <li><a href='#'>Visualiser</a></li>
+    </ul>
+</li>
+<li>
+    <a href='#'>
+        Amendements
+    </a>
+    <ul class='sub-menu'>
+        <li><a href='index.php?vue=amendement&action=ajouter'>Ajouter</a></li>
+        <li><a href='#'>Modifier</a></li>
+        <li><a href='index.php?vue=amendement&action=visualiser'>Visualiser</a></li>
+    </ul>
+</li>
+<li>
+    <a href='#'>
+        Institutions
+    </a>
+    <ul class='sub-menu'>
+        <li><a href='#'>Ajouter</a></li>
+        <li><a href='#'>Modifier</a></li>
+        <li><a href='#'>Visualiser</a></li>
+    </ul>
+</li>
+<li>
+    <a href='#'>
+        Types Institutions
+    </a>
+    <ul class='sub-menu'>
+        <li><a href='#'>Ajouter</a></li>
+        <li><a href='#'>Modifier</a></li>
+        <li><a href='#'>Visualiser</a></li>
+    </ul>
+</li>
+<li>
+    <a href='#'>
+        Organes
+    </a>
+    <ul class='sub-menu'>
+        <li><a href='#'>Ajouter</a></li>
+        <li><a href='#'>Modifier</a></li>
+        <li><a href='#'>Visualiser</a></li>
+    </ul>
+</li>
+<li>
+    <a href='#'>
+        Gérer les utilisateurs
+    </a>
+    <ul class='sub-menu'>
+        <li><a href='index.php?vue=afficherUtilisateurs&action=visualiser'>Voir les utilisateurs</a></li>
+        <li><a href='index.php?vue=modifRole&action=ajouter'>Modifier le rôle d'un utilisateur</a></li>
+    </ul>
+</li>";
 }
 
 

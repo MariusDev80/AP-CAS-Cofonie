@@ -12,7 +12,7 @@ class accesBD
 	{
 		$this->hote = "localhost";
 		$this->login = "root";
-		$this->passwd = "";
+		$this->passwd = "root";
 		$this->base = "cofonie";
 		$this->connexion();
 	}
@@ -32,16 +32,15 @@ class accesBD
 	{
 		return $this->conn;
 	}
-	public function insererUnRole($idRole,$idInstitution,$libelleRole)
+	public function insererUnRole($idRole, $idInstitution, $libelleRole)
 	{
-		$sonRole = $this->donneProchainIdentifiant("ROLEINSTITUTION","code");
+		$sonRole = $this->donneProchainIdentifiant("ROLEINSTITUTION", "code");
 		$requete = $this->conn->prepare("INSERT INTO roleInstitution (idRole,idInstitution,libelleRole) VALUES (?,?,?)");
-		$requete->bindValue(1,$idRole);
-		$requete->bindValue(2,$idInstitution);
-		$requete->bindValue(3,$libelleRole);
-		if(!$requete->execute())
-		{
-			die("Erreur dans insert Cofonie : ".$requete->errorCode());
+		$requete->bindValue(1, $idRole);
+		$requete->bindValue(2, $idInstitution);
+		$requete->bindValue(3, $libelleRole);
+		if (!$requete->execute()) {
+			die("Erreur dans insert Cofonie : " . $requete->errorCode());
 		}
 		return $sonRole;
 	}
@@ -49,19 +48,31 @@ class accesBD
 	{
 		$sonInstitution = $this->donneProchainIdentifiant("INSTITUTION", "code");
 		$requete = $this->conn->prepare("INSERT INTO institution (idInstitution,libelleInstitution) VALUES (?,?)");
-		$requete->bindValue(1,$idInstitution);
-		$requete->bindValue(2,$libelleInstitution);
-		if(!$requete->execute())
-		{
-			die("Erreur dans insert Cofonie : ".$requete->errorCode());
+		$requete->bindValue(1, $idInstitution);
+		$requete->bindValue(2, $libelleInstitution);
+		if (!$requete->execute()) {
+			die("Erreur dans insert Cofonie : " . $requete->errorCode());
 		}
 		return $sonInstitution;
 	}
 
+	public function insererUnUtilisateur($username, $password_hash, $role)
+    {
+        $requete = $this->conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
+        $requete->bindValue(1, $username);
+        $requete->bindValue(2, $password_hash);
+        $requete->bindValue(3, $role);
+
+        if (!$requete->execute()) {
+            die("Erreur dans l'insertion d'un utilisateur : " . $requete->errorCode());
+        }
+	}
+
+
 
 	/***********************************************************************************************
-							   C'est la fonction qui permet de charger les tables et de les mettre dans un tableau 2 dimensions. La petite fontions specialCase permet juste de psser des minuscules aux majuscules pour les noms des tables de la base de données
-	************************************************************************************************/
+									 C'est la fonction qui permet de charger les tables et de les mettre dans un tableau 2 dimensions. La petite fontions specialCase permet juste de psser des minuscules aux majuscules pour les noms des tables de la base de données
+		  ************************************************************************************************/
 	public function chargement($uneTable)
 	{
 		$lesInfos = null;
@@ -82,41 +93,44 @@ class accesBD
 
 	private function specialCase($stringQuery, $uneTable)
 	{
-			$uneTable = strtoupper($uneTable);
-			switch ($uneTable) {
+		$uneTable = strtoupper($uneTable);
+		switch ($uneTable) {
 
 			case 'ROLEINSTITUTION':
-				$stringQuery.='roleinstitution';
+				$stringQuery .= 'roleinstitution';
 				break;
 			case 'INSTITUTION':
-				$stringQuery.='institution';
-        		break;
+				$stringQuery .= 'institution';
+				break;
 			case 'TYPEINSTITUTION':
-				$stringQuery.='typeinstitution'; // concatenation de stringQuery et 'voiture'
+				$stringQuery .= 'typeinstitution'; // concatenation de stringQuery et 'voiture'
 				break;
 			case 'AMENDEMENT':
-				$stringQuery.='amendement';
+				$stringQuery .= 'amendement';
 				break;
 			case 'ARTICLE':
-				$stringQuery.='article';
+				$stringQuery .= 'article';
 				break;
 			case 'TEXTE':
-				$stringQuery.='texte';
+				$stringQuery .= 'texte';
 				break;
 			case 'FAIREREFERENCE':
-				$stringQuery.='fairereference';
+				$stringQuery .= 'fairereference';
+				break;
+			case 'USERS';
+				$stringQuery .= 'users';
 				break;
 			default:
 				die('Pas une table valide');
-				break;	
-			}
+				break;
+		}
 
 		return $stringQuery . ";";
 	}
 
 	/**************************************************************************
-							   fonction qui permet d'avoir le prochain identifiant de la table. Elle est là uniquement parce que nous n'avons pas d'autoincremente dans notre base de données
-							   ***************************************************************************/
+									 fonction qui permet d'avoir le prochain identifiant de la table. Elle est là uniquement parce que nous n'avons pas d'autoincremente dans notre base de données
+									 ***************************************************************************/
 	public function donneProchainIdentifiant($uneTable)
 	{
 		$stringQuery = $this->specialCase("SELECT * FROM ", $uneTable);
