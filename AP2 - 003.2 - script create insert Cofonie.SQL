@@ -262,10 +262,29 @@ CREATE TABLE IF NOT EXISTS VOTER
  )ENGINE = INNODB ;
 
 
-insert into VOTER values (1,1,'2019-02-01',1,277,300);
-insert into VOTER values (1,1,'2019-02-10',1,270,307);
-insert into VOTER values (1,2,'2019-02-12',2,121,200);
-insert into VOTER values (1,2,'2019-02-13',2,120,201);
+insert into voter values(1,1,'2019-01-01',1,388,112,1);
+insert into voter values(1,1,'2022-01-01',1,225,275,1);
+insert into voter values(1,2,'2020-06-01',2,9,491,1);
+insert into voter values(1,2,'2020-07-01',2,8,492,1);
+insert into voter values(1,2,'2020-08-01',1,346,154,1);
+insert into voter values(1,3,'2023-09-01',2,372,128,1);
+insert into voter values(2,1,'2020-01-01',1,61,439,1);
+insert into voter values(2,1,'2020-02-01',1,212,288,1);
+insert into voter values(2,2,'2020-03-01',1,111,389,1);
+insert into voter values(2,3,'2020-04-01',2,222,278,1);
+insert into voter values(2,3,'2020-08-01',2,253,247,1);
+insert into voter values(2,3,'2020-09-01',1,129,371,1);
+insert into voter values(2,4,'2023-10-01',1,367,133,1);
+insert into voter values(2,4,'2023-11-01',2,84,416,1);
+insert into voter values(3,1,'2023-01-01',2,354,146,1);
+insert into voter values(3,1,'2020-02-01',2,324,176,1);
+insert into voter values(4,1,'2020-02-01',1,444,56,1);
+insert into voter values(4,1,'2023-03-01',2,76,424,1);
+insert into voter values(4,2,'2023-04-01',1,427,73,1);
+insert into voter values(4,2,'2023-08-01',1,407,93,1);
+insert into voter values(4,2,'2023-09-01',2,296,204,1);
+insert into voter values(4,3,'2023-10-01',2,446,54,1);
+insert into voter values(4,3,'2023-11-01',2,205,295,1);
 
 
 
