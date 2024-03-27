@@ -18,32 +18,32 @@ class controleur
     private $refArticles;
     private $maBD;
 
-/*******************************************************************************
-                                CONSTRUCTEUR 
-********************************************************************************/
+    /*******************************************************************************
+                                    CONSTRUCTEUR 
+    ********************************************************************************/
 
-public function __construct()
-{
-    $this->maBD = new accesBD();
-    $this->toutLesRoles = new conteneurRole();
-    $this->chargeLesRoles();
-    $this->toutLesTypesInstitutions = new conteneurTypeInstitution();
-    $this->chargeLesTypesInstitutions(); 
-    $this->toutLesInstitutions = new conteneurInstitution();
-    $this->chargeLesInstitutions();
-    $this->toutLesAmendements = new conteneurAmendement();
-    $this->chargeLesAmendements();
-    $this->toutLesArticles = new conteneurArticle();
-    $this->chargeLesArticles();
-    $this->toutLesOrganes = new conteneurOrgane();
-    $this->chargeLesOrganes();
-    $this->refArticles = new ArrayIterator();
-    $this->chargeArtRef();
-    $this->toutLesTextes = new conteneurTexte();
-    $this->chargeLesTextes();
-    $this->toutLesVotes = new conteneurVote();
-    $this->chargeLesVotes();
-}
+    public function __construct()
+    {
+        $this->maBD = new accesBD();
+        $this->toutLesRoles = new conteneurRole();
+        $this->chargeLesRoles();
+        $this->toutLesTypesInstitutions = new conteneurTypeInstitution();
+        $this->chargeLesTypesInstitutions();
+        $this->toutLesInstitutions = new conteneurInstitution();
+        $this->chargeLesInstitutions();
+        $this->toutLesAmendements = new conteneurAmendement();
+        $this->chargeLesAmendements();
+        $this->toutLesArticles = new conteneurArticle();
+        $this->chargeLesArticles();
+        $this->toutLesOrganes = new conteneurOrgane();
+        $this->chargeLesOrganes();
+        $this->refArticles = new ArrayIterator();
+        $this->chargeArtRef();
+        $this->toutLesTextes = new conteneurTexte();
+        $this->chargeLesTextes();
+        $this->toutLesVotes = new conteneurVote();
+        $this->chargeLesVotes();
+    }
     /*******************************************************************************
 
                         Affichage ENTETE et PIED de PAGE 
@@ -104,10 +104,122 @@ public function __construct()
                 case "modifRole";
                     $this->modifRole();
                     break;
+                case "newsPratique":
+                    $this->newsPratique();
+                    break;
+                case "newsJuridique":
+                    $this->newsJuridique();
+                    break;
+                case "publierNews":
+                    $this->publierNews();
+                    break;
             }
         }
     }
 
+    public function newsPratique()
+    {
+        $sql = "SELECT * FROM newspratique";
+
+        // Exécution de la requête SQL
+        $query = $this->maBD->__get("conn")->query($sql);
+
+        // Vérification si la requête a réussi
+        if ($query) {
+            // Récupération des données sous forme de tableau associatif
+            $news = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            // Affichage du début du tableau HTML avec les en-têtes
+            echo '<table class="table table-striped table-bordered table-sm">
+					<thead>
+						<tr>
+							<th scope="col">Titre</th>
+							<th scope="col">Contenue</th>
+						</tr>
+					</thead>
+					<tbody>';
+            foreach ($news as $news) {
+                echo "<tr>";
+                echo "<td>" . $news['titre'] . "</td>";
+                echo "<td>" . $news['contenue'] . "</td>";
+                echo "</tr>";
+            }
+
+            // Affichage de la fin du tableau HTML
+            echo '</tbody></table>';
+        }
+    }
+
+    public function newsJuridique()
+    {
+        $sql = "SELECT * FROM newsjuridique";
+
+        // Exécution de la requête SQL
+        $query = $this->maBD->__get("conn")->query($sql);
+
+        // Vérification si la requête a réussi
+        if ($query) {
+            // Récupération des données sous forme de tableau associatif
+            $news = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            // Affichage du début du tableau HTML avec les en-têtes
+            echo '<table class="table table-striped table-bordered table-sm">
+					<thead>
+						<tr>
+							<th scope="col">Titre</th>
+							<th scope="col">Contenue</th>
+						</tr>
+					</thead>
+					<tbody>';
+            foreach ($news as $news) {
+                echo "<tr>";
+                echo "<td>" . $news['titre'] . "</td>";
+                echo "<td>" . $news['contenue'] . "</td>";
+                echo "</tr>";
+            }
+
+            // Affichage de la fin du tableau HTML
+            echo '</tbody></table>';
+        }
+    }
+
+    public function publierNews()
+    {
+        echo '<form method="post">';
+        echo '<label for="table">Choisissez la table :</label>';
+        echo '<select name="table">';
+        echo '<option value="newspratique">News Pratique</option>';
+        echo '<option value="newsjuridique">News Juridique</option>';
+        echo '</select><br>';
+
+        // Saisie du titre et du contenu
+        echo '<label for="titre">Titre :</label>';
+        echo '<input type="text" name="titre"><br>';
+        echo '<label for="contenu">Contenu :</label>';
+        echo '<textarea name="contenu"></textarea><br>';
+
+        // Bouton de soumission
+        echo '<input type="submit" name="submit" value="Publier">';
+        echo '</form>';
+
+        // Traitement du formulaire
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $table = $_POST['table'];
+            $titre = $_POST['titre'];
+            $contenu = $_POST['contenu'];
+
+            // Insertion des données dans la table choisie
+            $requete = $this->maBD->__get("conn")->prepare("INSERT INTO $table (titre, contenue) VALUES (?, ?)");
+            $requete->bindValue(1, $titre);
+            $requete->bindValue(2, $contenu);
+
+            if ($requete->execute()) {
+                echo "La news a été publiée avec succès.";
+            } else {
+                echo "Erreur lors de la publication de la news.\n";
+            }
+        }
+    }
     public function modifRole()
     {
         // Vérification si des données de formulaire ont été soumises
@@ -328,7 +440,7 @@ public function __construct()
                         $texteChoisi = $unTexte;
                     }
                 }
-                $vue->visualiserVote($texteChoisi,$this->toutLesVotes,$texte); // ajouter le conteneurVote pour
+                $vue->visualiserVote($texteChoisi, $this->toutLesVotes, $texte); // ajouter le conteneurVote pour
                 break;                                   // avoir le nombre de vote sur les articles
         }
     }
@@ -340,7 +452,7 @@ public function __construct()
                 $vue = new vueCentraleOrgane();
                 $vue->ajouterOrgane($this->toutLesOrganes->nbOrgane());
                 break;
-            case 'saisirOrgane' :
+            case 'saisirOrgane':
                 $idOrgane = $_POST['idOrgane'];
                 $nomOrgane = $_POST['nomOrgane'];
                 $nbPersonne = $_POST['nbPersonne'];
@@ -349,7 +461,7 @@ public function __construct()
                 echo 'Rôle rajouté correctement';
                 break;
 
-            case 'visualiser' :
+            case 'visualiser':
                 $listeOrgane = $this->toutLesOrganes->listeDesOrganes();
                 $vue = new vueCentraleOrgane();
                 $vue->visualiserOrgane($listeOrgane);
@@ -357,20 +469,21 @@ public function __construct()
         }
     }
 
-    public function actionInstitution($action){
+    public function actionInstitution($action)
+    {
         switch ($action) {
-            case "ajouter" :
+            case "ajouter":
                 $vue = new vueCentraleInstitution();
                 $vue->ajouterInstitution($this->toutLesInstitutions->nbInstitution());
                 break;
-            case "saisirInstitution" :
+            case "saisirInstitution":
                 $idInstitution = $_POST['idInstitution'];
                 $libelleInstitution = $_POST['libelleInstitution'];
                 $this->toutLesInstitutions->ajouterUneInstitution($idInstitution, $libelleInstitution);
                 $this->maBD->insererUneInstitution($idInstitution, $libelleInstitution);
                 echo 'Rôle rajouté correctement';
                 break;
-            case "visualiser" :
+            case "visualiser":
                 $listeInstitution = $this->toutLesInstitutions->listeDesInstitutions();
                 $vue = new vueCentraleInstitution();
                 $vue->visualiserInstitution($listeInstitution);
@@ -387,7 +500,7 @@ public function __construct()
                 break;
 
             case "saisirTypeInstitution":
-                // break;
+            // break;
 
             case "visualiser":
                 $liste = $this->toutLesTypesInstitutions->listeDesTypesInstitutions();
@@ -415,7 +528,8 @@ public function __construct()
                 break;
         }
     }
-    public function actionRole($action){
+    public function actionRole($action)
+    {
         switch ($action) {
 
             case "ajouter":
@@ -439,29 +553,29 @@ public function __construct()
                 break;
         }
     }
-/***********************************************************************************************************************
-                                    CHARGEMENT DES TABLES DANS LES CONTENEURS
-***********************************************************************************************************************/
-    public function chargeLesOrganes(){
-        $resultatOrganes=$this->maBD->chargement('organe');
-        $nbE=0;
-        while ($nbE<sizeof($resultatOrganes))
-			{
-				$this->toutLesOrganes->ajouterUnOrgane($resultatOrganes[$nbE][0],$resultatOrganes[$nbE][1],$resultatOrganes[$nbE][2]);
-                
-				$nbE++;
-			}
+    /***********************************************************************************************************************
+                                        CHARGEMENT DES TABLES DANS LES CONTENEURS
+    ***********************************************************************************************************************/
+    public function chargeLesOrganes()
+    {
+        $resultatOrganes = $this->maBD->chargement('organe');
+        $nbE = 0;
+        while ($nbE < sizeof($resultatOrganes)) {
+            $this->toutLesOrganes->ajouterUnOrgane($resultatOrganes[$nbE][0], $resultatOrganes[$nbE][1], $resultatOrganes[$nbE][2]);
+
+            $nbE++;
+        }
     }
 
-    public function chargeLesInstitutions(){
-        $resultatInstitutions=$this->maBD->chargement('institution');
-        $nbE=0;
-        while ($nbE<sizeof($resultatInstitutions))
-			{
-				$this->toutLesInstitutions->ajouterUneInstitution($resultatInstitutions[$nbE][0],$resultatInstitutions[$nbE][1]);
-                
-				$nbE++;
-			}
+    public function chargeLesInstitutions()
+    {
+        $resultatInstitutions = $this->maBD->chargement('institution');
+        $nbE = 0;
+        while ($nbE < sizeof($resultatInstitutions)) {
+            $this->toutLesInstitutions->ajouterUneInstitution($resultatInstitutions[$nbE][0], $resultatInstitutions[$nbE][1]);
+
+            $nbE++;
+        }
     }
     public function chargeLesRoles()
     {
@@ -589,12 +703,13 @@ public function __construct()
         }
     }
 
-    public function chargeLesVotes(){
+    public function chargeLesVotes()
+    {
         $resultatVotes = $this->maBD->chargement('voter');
         $nbE = 0;
-        while ($nbE < sizeof($resultatVotes)){
+        while ($nbE < sizeof($resultatVotes)) {
             $date = new DateTime($resultatVotes[$nbE][2]);
-            $this->toutLesVotes->ajouterUnVote($resultatVotes[$nbE][0],$resultatVotes[$nbE][1],$date,$resultatVotes[$nbE][3],$resultatVotes[$nbE][4],$resultatVotes[$nbE][5],$resultatVotes[$nbE][6]);
+            $this->toutLesVotes->ajouterUnVote($resultatVotes[$nbE][0], $resultatVotes[$nbE][1], $date, $resultatVotes[$nbE][3], $resultatVotes[$nbE][4], $resultatVotes[$nbE][5], $resultatVotes[$nbE][6]);
             $nbE++;
         }
     }
