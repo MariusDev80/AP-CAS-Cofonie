@@ -10,10 +10,21 @@ class conteneurVote
         $this->lesVotes = new ArrayObject();
     }
 
-    public function ajouterUnVote(int $unIdVote,metierArticle $unArticle, metierOrgane $unOrgane, DateTime $uneDate, int $unNbPour, int $unNbContre){
-
-        $unVote = new metierVote($unIdVote,$unArticle,$unOrgane,$uneDate,$unNbPour,$unNbContre);
+    public function ajouterUnVote(int $unIdTexte,int $unArticle, DateTime $uneDate, int $unOrgane, int $unNbPour, int $unNbContre, int $unAmendement){
+        if ($unAmendement == 0){
+            $amendement = false;
+        }
+        else {
+            $amendement = true;
+        }
+        $unVote = new metierVote($unIdTexte,$unArticle,$uneDate,$unOrgane,$unNbPour,$unNbContre,$amendement);
         $this->lesVotes->append($unVote);
+    }
+
+    public function __get($attribut){
+        switch ($attribut){
+            case "lesVotes": return $this->lesVotes; break;
+        }
     }
     
     public function nbVotes(){
@@ -24,7 +35,7 @@ class conteneurVote
 
         $liste = '';
         foreach($this->lesVotes as $unVote){
-            $liste = $liste.$unVote->nbPour.','.$unVote->nbContre;
+            $liste = $liste.$unVote->afficheVote();
         }
         return $liste;
     }

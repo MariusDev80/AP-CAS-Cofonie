@@ -20,3 +20,18 @@ session_start();
     }
     spl_autoload_register('my_autoloader');
 ?>
+
+<!--
+tousLesAmendement = new conteneurAmendement()
+```
+
+include_once conteneur/conteneurAmendement.php
+
+controler -> contr
+conteneur -> conte
+accesBD -> acces
+metier -> metie
+vueCentrale -> vueCe
+
+strcmp() -> 0 si true 1 si false
+-->

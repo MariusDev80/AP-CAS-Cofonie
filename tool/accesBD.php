@@ -12,7 +12,7 @@ class accesBD
 		{
 		$this->hote="localhost";
 		$this->login="root";
-		$this->passwd="";
+		$this->passwd="root";
 		$this->base="cofonie";
 		$this->connexion();
 		}
@@ -121,6 +121,9 @@ class accesBD
 				break;
 			case 'FAIREREFERENCE':
 				$stringQuery.='fairereference';
+				break;
+			case 'VOTER':
+				$stringQuery.='voter';
 				break;
 			default:
 				die('Pas une table valide');
