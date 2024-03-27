@@ -9,11 +9,11 @@ class accesBD
 
 	// Nous construisons notre connexion
 	public function __construct()
-	{
-		$this->hote = "localhost";
-		$this->login = "root";
-		$this->passwd = "";
-		$this->base = "cofonie";
+		{
+		$this->hote="localhost";
+		$this->login="root";
+		$this->passwd="";
+		$this->base="cofonie";
 		$this->connexion();
 	}
 
@@ -26,9 +26,20 @@ class accesBD
 			die("Connection à la base de données échouée" . $e->getMessage());
 		}
 	}
-
-
-	public function getConn()
+	public function insererUnOrgane($idOrgane,$nomOrgane,$nbPersonne)
+	{
+		$sonOrgane = $this->donneProchainIdentifiant("ORGANE","code");
+		$requete = $this->conn->prepare("INSERT INTO organe (idOrgane,libOrgane,nbrPersonnesOrgane) VALUES (?,?,?)");
+		$requete->bindValue(1,$idOrgane);
+		$requete->bindValue(2,$nomOrgane);
+		$requete->bindValue(3,$nbPersonne);
+		if(!$requete->execute())
+		{
+			die("Erreur dans insert Cofonie : ".$requete->errorCode());
+		}
+		return $sonOrgane;
+	}
+	public function insererUnRole($idRole,$idInstitution,$libelleRole)
 	{
 		return $this->conn;
 	}
@@ -107,6 +118,9 @@ class accesBD
 				break;
 			case 'AMENDEMENT':
 				$stringQuery .= 'amendement';
+				break;
+			case 'ORGANE':
+				$stringQuery.='organe';
 				break;
 			case 'ARTICLE':
 				$stringQuery .= 'article';
