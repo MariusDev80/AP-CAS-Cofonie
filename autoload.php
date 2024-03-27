@@ -1,5 +1,4 @@
 <?php 
-session_start();
     function my_autoloader($class) 
     {
         $result = substr($class,0,5);
