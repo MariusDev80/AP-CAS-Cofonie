@@ -124,12 +124,10 @@ class controleur
         // Exécution de la requête SQL
         $query = $this->maBD->__get("conn")->query($sql);
 
-        // Vérification si la requête a réussi
         if ($query) {
             // Récupération des données sous forme de tableau associatif
             $news = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            // Affichage du début du tableau HTML avec les en-têtes
             echo '<table class="table table-striped table-bordered table-sm">
 					<thead>
 						<tr>
@@ -145,7 +143,6 @@ class controleur
                 echo "</tr>";
             }
 
-            // Affichage de la fin du tableau HTML
             echo '</tbody></table>';
         }
     }
@@ -157,12 +154,10 @@ class controleur
         // Exécution de la requête SQL
         $query = $this->maBD->__get("conn")->query($sql);
 
-        // Vérification si la requête a réussi
         if ($query) {
             // Récupération des données sous forme de tableau associatif
             $news = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            // Affichage du début du tableau HTML avec les en-têtes
             echo '<table class="table table-striped table-bordered table-sm">
 					<thead>
 						<tr>
@@ -178,7 +173,6 @@ class controleur
                 echo "</tr>";
             }
 
-            // Affichage de la fin du tableau HTML
             echo '</tbody></table>';
         }
     }
@@ -192,17 +186,14 @@ class controleur
         echo '<option value="newsjuridique">News Juridique</option>';
         echo '</select><br>';
 
-        // Saisie du titre et du contenu
         echo '<label for="titre">Titre :</label>';
         echo '<input type="text" name="titre"><br>';
         echo '<label for="contenu">Contenu :</label>';
         echo '<textarea name="contenu"></textarea><br>';
 
-        // Bouton de soumission
         echo '<input type="submit" name="submit" value="Publier">';
         echo '</form>';
 
-        // Traitement du formulaire
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $table = $_POST['table'];
             $titre = $_POST['titre'];
