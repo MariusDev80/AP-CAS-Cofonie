@@ -96,7 +96,7 @@ public function __construct()
                 $nbPersonne = $_POST['nbPersonne'];
                 $this->toutLesOrganes->ajouterUnOrgane($idOrgane, $nomOrgane, $nbPersonne);
                 $this->maBD->insererUnOrgane($idOrgane, $nomOrgane, $nbPersonne);
-                echo 'Rôle rajouté correctement';
+                echo 'Organe rajouté correctement';
                 break;
 
             case 'visualiser' :
