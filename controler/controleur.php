@@ -43,7 +43,7 @@ public function __construct()
     $this->chargeLesTextes();
     $this->toutLesVotes = new conteneurVote();
     $this->chargeLesVotes();
-
+}
     /*******************************************************************************
 
                         Affichage ENTETE et PIED de PAGE 
@@ -80,17 +80,11 @@ public function __construct()
                 case "organe":
                     $this->actionOrgane($action);
                     break;
-                case "amendement":
-                    $this->actionAmendement($action);
-                    break;
                 case "role":
                     $this->actionRole($action);
                     break;
                 case "typeInstitution":
                     $this->actionTypeInstitution($action);
-                    break;
-                case "avancement":
-                    $this->actionAvancement($action);
                     break;
                 case "vote":
                     $this->actionVote($action);
@@ -126,7 +120,7 @@ public function __construct()
             $sql = "UPDATE users SET role = :nouveauRole WHERE id = :idUtilisateur";
 
             // Préparation de la requête SQL
-            $query = $this->maBD->getConn()->prepare($sql);
+            $query = $this->maBD->__get("conn")->prepare($sql);
 
             // Liaison des paramètres
             $query->bindParam(':nouveauRole', $nouveauRole, PDO::PARAM_INT);
@@ -148,7 +142,7 @@ public function __construct()
         $sql = "SELECT id, username FROM users";
 
         // Exécution de la requête SQL
-        $query = $this->maBD->getConn()->query($sql);
+        $query = $this->maBD->__get("conn")->query($sql);
 
         // Vérification si la requête a réussi
         if ($query) {
@@ -169,7 +163,6 @@ public function __construct()
             echo '</div>';
             echo '<div class="form-group">';
             echo '<label for="role">Nouveau rôle :</label>';
-            echo '<label for="role">Nouveau rôle :</label>';
             echo '<select class="form-control" name="role" id="role">';
             echo '<option value="1">1 (Secrétaire)</option>';
             echo '<option value="2">2 (Greffier)</option>';
@@ -178,6 +171,7 @@ public function __construct()
             echo '</select>';
             echo '</select>';
             echo '</div>';
+            echo '<br>';
             echo '<button type="submit" class="btn btn-primary">Modifier le rôle</button>';
             echo '</form>';
             echo '</div>';
@@ -193,7 +187,7 @@ public function __construct()
         $sql = "SELECT * FROM users";
 
         // Exécution de la requête SQL
-        $query = $this->maBD->getConn()->query($sql);
+        $query = $this->maBD->__get("conn")->query($sql);
 
         // Vérification si la requête a réussi
         if ($query) {
@@ -231,7 +225,8 @@ public function __construct()
     {
         // Détruire la session
         session_destroy();
-        header('Location: ../AP-CAS-COFONIE-1/index.php');
+        header('index.php');
+        exit();
         // array_pop($_GET['action']);
         // array_pop($_GET['vue']);
     }
@@ -277,7 +272,7 @@ public function __construct()
         $accesBD = $this->maBD;
 
         // Requête SQL pour récupérer l'utilisateur et le rôle
-        $req = $accesBD->getConn()->prepare('SELECT username, role FROM users WHERE username = :username AND password = :password');
+        $req = $accesBD->__get("conn")->prepare('SELECT username, role FROM users WHERE username = :username AND password = :password');
         $req->execute(
             array(
                 'username' => $username,
@@ -338,32 +333,6 @@ public function __construct()
         }
     }
 
-    public function actionAvancement($action)
-    {
-        switch ($action) {
-            case 'visualiser':
-                $vue = new vueCentraleAvancement();
-                $vue->visualiserAvancement();
-                break;
-        }
-    }
-    public function actionAmendement($action)
-    {
-        switch ($action) {
-
-            case "ajouter":
-                $vue = new vueCentraleAmendements();
-                $vue->ajouterAmendement();
-                break;
-            case "saisirAmendement":
-                break;
-
-            case 'visualiser':
-                $vue = new vueCentraleAmendements();
-                $vue->visualiserAmendement();
-                break;
-        }
-    }
     public function actionOrgane($action)
     {
         switch ($action) {

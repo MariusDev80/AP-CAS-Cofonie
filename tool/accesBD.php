@@ -9,7 +9,7 @@ class accesBD
 
 	// Nous construisons notre connexion
 	public function __construct()
-		{
+	{
 		$this->hote="localhost";
 		$this->login="root";
 		$this->passwd="root";
@@ -26,6 +26,15 @@ class accesBD
 			die("Connection à la base de données échouée" . $e->getMessage());
 		}
 	}
+
+	public function __get($attribut){
+		switch($attribut){
+			case "conn":
+				return $this->conn;
+				break;
+		}
+	}
+
 	public function insererUnOrgane($idOrgane,$nomOrgane,$nbPersonne)
 	{
 		$sonOrgane = $this->donneProchainIdentifiant("ORGANE","code");
@@ -39,10 +48,7 @@ class accesBD
 		}
 		return $sonOrgane;
 	}
-	public function insererUnRole($idRole,$idInstitution,$libelleRole)
-	{
-		return $this->conn;
-	}
+	
 	public function insererUnRole($idRole, $idInstitution, $libelleRole)
 	{
 		$sonRole = $this->donneProchainIdentifiant("ROLEINSTITUTION", "code");

@@ -11,7 +11,7 @@ include_once('autoload.php');
 			
 			$listeRole=explode("|",$message);
 			
-			echo '<table class="table table-striped table-bordered table-sm ">
+			echo '<table class="table table-striped table-bordered table-sm">
 					<thead>
 						<tr>
 							<th scope="col">Id Role</th>

@@ -12,7 +12,7 @@
 			
 			$listeInstitution=explode("|",$message);
 			
-			echo '<table class="table table-striped table-bordered table-sm ">
+			echo '<table class="table table-striped table-bordered table-sm">
 					<thead>
 						<tr>
 							<th scope="col">Id Institution</th>

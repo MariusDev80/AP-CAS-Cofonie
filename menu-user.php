@@ -22,7 +22,7 @@ if ($role == 1) { // role 1 = secrétaire
     echo "
     <li>
     <a href='#'>
-        Articles
+        Texte
     </a>
     <ul class='sub-menu'>
         <li><a href='index.php?vue=texte&action=ajouter'>Ajouter</a></li>
@@ -33,7 +33,7 @@ if ($role == 1) { // role 1 = secrétaire
     echo "
 <li>
     <a href='#'>
-        Articles
+        Texte
     </a>
     <ul class='sub-menu'>
         <li><a href='index.php?vue=texte&action=visualiser'>Visualiser</a></li>
@@ -45,36 +45,18 @@ if ($role == 1) { // role 1 = secrétaire
     </a>
     <ul class='sub-menu'>
         <li><a href='index.php?vue=amendement&action=visualiser'>Visualiser</a></li>
-    </ul>
-</li>
-<li>
-    <a href='#'>
-        Etat d'avancement
-    </a>
-    <ul class='sub-menu'>
-        <li><a href='index.php?vue=avancement&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>";
 } elseif ($role == 4) { // role 4 = monarque
     echo "
 <li>
     <a href='#'>
-        Articles
+        Texte
     </a>
     <ul class='sub-menu'>
         <li><a href='index.php?vue=texte&action=ajouter'>Ajouter</a></li>
         <li><a href='#'>Modifier</a></li>
         <li><a href='index.php?vue=texte&action=visualiser'>Visualiser</a></li>
-    </ul>
-</li>
-<li>
-    <a href='#'>
-        Amendements
-    </a>
-    <ul class='sub-menu'>
-        <li><a href='index.php?vue=amendement&action=ajouter'>Ajouter</a></li>
-        <li><a href='#'>Modifier</a></li>
-        <li><a href='index.php?vue=amendement&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>
 <li>
@@ -123,7 +105,7 @@ if ($role == 10) { // role 10 = admin
     echo "
     <li>
     <a href='#'>
-        Articles
+        Texte
     </a>
     <ul class='sub-menu'>
         <li><a href='index.php?vue=texte&action=ajouter'>Ajouter</a></li>
@@ -133,12 +115,12 @@ if ($role == 10) { // role 10 = admin
 </li>
 <li>
     <a href='#'>
-        Amendements
+        Votes
     </a>
     <ul class='sub-menu'>
-        <li><a href='index.php?vue=amendement&action=ajouter'>Ajouter</a></li>
+        <li><a href='index.php?vue=vote&action=ajouter'>Ajouter</a></li>
         <li><a href='#'>Modifier</a></li>
-        <li><a href='index.php?vue=amendement&action=visualiser'>Visualiser</a></li>
+        <li><a href='index.php?vue=vote&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>
 <li>
@@ -173,13 +155,26 @@ if ($role == 10) { // role 10 = admin
 </li>
 <li>
     <a href='#'>
+        Rôles
+    </a>
+    <ul class='sub-menu'>
+        <li><a href='index.php?vue=role&action=ajouter'>Ajouter</a></li>
+        <li><a href='#'>Modifier</a></li>
+        <li><a href='index.php?vue=role&action=visualiser'>Visualiser</a></li>
+    </ul>
+</li>
+<li>
+    <a href='#'>
         Gérer les utilisateurs
     </a>
     <ul class='sub-menu'>
         <li><a href='index.php?vue=afficherUtilisateurs&action=visualiser'>Voir les utilisateurs</a></li>
         <li><a href='index.php?vue=modifRole&action=ajouter'>Modifier le rôle d'un utilisateur</a></li>
     </ul>
-</li>";
+</li>
+
+
+";
 }
 
 
