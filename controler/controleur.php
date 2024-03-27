@@ -14,7 +14,7 @@ class controleur
     private $toutLesTextes;
     private $toutLesInstitutions;
     private $toutLesTypesInstitutions;
-    private $toutLesAvancements;
+    private $toutLesVotes;
     private $refArticles;
     private $maBD;
 
@@ -41,6 +41,8 @@ public function __construct()
     $this->chargeArtRef();
     $this->toutLesTextes = new conteneurTexte();
     $this->chargeLesTextes();
+    $this->toutLesVotes = new conteneurVote();
+    $this->chargeLesVotes();
 
     /*******************************************************************************
 
@@ -331,7 +333,7 @@ public function __construct()
                         $texteChoisi = $unTexte;
                     }
                 }
-                $vue->visualiserVote($texteChoisi); // ajouter le conteneurVote pour
+                $vue->visualiserVote($texteChoisi,$this->toutLesVotes,$texte); // ajouter le conteneurVote pour
                 break;                                   // avoir le nombre de vote sur les articles
         }
     }
@@ -615,6 +617,16 @@ public function __construct()
                     $unTexte->__set('lInstitution', $uneInstitution);
                 }
             }
+        }
+    }
+
+    public function chargeLesVotes(){
+        $resultatVotes = $this->maBD->chargement('voter');
+        $nbE = 0;
+        while ($nbE < sizeof($resultatVotes)){
+            $date = new DateTime($resultatVotes[$nbE][2]);
+            $this->toutLesVotes->ajouterUnVote($resultatVotes[$nbE][0],$resultatVotes[$nbE][1],$date,$resultatVotes[$nbE][3],$resultatVotes[$nbE][4],$resultatVotes[$nbE][5],$resultatVotes[$nbE][6]);
+            $nbE++;
         }
     }
 }

@@ -22,7 +22,7 @@ class vueCentraleVote{
               </form>";
     }
 
-    public function visualiserVote(metierTexte $unTexte){
+    public function visualiserVote(metierTexte $unTexte, conteneurVote $lesVotes,$numTexte){
 
         echo '<ul class="textes">';
 		$lesArticles = $unTexte->__get('lesArticles')->__get('lesArticles');
@@ -32,15 +32,22 @@ class vueCentraleVote{
 		foreach($lesArticles as $unArticle){
 			echo'<li>';
 			$unArticle->afficheArticle();
-			if ($unArticle->__get('lesAmendements')->nbAmendement() != 0){
-				$lesAmendements = $unArticle->__get('lesAmendements')->__get('lesAmendements');
-				echo'<ul class="amendements">';
-				foreach($lesAmendements as $unAmendement){
-					echo '<li>';
-					$unAmendement->afficheAmendement();
-					echo '</li>';
+			$cptAm = 0;
+			foreach ($lesVotes->__get("lesVotes") as $unVote){
+				if ($unVote->__get("idTexte") == $numTexte && $unVote->__get("lArticle") == $unArticle->__get("codeSeqArticle")){
+					$lesAmendements = $unArticle->__get('lesAmendements')->__get('lesAmendements');
+					if ($unVote->__get("amendement")==true){
+						$unVote->afficheVote();
+						echo'<ul class="amendements">';
+						echo '<li>';
+						$lesAmendements[$cptAm]->afficheAmendement();
+						echo '</li>';
+						echo '</ul>';
+					}
+					else{
+						$unVote->afficheVote();
+					}
 				}
-				echo '</ul>';
 			}
 			echo '</li>';
 		}
