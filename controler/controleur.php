@@ -89,6 +89,15 @@ class controleur
                 case "vote":
                     $this->actionVote($action);
                     break;
+                case "newsPratique":
+                    $this->newPratique();
+                    break;
+                case "newsJuridique":
+                    $this->newsJuridique();
+                    break;
+                case "publierNews":
+                    $this->publierNews();
+                    break;
                 case "deconnexion":
                     $this->deconnexion();
                     break;
@@ -339,6 +348,73 @@ class controleur
                 $vue = new vueCentraleAvancement();
                 $vue->visualiserAvancement();
                 break;
+        }
+    }
+
+    public function publierNews(){
+        echo "Publier une news";
+    }
+    public function newPratique(){
+        $sql = "SELECT * FROM newspratique";
+
+        // Exécution de la requête SQL
+        $query = $this->maBD->getConn()->query($sql);
+
+        // Vérification si la requête a réussi
+        if ($query) {
+            // Récupération des données sous forme de tableau associatif
+            $news = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            // Affichage du début du tableau HTML avec les en-têtes
+            echo '<table class="table table-striped table-bordered table-sm">
+					<thead>
+						<tr>
+							<th scope="col">Titre</th>
+							<th scope="col">Contenue</th>
+						</tr>
+					</thead>
+					<tbody>';
+            foreach ($news as $news) {
+                echo "<tr>";
+                echo "<td>" . $news['titre'] . "</td>";
+                echo "<td>" . $news['contenue'] . "</td>";
+                echo "</tr>";
+            }
+
+            // Affichage de la fin du tableau HTML
+            echo '</tbody></table>';
+        }
+    }
+
+    public function newsJuridique(){
+        $sql = "SELECT * FROM newsjuridique";
+
+        // Exécution de la requête SQL
+        $query = $this->maBD->getConn()->query($sql);
+
+        // Vérification si la requête a réussi
+        if ($query) {
+            // Récupération des données sous forme de tableau associatif
+            $news = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            // Affichage du début du tableau HTML avec les en-têtes
+            echo '<table class="table table-striped table-bordered table-sm">
+					<thead>
+						<tr>
+							<th scope="col">Titre</th>
+							<th scope="col">Contenue</th>
+						</tr>
+					</thead>
+					<tbody>';
+            foreach ($news as $news) {
+                echo "<tr>";
+                echo "<td>" . $news['titre'] . "</td>";
+                echo "<td>" . $news['contenue'] . "</td>";
+                echo "</tr>";
+            }
+
+            // Affichage de la fin du tableau HTML
+            echo '</tbody></table>';
         }
     }
     public function actionAmendement($action)

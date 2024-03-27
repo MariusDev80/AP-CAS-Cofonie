@@ -17,7 +17,18 @@ if ($role == 1) { // role 1 = secrétaire
         <li><a href='#'>Modifier</a></li>
         <li><a href='index.php?vue=texte&action=visualiser'>Visualiser</a></li>
     </ul>
-</li>";
+</li>
+<li>
+    <a href='#'>
+        News
+    </a>
+    <ul class='sub-menu'>
+        <li><a href='index.php?vue=publierNews&action=ajouter'>Publier une news</a></li>
+        <li><a href='index.php?vue=newsPratique&action=visualiser'>Pratique</a></li>
+        <li><a href='index.php?vue=newsJuridique&action=visualiser'>Juridique</a></li>
+    </ul>
+</li>
+";
 } elseif ($role == 2) { // role 2 = greffier
     echo "
     <li>

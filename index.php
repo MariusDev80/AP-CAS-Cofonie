@@ -34,6 +34,7 @@ session_start();
 			$leControleur->affichePage($_GET['action'],$_GET['vue']);
 		}
 	}
+	
 
 	if ((isset($_GET['vue'])) && (isset($_GET['action'])))
 	{
@@ -120,6 +121,45 @@ session_start();
 			$leControleur->affichePage($_GET['action'],$_GET['vue']);
 		}
 		if ($_GET['vue'] == 'avancement' && $_GET['action'] == 'avancement' && (isset($_GET['role'])))
+		{	
+			require "menu-user.php";
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+	}
+
+	if ((isset($_GET['vue'])) && (isset($_GET['action'])))
+	{
+		if ($_GET['vue'] == 'newsPratique' && $_GET['action'] == 'newsPratique' && (!isset($_GET['role'])))
+		{
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+		if ($_GET['vue'] == 'newsPratique' && $_GET['action'] == 'newsPratique' && (isset($_GET['role'])))
+		{	
+			require "menu-user.php";
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+	}
+
+	if ((isset($_GET['vue'])) && (isset($_GET['action'])))
+	{
+		if ($_GET['vue'] == 'publierNews' && $_GET['action'] == 'publierNews' && (!isset($_GET['role'])))
+		{
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+		if ($_GET['vue'] == 'publierNews' && $_GET['action'] == 'publierNews' && (isset($_GET['role'])))
+		{	
+			require "menu-user.php";
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+	}
+	
+	if ((isset($_GET['vue'])) && (isset($_GET['action'])))
+	{
+		if ($_GET['vue'] == 'newsJuridique' && $_GET['action'] == 'newsJuridique' && (!isset($_GET['role'])))
+		{
+			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		}
+		if ($_GET['vue'] == 'newsJuridique' && $_GET['action'] == 'newsJuridique' && (isset($_GET['role'])))
 		{	
 			require "menu-user.php";
 			$leControleur->affichePage($_GET['action'],$_GET['vue']);
