@@ -14,6 +14,7 @@ class controleur
     private $toutLesTextes;
     private $toutLesInstitutions;
     private $toutLesTypesInstitutions;
+    private $toutLesAvancements;
     private $refArticles;
     private $maBD;
 
@@ -34,13 +35,13 @@ class controleur
         $this->chargeArtRef();
         $this->toutLesTextes = new conteneurTexte();
         $this->chargeLesTextes();
-
+        $this->toutLesAvancements = new conteneurAvancement();
     }
 
     /*******************************************************************************
 
                         Affichage ENTETE et PIED de PAGE 
-         ********************************************************************************/
+     ********************************************************************************/
     public function afficheEntete()
     {
         require 'entete.php';
@@ -73,11 +74,17 @@ class controleur
                 case "organe":
                     $this->actionOrgane($action);
                     break;
+                case "amendement":
+                    $this->actionAmendement($action);
+                    break;
                 case "role":
                     $this->actionRole($action);
                     break;
                 case "typeInstitution":
                     $this->actionTypeInstitution($action);
+                    break;
+                case "avancement":
+                    $this->actionAvancement($action);
                     break;
                 case "vote":
                     $this->actionVote($action);
@@ -218,7 +225,7 @@ class controleur
     {
         // Détruire la session
         session_destroy();
-        header('Location: ../AP-CAS-COFONIE-5/index.php');
+        header('Location: ../AP-CAS-COFONIE-1/index.php');
         // array_pop($_GET['action']);
         // array_pop($_GET['vue']);
     }
@@ -325,6 +332,32 @@ class controleur
         }
     }
 
+    public function actionAvancement($action)
+    {
+        switch ($action) {
+            case 'visualiser':
+                $vue = new vueCentraleAvancement();
+                $vue->visualiserAvancement();
+                break;
+        }
+    }
+    public function actionAmendement($action)
+    {
+        switch ($action) {
+
+            case "ajouter":
+                $vue = new vueCentraleAmendements();
+                $vue->ajouterAmendement();
+                break;
+            case "saisirAmendement":
+                break;
+
+            case 'visualiser':
+                $vue = new vueCentraleAmendements();
+                $vue->visualiserAmendement();
+                break;
+        }
+    }
     public function actionOrgane($action)
     {
         switch ($action) {
@@ -351,7 +384,7 @@ class controleur
                 break;
 
             case "saisirTypeInstitution":
-            // break;
+                // break;
 
             case "visualiser":
                 $liste = $this->toutLesTypesInstitutions->listeDesTypesInstitutions();
@@ -429,7 +462,7 @@ class controleur
 
     /***********************************************************************************************************************
                                         CHARGEMENT DES TABLES DANS LES CONTENEURS
-    ***********************************************************************************************************************/
+     ***********************************************************************************************************************/
     public function chargeLesInstitutions()
     {
         $resultatInstitutions = $this->maBD->chargement('institution');
@@ -449,7 +482,6 @@ class controleur
 
             $nbE++;
         }
-
     }
 
     public function chargeLesTypesInstitutions()

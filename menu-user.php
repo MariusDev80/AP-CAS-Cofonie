@@ -25,7 +25,7 @@ if ($role == 1) { // role 1 = secrétaire
         Articles
     </a>
     <ul class='sub-menu'>
-        <li><a href='#'>Ajouter</a></li>
+        <li><a href='index.php?vue=texte&action=ajouter'>Ajouter</a></li>
         <li><a href='#'>Modifier</a></li>
     </ul>
 </li>";
@@ -36,7 +36,7 @@ if ($role == 1) { // role 1 = secrétaire
         Articles
     </a>
     <ul class='sub-menu'>
-        <li><a href='#'>Visualiser</a></li>
+        <li><a href='index.php?vue=texte&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>
 <li>
@@ -44,7 +44,7 @@ if ($role == 1) { // role 1 = secrétaire
         Amendements
     </a>
     <ul class='sub-menu'>
-        <li><a href='#'>Visualiser</a></li>
+        <li><a href='index.php?vue=amendement&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>
 <li>
@@ -52,7 +52,7 @@ if ($role == 1) { // role 1 = secrétaire
         Etat d'avancement
     </a>
     <ul class='sub-menu'>
-        <li><a href='#'>Visualiser</a></li>
+        <li><a href='index.php?vue=avancement&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>";
 } elseif ($role == 4) { // role 4 = monarque
@@ -62,9 +62,9 @@ if ($role == 1) { // role 1 = secrétaire
         Articles
     </a>
     <ul class='sub-menu'>
-        <li><a href='#'>Ajouter</a></li>
+        <li><a href='index.php?vue=texte&action=ajouter'>Ajouter</a></li>
         <li><a href='#'>Modifier</a></li>
-        <li><a href='#'>Visualiser</a></li>
+        <li><a href='index.php?vue=texte&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>
 <li>
@@ -82,9 +82,9 @@ if ($role == 1) { // role 1 = secrétaire
         Institutions
     </a>
     <ul class='sub-menu'>
-        <li><a href='#'>Ajouter</a></li>
+        <li><a href='index.php?vue=institution&action=ajouter'>Ajouter</a></li>
         <li><a href='#'>Modifier</a></li>
-        <li><a href='#'>Visualiser</a></li>
+        <li><a href='index.php?vue=institution&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>
 <li>
@@ -102,9 +102,9 @@ if ($role == 1) { // role 1 = secrétaire
         Organes
     </a>
     <ul class='sub-menu'>
-        <li><a href='#'>Ajouter</a></li>
+        <li><a href='index.php?vue=organe&action=ajouter'>Ajouter</a></li>
         <li><a href='#'>Modifier</a></li>
-        <li><a href='#'>Visualiser</a></li>
+        <li><a href='index.php?vue=organe&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>
 <li>
@@ -112,9 +112,9 @@ if ($role == 1) { // role 1 = secrétaire
         Rôles
     </a>
     <ul class='sub-menu'>
-        <li><a href='#'>Ajouter</a></li>
+        <li><a href='index.php?vue=role&action=ajouter'>Ajouter</a></li>
         <li><a href='#'>Modifier</a></li>
-        <li><a href='#'>Visualiser</a></li>
+        <li><a href='index.php?vue=role&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>";
     echo '</ul>';
@@ -126,9 +126,9 @@ if ($role == 10) { // role 10 = admin
         Articles
     </a>
     <ul class='sub-menu'>
-        <li><a href='#'>Ajouter</a></li>
+        <li><a href='index.php?vue=texte&action=ajouter'>Ajouter</a></li>
         <li><a href='#'>Modifier</a></li>
-        <li><a href='#'>Visualiser</a></li>
+        <li><a href='index.php?vue=texte&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>
 <li>
@@ -146,9 +146,9 @@ if ($role == 10) { // role 10 = admin
         Institutions
     </a>
     <ul class='sub-menu'>
-        <li><a href='#'>Ajouter</a></li>
+        <li><a href='index.php?vue=institution&action=ajouter'>Ajouter</a></li>
         <li><a href='#'>Modifier</a></li>
-        <li><a href='#'>Visualiser</a></li>
+        <li><a href='index.php?vue=institution&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>
 <li>
@@ -166,9 +166,9 @@ if ($role == 10) { // role 10 = admin
         Organes
     </a>
     <ul class='sub-menu'>
-        <li><a href='#'>Ajouter</a></li>
+        <li><a href='index.php?vue=organe&action=ajouter'>Ajouter</a></li>
         <li><a href='#'>Modifier</a></li>
-        <li><a href='#'>Visualiser</a></li>
+        <li><a href='index.php?vue=organe&action=visualiser'>Visualiser</a></li>
     </ul>
 </li>
 <li>
