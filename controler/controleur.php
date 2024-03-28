@@ -132,14 +132,14 @@ class controleur
 					<thead>
 						<tr>
 							<th scope="col">Titre</th>
-							<th scope="col">Contenue</th>
+							<th scope="col">Contenu</th>
 						</tr>
 					</thead>
 					<tbody>';
             foreach ($news as $news) {
                 echo "<tr>";
                 echo "<td>" . $news['titre'] . "</td>";
-                echo "<td>" . $news['contenue'] . "</td>";
+                echo "<td>" . $news['contenu'] . "</td>";
                 echo "</tr>";
             }
 
@@ -162,14 +162,14 @@ class controleur
 					<thead>
 						<tr>
 							<th scope="col">Titre</th>
-							<th scope="col">Contenue</th>
+							<th scope="col">Contenu</th>
 						</tr>
 					</thead>
 					<tbody>';
             foreach ($news as $news) {
                 echo "<tr>";
                 echo "<td>" . $news['titre'] . "</td>";
-                echo "<td>" . $news['contenue'] . "</td>";
+                echo "<td>" . $news['contenu'] . "</td>";
                 echo "</tr>";
             }
 
@@ -180,18 +180,17 @@ class controleur
     public function publierNews()
     {
         echo '<form method="post">';
-        echo '<label for="table">Choisissez la table :</label>';
-        echo '<select name="table">';
+        echo '<label for="table">Choisissez ou publier la news :</label>';
+        echo '<select class="form-select" name="table">';
         echo '<option value="newspratique">News Pratique</option>';
         echo '<option value="newsjuridique">News Juridique</option>';
         echo '</select><br>';
 
         echo '<label for="titre">Titre :</label>';
-        echo '<input type="text" name="titre"><br>';
+        echo '<input type="text" class="form-control" name="titre" required> <br>';
         echo '<label for="contenu">Contenu :</label>';
-        echo '<textarea name="contenu"></textarea><br>';
-
-        echo '<input type="submit" name="submit" value="Publier">';
+        echo '<textarea class="form-control" placeholder="Contenu de la news" name="contenu" id="floatingTextarea" required></textarea><br>';
+        echo '<button type="submit" class="btn btn-light">Publier</button><br>';
         echo '</form>';
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -200,14 +199,18 @@ class controleur
             $contenu = $_POST['contenu'];
 
             // Insertion des données dans la table choisie
-            $requete = $this->maBD->__get("conn")->prepare("INSERT INTO $table (titre, contenue) VALUES (?, ?)");
+            $requete = $this->maBD->__get("conn")->prepare("INSERT INTO $table (titre, contenu) VALUES (?, ?)");
             $requete->bindValue(1, $titre);
             $requete->bindValue(2, $contenu);
 
             if ($requete->execute()) {
-                echo "La news a été publiée avec succès.";
+                echo '<div class="alert alert-success" role="alert">';
+                echo "La news été publiée avec succès.";
+                echo '</div>';
             } else {
-                echo "Erreur lors de la publication de la news.\n";
+                echo '<div class="alert alert-danger" role="alert">';
+                echo "Erreur lors de la publication de la news.";
+                echo '</div>';
             }
         }
     }

@@ -26,3 +26,20 @@ INSERT INTO USERS (username, password, role) VALUES
 ALTER TABLE USERS
   ADD PRIMARY KEY (id);
 COMMIT;
+
+create table newspratique(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titre varchar(255),
+    contenu varchar(255)
+    );
+create table newsjuridique(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titre varchar(255),
+    contenu varchar(255)
+    )
+
+INSERT INTO newspratique (titre, contenu) VALUES
+('Titre news pratique', 'Contenu de la news pratique');
+
+INSERT INTO newsjuridique (titre, contenu) VALUES
+('Titre news juridique', 'Contenu de la news juridique');
