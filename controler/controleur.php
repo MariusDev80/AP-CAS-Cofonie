@@ -118,102 +118,125 @@ class controleur
     }
 
     public function newsPratique()
-    {
-        $sql = "SELECT * FROM newspratique";
+{
+    $sql = "SELECT * FROM newspratique";
 
-        // Exécution de la requête SQL
-        $query = $this->maBD->__get("conn")->query($sql);
+    // Execution de la requete SQL
+    $query = $this->maBD->__get("conn")->query($sql);
 
-        if ($query) {
-            // Récupération des données sous forme de tableau associatif
-            $news = $query->fetchAll(PDO::FETCH_ASSOC);
+    if ($query) {
+        // Récupération des données sous forme de tableau associatif
+        $news = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            echo '<table class="table table-striped table-bordered table-sm">
-					<thead>
-						<tr>
-							<th scope="col">Titre</th>
-							<th scope="col">Contenu</th>
-						</tr>
-					</thead>
-					<tbody>';
-            foreach ($news as $news) {
-                echo "<tr>";
-                echo "<td>" . $news['titre'] . "</td>";
-                echo "<td>" . $news['contenu'] . "</td>";
-                echo "</tr>";
-            }
-
-            echo '</tbody></table>';
+        // Affichage des news sous forme de carte
+        echo '<h1>News Pratique</h1>';
+        echo '<div class="row">';
+        foreach ($news as $newsPratique) {
+            echo '<div class="col-lg-4 col-md-6 mb-4">';
+            echo '<div class="card">';
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">' . $newsPratique['titre'] . '</h5>';
+            echo '<p class="card-text">' . $newsPratique['contenu'] . '</p>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
         }
+        echo '</div>';
     }
+}
+
 
     public function newsJuridique()
     {
         $sql = "SELECT * FROM newsjuridique";
 
-        // Exécution de la requête SQL
-        $query = $this->maBD->__get("conn")->query($sql);
+    // Execution de la requete SQL
+    $query = $this->maBD->__get("conn")->query($sql);
 
-        if ($query) {
-            // Récupération des données sous forme de tableau associatif
-            $news = $query->fetchAll(PDO::FETCH_ASSOC);
+    if ($query) {
+        // Récupération des données sous forme de tableau associatif
+        $news = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            echo '<table class="table table-striped table-bordered table-sm">
-					<thead>
-						<tr>
-							<th scope="col">Titre</th>
-							<th scope="col">Contenu</th>
-						</tr>
-					</thead>
-					<tbody>';
-            foreach ($news as $news) {
-                echo "<tr>";
-                echo "<td>" . $news['titre'] . "</td>";
-                echo "<td>" . $news['contenu'] . "</td>";
-                echo "</tr>";
-            }
+        // Affichage des news sous forme de cartes
+        echo '<h1>News Juridique</h1>';
+        echo '<div class="row">';
+        foreach ($news as $newsJuridique) {
+            echo '<div class="col-lg-4 col-md-6 mb-4">';
+            echo '<div class="card">';
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">' . $newsJuridique['titre'] . '</h5>';
+            echo '<p class="card-text">' . $newsJuridique['contenu'] . '</p>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+        }
+        echo '</div>';
+    }
+}
 
-            echo '</tbody></table>';
+public function publierNews()
+{
+    echo '<div class="container">';
+    echo '<div class="row justify-content-center">';
+    echo '<div class="col-md-6">';
+
+    echo '<div class="card">';
+    echo '<div class="card-body">';
+
+    echo '<form method="post">';
+    echo '<div class="mb-3">';
+    echo '<label for="table" class="form-label">Choisissez où publier la news :</label>';
+    echo '<select class="form-select" name="table">';
+    echo '<option value="newspratique">News Pratique</option>';
+    echo '<option value="newsjuridique">News Juridique</option>';
+    echo '</select>';
+    echo '</div>';
+
+    echo '<div class="mb-3">';
+    echo '<label for="titre" class="form-label">Titre :</label>';
+    echo '<input type="text" class="form-control" name="titre" required>';
+    echo '</div>';
+
+    echo '<div class="mb-3">';
+    echo '<label for="contenu" class="form-label">Contenu :</label>';
+    echo '<textarea class="form-control" placeholder="Contenu de la news" name="contenu" id="floatingTextarea" required></textarea>';
+    echo '</div>';
+
+    echo '<button type="submit" class="btn btn-primary">Publier</button>';
+    echo '</form>';
+
+    echo '</div>';
+    echo '</div>'; 
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $table = $_POST['table'];
+        $titre = $_POST['titre'];
+        $contenu = $_POST['contenu'];
+
+
+        $requete = $this->maBD->__get("conn")->prepare("INSERT INTO $table (titre, contenu) VALUES (?, ?)");
+        $requete->bindValue(1, $titre);
+        $requete->bindValue(2, $contenu);
+
+        if ($requete->execute()) {
+            echo '<div class="container mt-3">';
+            echo '<div class="alert alert-success" role="alert">';
+            echo "La news a été publiée avec succès.";
+            echo '</div>';
+            echo '</div>';
+        } else {
+            echo '<div class="container mt-3">';
+            echo '<div class="alert alert-danger" role="alert">';
+            echo "Erreur lors de la publication de la news.";
+            echo '</div>';
+            echo '</div>';
         }
     }
+}
 
-    public function publierNews()
-    {
-        echo '<form method="post">';
-        echo '<label for="table">Choisissez ou publier la news :</label>';
-        echo '<select class="form-select" name="table">';
-        echo '<option value="newspratique">News Pratique</option>';
-        echo '<option value="newsjuridique">News Juridique</option>';
-        echo '</select><br>';
-
-        echo '<label for="titre">Titre :</label>';
-        echo '<input type="text" class="form-control" name="titre" required> <br>';
-        echo '<label for="contenu">Contenu :</label>';
-        echo '<textarea class="form-control" placeholder="Contenu de la news" name="contenu" id="floatingTextarea" required></textarea><br>';
-        echo '<button type="submit" class="btn btn-light">Publier</button><br>';
-        echo '</form>';
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $table = $_POST['table'];
-            $titre = $_POST['titre'];
-            $contenu = $_POST['contenu'];
-
-            // Insertion des données dans la table choisie
-            $requete = $this->maBD->__get("conn")->prepare("INSERT INTO $table (titre, contenu) VALUES (?, ?)");
-            $requete->bindValue(1, $titre);
-            $requete->bindValue(2, $contenu);
-
-            if ($requete->execute()) {
-                echo '<div class="alert alert-success" role="alert">';
-                echo "La news été publiée avec succès.";
-                echo '</div>';
-            } else {
-                echo '<div class="alert alert-danger" role="alert">';
-                echo "Erreur lors de la publication de la news.";
-                echo '</div>';
-            }
-        }
-    }
     public function modifRole()
     {
         // Vérification si des données de formulaire ont été soumises

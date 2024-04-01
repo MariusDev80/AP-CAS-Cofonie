@@ -12,7 +12,7 @@ class accesBD
 	{
 		$this->hote="localhost";
 		$this->login="root";
-		$this->passwd="";
+		$this->passwd="root";
 		$this->base="cofonie";
 		$this->connexion();
 	}
