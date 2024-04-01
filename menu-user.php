@@ -31,6 +31,15 @@
         echo "
         <li>
             <a href='#'>
+                News
+            </a>
+            <ul class='sub-menu'>
+                <li><a href='index.php?vue=newsPratique&action=visualiser'>Pratique</a></li>
+                <li><a href='index.php?vue=newsJuridique&action=visualiser'>Juridique</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href='#'>
                 Texte
             </a>
             <ul class='sub-menu'>
@@ -40,6 +49,15 @@
         </li>";
     } elseif ($role == 3) { // role 3 = citoyen
         echo "
+        <li>
+            <a href='#'>
+                News
+            </a>
+            <ul class='sub-menu'>
+                <li><a href='index.php?vue=newsPratique&action=visualiser'>Pratique</a></li>
+                <li><a href='index.php?vue=newsJuridique&action=visualiser'>Juridique</a></li>
+            </ul>
+        </li>
         <li>
             <a href='#'>
                 Texte
@@ -58,6 +76,15 @@
         </li>";
     } elseif ($role == 4) { // role 4 = monarque
         echo "
+        <li>
+            <a href='#'>
+                News
+            </a>
+            <ul class='sub-menu'>
+                <li><a href='index.php?vue=newsPratique&action=visualiser'>Pratique</a></li>
+                <li><a href='index.php?vue=newsJuridique&action=visualiser'>Juridique</a></li>
+            </ul>
+        </li>
         <li>
             <a href='#'>
                 Texte
@@ -112,6 +139,15 @@
         echo "
         <li>
             <a href='#'>
+                News
+            </a>
+            <ul class='sub-menu'>
+                <li><a href='index.php?vue=newsPratique&action=visualiser'>Pratique</a></li>
+                <li><a href='index.php?vue=newsJuridique&action=visualiser'>Juridique</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href='#'>
                 Texte
             </a>
             <ul class='sub-menu'>
@@ -138,6 +174,15 @@
                 <li><a href='index.php?vue=institution&action=ajouter'>Ajouter</a></li>
                 <li><a href='#'>Modifier</a></li>
                 <li><a href='index.php?vue=institution&action=visualiser'>Visualiser</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href='#'>
+                Gérer les utilisateurs
+            </a>
+            <ul class='sub-menu'>
+                <li><a href='index.php?vue=afficherUtilisateurs&action=visualiser'>Voir les utilisateurs</a></li>
+                <li><a href='index.php?vue=modifRole&action=ajouter'>Modifier le rôle d'un utilisateur</a></li>
             </ul>
         </li>
         <li>
@@ -170,25 +215,7 @@
                 <li><a href='index.php?vue=role&action=visualiser'>Visualiser</a></li>
             </ul>
         </li>
-        <li>
-            <a href='#'>
-                Gérer les utilisateurs
-            </a>
-            <ul class='sub-menu'>
-                <li><a href='index.php?vue=afficherUtilisateurs&action=visualiser'>Voir les utilisateurs</a></li>
-                <li><a href='index.php?vue=modifRole&action=ajouter'>Modifier le rôle d'un utilisateur</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href='#'>
-                News
-            </a>
-            <ul class='sub-menu'>
-                <li><a href='index.php?vue=publierNews&action=ajouter'>Publier une news</a></li>
-                <li><a href='index.php?vue=newsPratique&action=visualiser'>Pratique</a></li>
-                <li><a href='index.php?vue=newsJuridique&action=visualiser'>Juridique</a></li>
-            </ul>
-        </li>";
+        ";
     }
 
     echo '</ul>';

@@ -136,6 +136,7 @@ class controleur
             echo '<div class="card">';
             echo '<div class="card-body">';
             echo '<h5 class="card-title">' . $newsPratique['titre'] . '</h5>';
+            echo '<hr>';
             echo '<p class="card-text">' . $newsPratique['contenu'] . '</p>';
             echo '</div>';
             echo '</div>';
@@ -165,6 +166,7 @@ class controleur
             echo '<div class="card">';
             echo '<div class="card-body">';
             echo '<h5 class="card-title">' . $newsJuridique['titre'] . '</h5>';
+            echo '<hr>';
             echo '<p class="card-text">' . $newsJuridique['contenu'] . '</p>';
             echo '</div>';
             echo '</div>';
@@ -176,6 +178,7 @@ class controleur
 
 public function publierNews()
 {
+    echo '<br>';
     echo '<div class="container">';
     echo '<div class="row justify-content-center">';
     echo '<div class="col-md-6">';
