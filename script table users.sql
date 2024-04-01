@@ -1,3 +1,6 @@
+ancien code ne plus le prendre, tout est dans le fichier AP2 - 003.2 - script create insert Cofonie.sql
+/*
+
 CREATE TABLE USERS (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(55) DEFAULT NULL,
