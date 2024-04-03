@@ -165,7 +165,6 @@ public function __construct()
                 break;
             case "modification" :
                 $nouveauLibelle = $_POST['libelleModification'];
-              
                 $idModification = $_POST['idModification'];
                 $this->toutLesInstitutions->modificationDuLibelle($nouveauLibelle,$idModification);
                 $this->maBD->modificationLibelleInstitution($nouveauLibelle,$idModification);
