@@ -396,6 +396,7 @@ public function publierNews()
     {
         $username = htmlspecialchars($_POST['username']); //htmlspecialchars permet d'éviter de mettre des caractères spéciaux et permet d'éviter les attques sql
         $password = htmlspecialchars($_POST['password']);
+        $roleConnexion = $_POST['roleConnexion'];
 
         // Hachage du mot de passe avec MD5
         $hashed_password = md5($password);
@@ -425,12 +426,24 @@ public function publierNews()
                         <center><button type="submit" class="btn btn-danger">
                             Allez à la page de connexion
                         </button></center>
+                        
                     </form>
                 </div>
                 ';
-                exit();
+                exit(); 
             }
 
+            if ($role != $roleConnexion) {
+                echo '<center style="color:#FF0000">Vous n\'avez pas le droit de vous connecter avec ce rôle <br></center> <br>';
+                echo '
+                    <form action="index.php?vue=deconnexion&action=deconnexion" method="post">
+                        <center><button type="submit" class="btn btn-danger">
+                            Allez à la page de connexion
+                        </button></center>
+                        
+                    </form>';
+                exit();
+            }
             // Stocker le rôle dans une variable de session
             $_SESSION['role'] = $role;
         } else {
