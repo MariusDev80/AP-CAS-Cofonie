@@ -38,7 +38,7 @@
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 							</div>
 							<div class="modal-body">
-								<form action="index.php?vue=connexion&action=connexion" method="post">
+								<form action="index.php?vue=connexion&action=connexion&role=roleConnexion" method="post">
 									<div class="mb-3">
 										<label for="username" class="form-label">Nom d\'utilisateur</label>
 										<input type="text" class="form-control" id="username" name="username" placeholder="Entrez votre nom d\'utilisateur" required>

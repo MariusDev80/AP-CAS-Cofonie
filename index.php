@@ -11,11 +11,12 @@ session_start();
 	// si sur la page de connexion alors acceder 
 	if ((isset($_GET['vue'])) && (isset($_GET['action'])))
 	{
-		if ($_GET['vue'] == 'connexion' && $_GET['action'] == 'connexion' && (!isset($_GET['role'])))
+		var_dump($_GET['vue']); var_dump($_GET['action']); var_dump($_GET['role']);
+		if ($_GET['vue'] == 'connexion' && $_GET['action'] == 'connexion' && ($_GET['role'] == 'roleConnexion'))
 		{
 			$leControleur->affichePage($_GET['action'],$_GET['vue']);
 		}
-		if ($_GET['vue'] == 'connexion' && $_GET['action'] == 'connexion' && (isset($_GET['role'])))
+		if ($_GET['vue'] == 'connexion' && $_GET['action'] == 'connexion' && ($_GET['role'] == 'roleConnexion'))
 		{	
 			require "menu-user.php";
 			$leControleur->affichePage($_GET['action'],$_GET['vue']);
