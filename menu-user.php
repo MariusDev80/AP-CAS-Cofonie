@@ -172,12 +172,9 @@ if ($role == 10) { // role 10 = admin
         <li><a href='index.php?vue=modifRole&action=ajouter'>Modifier le rôle d'un utilisateur</a></li>
     </ul>
 </li>
-
-
+</ul>
 ";
 }
-
-
 ?>
 </div>
 <div class="page">

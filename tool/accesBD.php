@@ -85,6 +85,40 @@ class accesBD
         }
 	}
 
+	public function insererUnTexte($idTexte,$idInstitution,$titreTexte)
+    {
+        $requete = $this->conn->prepare("INSERT INTO texte (idTexte, idInstitution, titreTexte,promulgationTexte) VALUES (?, ?, ?, ?)");
+        $requete->bindValue(1, $idTexte);
+        $requete->bindValue(2, $idInstitution);
+        $requete->bindValue(3, $titreTexte);
+		$requete->bindValue(4, 0);
+
+        if (!$requete->execute()) {
+            die("Erreur dans l'insertion d'un utilisateur : " . $requete->errorCode());
+        }
+	}
+
+	public function insererUnArticle($idTexte,$idArticle,$titreArticle,$texteArticle)
+    {
+        $requete = $this->conn->prepare("INSERT INTO article (idTexte, codeSeqArticle, titreArticle,texteArticle) VALUES (?, ?, ?, ?)");
+        $requete->bindValue(1, $idTexte);
+        $requete->bindValue(2, $idArticle);
+        $requete->bindValue(3, $titreArticle);
+		$requete->bindValue(4, $texteArticle);
+
+        if (!$requete->execute()) {
+            die("Erreur dans l'insertion d'un utilisateur : " . $requete->errorCode());
+        }
+	}
+
+	public function annulerAjout($idTexte){
+
+		$this->conn->query("DELETE FROM article where idTexte = $idTexte");
+		$this->conn->query("DELETE FROM texte where idTexte = $idTexte");
+		echo '<h3 style="text-align:center; margin:5%;">L\'ajout a bien été annulé</h3>';
+
+	}
+
 
 
 	/***********************************************************************************************

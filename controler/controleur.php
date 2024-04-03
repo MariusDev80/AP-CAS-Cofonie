@@ -120,7 +120,7 @@ public function __construct()
             $sql = "UPDATE users SET role = :nouveauRole WHERE id = :idUtilisateur";
 
             // Préparation de la requête SQL
-            $query = $this->maBD->__get("conn")->prepare($sql);
+            $query = $this->maBD->__get('conn')->prepare($sql);
 
             // Liaison des paramètres
             $query->bindParam(':nouveauRole', $nouveauRole, PDO::PARAM_INT);
@@ -403,15 +403,50 @@ public function __construct()
 
             case "ajouter":
                 $vue = new vueCentraleTexte();
-                $vue->ajouterTextes();
+                //$vue->validation(0);
+                $vue->ajouterTextes($this->toutLesInstitutions);
                 break;
-            case "saisirAmendement":
+            case "saisirArticle":
+                $titreTexte = $_POST['titreTexte'];
+                $nbArticles = $_POST['nbArticles'];
+                $institution = $_POST['institution'];
+                $idTexte = $this->maBD->donneProchainIdentifiant("Texte");
+                $this->toutLesTextes->ajouterUnTexte($idTexte,$institution,$titreTexte);
+                $this->maBD->insererUnTexte($idTexte,(int)$institution,$titreTexte);
+                $vue = new vueCentraleTexte();
+                $vue->ajouterArticles($titreTexte,$nbArticles,$idTexte);
+                break;
+            case "ajout":
+                $idTexte = $_POST['idTexte'];
+                $cpt = $_POST['cpt'];
+                if ($cpt > 0){
+                    for ($i = 1;$i <= $cpt;$i++){
+                        $titre = $_POST['titre'.$i];
+                        $texte = $_POST['article'.$i];
+                        $this->toutLesArticles->ajouterUnArticle((int)$idTexte,$i,$titre,$texte);
+                        $this->maBD->insererUnArticle((int)$idTexte,$i,$titre,$texte);
+                    }
+                }
+                $cpt=0;
+                $vue = new vueCentraleTexte();
+                $vue->validation($idTexte,$this->toutLesTextes);
+                break;
+            
+            case "validation":
+                $choix = $_POST['choix'];
+                $id = $_POST['idTexte'];
+                if ($choix == 'Valider'){
+                    echo '<h3 style="text-align:center; margin:5%;">Le texte et ses articles sont ajoutés</h3>';
+                }
+                else {
+                    $this->maBD->annulerAjout((int)$id);
+                }
                 break;
 
             case "visualiser":
                 $textes = $this->toutLesTextes->__get('lesTextes');
                 $vue = new vueCentraleTexte();
-                $vue->visualiserTextes($textes, $this->toutLesArticles);
+                $vue->visualiserTextes($textes);
                 break;
         }
     }
