@@ -16,6 +16,7 @@
                 <ul class="sub-menu">
                   <li><a href="index.php?vue=institution&action=ajouter">Ajouter</a></li>
                   <li><a href="index.php?vue=institution&action=visualiser">Visualiser</a></li>
+                  <li><a href="index.php?vue=institution&action=selectionModification">Modifier</a></li>
                 </ul>
               </li>
               <li>

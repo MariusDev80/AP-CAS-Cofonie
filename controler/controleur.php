@@ -146,12 +146,30 @@ public function __construct()
                 $libelleInstitution = $_POST['libelleInstitution'];
                 $this->toutLesInstitutions->ajouterUneInstitution($idInstitution, $libelleInstitution);
                 $this->maBD->insererUneInstitution($idInstitution, $libelleInstitution);
-                echo 'Rôle rajouté correctement';
+                echo 'Institution rajouté correctement';
                 break;
             case "visualiser" :
                 $listeInstitution = $this->toutLesInstitutions->listeDesInstitutions();
                 $vue = new vueCentraleInstitution();
                 $vue->visualiserInstitution($listeInstitution);
+                break;
+            case "selectionModification" :
+                $vue = new vueCentraleInstitution();
+                $vue->selectionModification($this->toutLesInstitutions->lesInstitutionsAuFormatHTML());
+                break;
+            case "modifier" :
+                $institutionChoisis = $_POST['libelleInstitution'];
+                $vue = new vueCentraleInstitution();
+                $leLib=$this->toutLesInstitutions->donneLibelleInstitutionDepuisNumero($institutionChoisis);
+                $vue->modification($leLib,$institutionChoisis);
+                break;
+            case "modification" :
+                $nouveauLibelle = $_POST['libelleModification'];
+              
+                $idModification = $_POST['idModification'];
+                $this->toutLesInstitutions->modificationDuLibelle($nouveauLibelle,$idModification);
+                $this->maBD->modificationLibelleInstitution($nouveauLibelle,$idModification);
+                echo 'Vous avez bien modifié l\'institution';
                 break;
         }
     }
@@ -344,8 +362,8 @@ public function __construct()
             $nbE++;
         }
 
-        foreach($this->toutLesTextes->__get('lesTextes') as $unTexte){
-            $id = $unTexte->__get('idTexte');
+        foreach($this->toutLesTextes->lesTextes as $unTexte){
+            $id = $unTexte->idTexte;
 
             foreach($this->toutLesArticles->__get('lesArticles') as $unArticle){
                 $idTexteArt = $unArticle->__get('idTexte');
@@ -354,10 +372,12 @@ public function __construct()
                     $unTexte->ajouterArticle($unArticle);
                 }
             }
-            foreach($this->toutLesInstitutions->__get('lesInstitutions') as $uneInstitution){
+            foreach($this->toutLesInstitutions->lesInstitutions as $uneInstitution)
+            {
                 $idInst = $uneInstitution->__get('idInstitution');
                 $idTextInst = $unTexte->__get('idInstitution');
-                if ($idTextInst == $idInst){
+                if ($idTextInst == $idInst)
+                {
                     $unTexte->__set('lInstitution',$uneInstitution);
                 }
             }

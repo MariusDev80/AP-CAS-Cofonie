@@ -62,6 +62,49 @@
 				</table>';
 	
 		}
-	
-}
+		public function selectionModification($message)
+		{
+			echo '<table class="table table-striped table-bordered table-sm ">
+						<thead>
+						<tr>
+							<th scope="col">Libelle Institution</th>
+							<th scope="col">Valider<th>
+						</tr>
+					</thead>
+					<tbody>
+						<form action=index.php?vue=institution&action=modifier method=POST align=center autocomplete="off">
+							<tr>
+								<th>';
+								echo $message;
+								echo '</th>
+								<th scope="col"><input type="submit" class="btn btn-primary" value=Valider></input></th>
+							</tr>
+				 		</form>
+					</tbody>
+				</table>';
+		}
+		public function modification($message,$id)
+		{
+			echo '<table class="table table-striped table-bordered table-sm ">
+					<thead>
+						<tr>
+							<th scope="col">Nouveau libelle</th>
+							<th scope="col">Valider<th>
+						</tr>
+					</thead>
+					<tbody>
+						<form action=index.php?vue=institution&action=modification method=POST align=center autocomplete="off">
+							<fieldset>
+								<tr>
+								     
+									<th scope="col"><input type=text name="libelleModification" value = '.$message.'></th>
+									<input type=hidden name="idModification" value = '.$id.'>
+									<th scope="col"><input type="submit" class="btn btn-primary" value=Valider></input></th>
+								</tr>
+							</fieldset>
+				 		</form>
+					</tbody>
+				</table>';
+		}
+	}
 ?>

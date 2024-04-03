@@ -42,6 +42,18 @@ class accesBD
 		}
 		return $sonOrgane;
 	}
+	
+	public function modificationLibelleInstitution($nouveauLibelle,$idModification)
+	{
+		$requete = $this->conn->prepare("update institution set libelleInstitution = ? where idInstitution = ?");
+		$requete->bindValue(1,$nouveauLibelle);
+		$requete->bindValue(2,$idModification);
+		if(!$requete->execute())
+		{
+			die("Erreur dans update Cofonie : ".$requete->errorCode());
+		}
+ 
+	}
 	public function insererUnRole($idRole,$idInstitution,$libelleRole)
 	{
 		$sonRole = $this->donneProchainIdentifiant("ROLEINSTITUTION","code");

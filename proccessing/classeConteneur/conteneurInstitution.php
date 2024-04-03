@@ -9,13 +9,11 @@ class conteneurInstitution
     public function __construct(){
         $this->lesInstitutions = new ArrayObject();
     }
-
-    public function __get($attribut){
+	public function __get($attribut){
         switch($attribut){
             case'lesInstitutions': return $this->lesInstitutions;break;
         }
     }
-
     public function ajouterUneInstitution(int $unId,string $unLibelle){
         $uneInstitution = new metierInstitution($unId,$unLibelle);
         $this->lesInstitutions->append($uneInstitution);
@@ -33,5 +31,60 @@ class conteneurInstitution
         }
         return $liste;
     }
+    public function lesInstitutionsAuFormatHTML()
+		{
+		$liste = "<SELECT name = 'libelleInstitution'>";
+		foreach ($this->lesInstitutions as $uneInstitution)
+			{
+			$liste = $liste."<OPTION value='".$uneInstitution->idInstitution."'>".$uneInstitution->libelleInstitution."</OPTION>";
+			}
+		$liste = $liste."</SELECT>";
+		return $liste;
+		}
+
+	public function	modificationDuLibelle($message,$id)
+	{	foreach ($this->lesInstitutions as $lInstitution)
+			{
+			if ($lInstitution->idInstitution==$id)
+			{
+				$lInstitution->libelleInstitution=$message;
+			}
+		}
+	
+	}
+    public function donneObjetInstitutionDepuisNumero($uneIdInstitution)
+	{
+		$trouve=false;
+		$laBonneInstitution=null;
+		$idInstitution = $this->lesInstitutions->getIterator();
+		while ((!$trouve)&&($idInstitution->valid()))
+			{
+			if ($idInstitution->current()->idInstitution()==$uneIdInstitution)
+				{
+				$trouve=true;
+				$laBonneInstitution = $idInstitution->current();
+				}
+			else
+				$idInstitution->next();
+			}
+		return $laBonneInstitution;
+	}		
+
+
+
+	public function donneLibelleInstitutionDepuisNumero($uneIdInstitution)
+	{
+		$trouve=false;
+		$laBonneInstitution=null;
+		foreach($this->lesInstitutions as $lInstitution)
+		{
+			if ($lInstitution->idInstitution==$uneIdInstitution)
+			{
+				$trouve=true;
+				$laBonneInstitution = $lInstitution;
+			}
+		}
+		return $laBonneInstitution->libelleInstitution;
+	}		
 }
 ?>
