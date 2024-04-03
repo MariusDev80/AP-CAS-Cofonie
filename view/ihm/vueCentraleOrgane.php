@@ -19,7 +19,7 @@
 							<th scope="col">Nombre de personnes</th>
 						</tr>
 					</thead>
-					<tbody>';	
+					<tbody>';
 			$nbE=0;
 			while ($nbE<sizeof($listeOrgane))
 			{	

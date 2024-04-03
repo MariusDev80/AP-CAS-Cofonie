@@ -8,10 +8,6 @@ CREATE TABLE USERS (
   role INT DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table users
---
-
 INSERT INTO USERS (username, password, role) VALUES
 ('marius', '98fbcccdc2e8ddcda2c45c422111531d', 1),
 ('nolan', '14d54cbd95b45292736ee3e4cb2ed925', 2),
