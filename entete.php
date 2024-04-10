@@ -13,19 +13,6 @@
 
 <body>
 	<div class="entete">
-		<?php
-		if (isset($_SESSION['role']) && $_SESSION['role'] !== 0) {
-			echo '
-			<div class="deconnexion">
-				<form action="index.php?vue=deconnexion&action=deconnexion" method="post">
-					<button type="submit" class="bouton">
-						Se déconnecter
-					</button>
-				</form>
-			</div>
-			';
-		} else {
-			echo '
 			<div class="connexion">
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#connexion">
 					Se connecter
@@ -71,9 +58,7 @@
 					</div>
 				</div>
 			</div>
-			';
-		}
-		?>
+
 		<div class="signup">
 			<div class="modal" id="signup">
 				<div class="modal-dialog">

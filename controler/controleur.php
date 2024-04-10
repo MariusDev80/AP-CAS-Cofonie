@@ -52,7 +52,10 @@ class controleur
     {
         require 'entete.php';
     }
-
+    public function afficheEnteteDeconnexion()
+    {
+        require 'enteteDeconnexion.php';
+    }
     public function affichePiedPage()
     {
         require 'piedPage.php';
@@ -359,8 +362,6 @@ public function publierNews()
         session_destroy();
         header('index.php');
         exit();
-        // array_pop($_GET['action']);
-        // array_pop($_GET['vue']);
     }
 
     public function signup()
@@ -412,41 +413,26 @@ public function publierNews()
                 'password' => $hashed_password
             )
         );
-
+       
         // Récupération du résultat
         $userInfo = $req->fetch(PDO::FETCH_ASSOC);
-
-        // Vérification du résultat
-        if ($userInfo) {
+        if (!empty($userInfo ))
+        {
             $role = $userInfo['role'];
-            if ($role == 0) {
+            if ($role != 0) 
+            {   echo 'coucou';
+                $_SESSION['role'] = $role;
+                header('Location: index.php?vue=connexion&action=connexion&role='.$role.'');
+            }
+            else
+            {
                 echo '<br><center style="color:#FF0000">L\'administrateur doit vérifier votre compte.</center><br>';
-                echo '
-                    <form action="index.php?vue=deconnexion&action=deconnexion" method="post">
-                        <center><button type="submit" class="btn btn-danger">
-                            Allez à la page de connexion
-                        </button></center>
-                        
-                    </form>
-                </div>
-                ';
-                exit(); 
+                $_SESSION['role'] = $role;
             }
-
-            if ($role != $roleConnexion) {
-                echo '<center style="color:#FF0000">Vous n\'avez pas le droit de vous connecter avec ce rôle <br></center> <br>';
-                echo '
-                    <form action="index.php?vue=deconnexion&action=deconnexion" method="post">
-                        <center><button type="submit" class="btn btn-danger">
-                            Allez à la page de connexion
-                        </button></center>
-                        
-                    </form>';
-                exit();
-            }
-            // Stocker le rôle dans une variable de session
-            $_SESSION['role'] = $role;
-        } else {
+                       
+        } 
+        else 
+        {
             echo '<center style="color:#FF0000">Identifiant ou mot de passe incorrect <br></center>';
         }
 

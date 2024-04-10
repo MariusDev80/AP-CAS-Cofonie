@@ -11,18 +11,28 @@ session_start();
 	// si sur la page de connexion alors acceder 
 	if ((isset($_GET['vue'])) && (isset($_GET['action'])))
 	{
-		var_dump($_GET['vue']); var_dump($_GET['action']); var_dump($_GET['role']);
-		if ($_GET['vue'] == 'connexion' && $_GET['action'] == 'connexion' && ($_GET['role'] == 'roleConnexion'))
+		if (isset($_GET['role']))
 		{
-			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+			if($_GET['role'] != 0)
+			{	$leControleur->afficheEnteteDeconnexion();
+				require "menu-user.php";
+			}
+			else
+			{	$leControleur->afficheEntete();
+				require "menu.php";
+			}
 		}
-		if ($_GET['vue'] == 'connexion' && $_GET['action'] == 'connexion' && ($_GET['role'] == 'roleConnexion'))
-		{	
-			require "menu-user.php";
-			$leControleur->affichePage($_GET['action'],$_GET['vue']);
+		else
+		{
+			$leControleur->afficheEntete();
+			require "menu.php";
 		}
 	}
-	if ((isset($_GET['vue'])) && (isset($_GET['action'])))
+	else
+	{
+		require "menu.php";
+	}
+	/*if ((isset($_GET['vue'])) && (isset($_GET['action'])))
 	{
 		if ($_GET['vue'] == 'signup' && $_GET['action'] == 'signup' && (!isset($_GET['role'])))
 		{
@@ -35,15 +45,15 @@ session_start();
 		}
 	}
 
-	if ((isset($_GET['vue'])) && (isset($_GET['action'])) && (isset($_SESSION['role'])))
+	if ((isset($_GET['vue'])) && (isset($_GET['action'])) && (isset($_GET['role'])))
 	{
 		require "menu-user.php";
 		$leControleur->affichePage($_GET['action'],$_GET['vue']);
 	}
 	else
 	{
-		require "menu.php";
-	}
+		
+	}*/
 	$leControleur->affichePiedPage();
 ?>
 
