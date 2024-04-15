@@ -29,5 +29,16 @@ class conteneurTypeInstitution
         }
         return $liste;
     }
+
+    public function lesTypesInstitutionsAuFormatHTML()
+		{
+		$liste = "<SELECT name = 'libelleTypeInstitution'>";
+		foreach ($this->lesTypesInstitutions as $unTypeInstitution)
+			{
+			$liste = $liste."<OPTION value='".$unTypeInstitution->idTypeInstitution."'>".$unTypeInstitution->libelleTypeInstitution."</OPTION>";
+			}
+		$liste = $liste."</SELECT>";
+		return $liste;
+		}
 }
 ?>

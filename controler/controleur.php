@@ -188,6 +188,12 @@ public function __construct()
 				$vue=new vueCentraleTypeInstitution();
 				$vue->visualiserTypeInstitution($liste);
 				break;
+            case "selectionModification" :
+                $vue = new vueCentraleTypeInstitution();
+                $vue->selectionModification($this->toutLesTypesInstitutions->lesTypesInstitutionsAuFormatHTML());
+                break;
+            case "modifier" :
+                break;
         }
     }
 

@@ -44,6 +44,27 @@
 			echo "<BR>je suis dans l'ajout d'un type d'institution";
 	
 		}
+		public function selectionModification($message)
+		{
+			echo '<table class="table table-striped table-bordered table-sm ">
+						<thead>
+						<tr>
+							<th scope="col">Libelle Institution</th>
+							<th scope="col">Valider<th>
+						</tr>
+					</thead>
+					<tbody>
+						<form action=index.php?vue=typeinstitution&action=modifier method=POST align=center autocomplete="off">
+							<tr>
+								<th>';
+								echo $message;
+								echo '</th>
+								<th scope="col"><input type="submit" class="btn btn-primary" value=Valider></input></th>
+							</tr>
+				 		</form>
+					</tbody>
+				</table>';
+		}
 	
 }
 ?>
